@@ -2,7 +2,6 @@ package io.github.joaoh1.okzoomer.client.events;
 
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfig;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
-import io.github.joaoh1.okzoomer.client.utils.OwoUtils;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 
@@ -14,9 +13,6 @@ public class LoadConfigEvent {
 			if (!OkZoomerConfig.isConfigLoaded) {
 				OkZoomerConfig.loadModConfig();
 			}
-			
-			//uwu
-			OwoUtils.printOwo();
 
 			//This handles the hijacking of the "Save Toolbar Activator" key.
 			if (OkZoomerConfigPojo.tweaks.unbindConflictingKey) {
