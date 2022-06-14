@@ -62,23 +62,6 @@ public class ZoomUtils {
 		lastZoomState = true;
 	}
 
-	//The method used for unbinding the "Save Toolbar Activator"
-	public static final void unbindConflictingKey(MinecraftClient client, boolean userPrompted) {
-		if (ZoomKeybinds.zoomKey.isDefault()) {
-			if (client.options.keySaveToolbarActivator.isDefault()) {
-				if (userPrompted) {
-					ZoomUtils.modLogger.info("[Ok Zoomer] The \"Save Toolbar Activator\" keybind was occupying C! Unbinding...");
-				} else {
-					ZoomUtils.modLogger.info("[Ok Zoomer] The \"Save Toolbar Activator\" keybind was occupying C! Unbinding... This process won't be repeated until specified in the config.");
-				}
-				client.options.keySaveToolbarActivator.setBoundKey(InputUtil.UNKNOWN_KEY);
-				client.options.write();
-				KeyBinding.updateKeysByCode();
-			} else {
-				ZoomUtils.modLogger.info("[Ok Zoomer] No conflicts with the \"Save Toolbar Activator\" keybind was found!");
-			}
-		}
-	}
 
 	//The equivalent of GameRenderer's updateFovMultiplier but for zooming. Used by zoom transitions.
 	public static final void updateZoomFovMultiplier() {

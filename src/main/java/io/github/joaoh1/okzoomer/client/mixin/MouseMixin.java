@@ -56,7 +56,7 @@ public class MouseMixin {
 			ordinal = 2
 	)
 	private double applyReduceSensitivity(double g) {
-		double modifiedMouseSensitivity = this.client.options.mouseSensitivity;
+		double modifiedMouseSensitivity = this.client.options.getMouseSensitivity().getValue();
 		if (Config.features.reduceSensitivity) {
 			if (!Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.OFF)) {
 				modifiedMouseSensitivity *= ZoomUtils.zoomFovMultiplier;

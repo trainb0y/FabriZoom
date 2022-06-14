@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "io.github.joaoh1.okzoomer.client.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "client": [
     "GameRendererMixin",
     "MouseMixin"
