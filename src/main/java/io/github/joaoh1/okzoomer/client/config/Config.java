@@ -23,6 +23,8 @@ public class Config {
 		// Reduces the mouse sensitivity when zooming
 		public boolean reduceSensitivity = true;
 
+		public boolean resetZoomWithMouse = true;
+
 		// Adds transitions between zooms.\n\"OFF\" disables transitions.\n\"SMOOTH\" replicates Vanilla's dynamic FOV.\n\"LINEAR\" removes the smoothiness.
 		public FeaturesGroup.ZoomTransitionOptions zoomTransition = FeaturesGroup.ZoomTransitionOptions.SMOOTH;
 
@@ -37,9 +39,6 @@ public class Config {
 
 		// Allows to increase or decrease zoom by scrolling.
 		public boolean zoomScrolling = true;
-
-		// Adds zoom manipulation keys along with the zoom key.
-		public boolean extraKeybinds = true;
 	}
 
 	public static ValuesGroup values = new ValuesGroup();
@@ -71,12 +70,5 @@ public class Config {
 
 		// The maximum value which the linear transition step can reach.
 		public double maximumLinearStep = 0.25;
-	}
-
-	public static TweaksGroup tweaks = new TweaksGroup();
-
-	public static class TweaksGroup {
-		// Allows for resetting the zoom with the middle mouse button
-		public boolean resetZoomWithMouse = true;
 	}
 }

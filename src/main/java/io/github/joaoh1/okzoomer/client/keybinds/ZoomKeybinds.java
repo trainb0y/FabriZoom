@@ -1,6 +1,5 @@
 package io.github.joaoh1.okzoomer.client.keybinds;
 
-import io.github.joaoh1.okzoomer.client.config.Config;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -13,33 +12,15 @@ public class ZoomKeybinds {
 			new KeyBinding("key.okzoomer.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C, "key.okzoomer.category"));
 
 	//The "Decrease Zoom" keybinding.
-	public static final KeyBinding decreaseZoomKey = getExtraKeybind("key.okzoomer.decrease_zoom");
+	public static final KeyBinding decreaseZoomKey = KeyBindingHelper.registerKeyBinding(
+			new KeyBinding("key.okzoomer.decrease_zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.okzoomer.category"));
 
 	//The "Increase Zoom" keybinding.
-	public static final KeyBinding increaseZoomKey = getExtraKeybind("key.okzoomer.increase_zoom");
+	public static final KeyBinding increaseZoomKey = KeyBindingHelper.registerKeyBinding(
+			new KeyBinding("key.okzoomer.increase_zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.okzoomer.category"));
 
 	//The "Reset Zoom" keybinding.
-	public static final KeyBinding resetZoomKey = getExtraKeybind("key.okzoomer.reset_zoom");
+	public static final KeyBinding resetZoomKey = KeyBindingHelper.registerKeyBinding(
+			new KeyBinding("key.okzoomer.reset_zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "key.okzoomer.category"));
 
-	//The boolean used to keep track of the "Extra Keybinds" option's initial value.
-	private static boolean extraKeybinds = false;
-
-	//The method used to check if the zoom manipulation keybinds should be disabled, can be used by other mods.
-	public static final boolean areExtraKeybindsEnabled() {
-		/* if (!OkZoomerConfig.isConfigLoaded) {
-			OkZoomerConfig.loadModConfig();
-		}
-		 */
-		extraKeybinds = Config.features.extraKeybinds;
-		return extraKeybinds;
-	}
-
-	//The method used to get the extra keybinds, if disabled, return null.
-	public static final KeyBinding getExtraKeybind(String translationKey) {
-		if (areExtraKeybindsEnabled()) {
-			return KeyBindingHelper.registerKeyBinding(
-					new KeyBinding(translationKey, InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.getCode(), "key.okzoomer.category"));
-		}
-		return null;
-	}
 }

@@ -114,17 +114,14 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		features.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config.okzoomer.extra_keybinds"), Config.features.extraKeybinds)
-				.requireRestart()
+		features.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config.okzoomer.reset_zoom_with_mouse"), Config.features.resetZoomWithMouse)
 				.setDefaultValue(true)
 				.setSaveConsumer(value -> {
-					Config.features.extraKeybinds = value;
+					Config.features.resetZoomWithMouse = value;
 				})
-				.setTooltip(new Text[]{
-						Text.translatable("config.okzoomer.extra_keybinds.tooltip"),
-						Text.translatable("config.okzoomer.extra_keybinds.tooltip.warning")
-				})
+				.setTooltip(Text.translatable("config.okzoomer.reset_zoom_with_mouse.tooltip"))
 				.build());
+
 
 		ConfigCategory values = builder.getOrCreateCategory(Text.translatable("config.okzoomer.category.values"))
 				.setCategoryBackground(new Identifier("minecraft:textures/block/yellow_concrete_powder.png"));
@@ -217,23 +214,12 @@ public class OkZoomerConfigScreen {
 				.setTooltip(Text.translatable("config.okzoomer.maximum_linear_step.tooltip"))
 				.build());
 
-		ConfigCategory tweaks = builder.getOrCreateCategory(Text.translatable("config.okzoomer.category.tweaks"))
-				.setCategoryBackground(new Identifier("minecraft:textures/block/yellow_glazed_terracotta.png"));
 
-		tweaks.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config.okzoomer.reset_zoom_with_mouse"), Config.tweaks.resetZoomWithMouse)
-				.setDefaultValue(true)
-				.setSaveConsumer(value -> {
-					Config.tweaks.resetZoomWithMouse = value;
-				})
-				.setTooltip(Text.translatable("config.okzoomer.reset_zoom_with_mouse.tooltip"))
-				.build());
-
-
-		ConfigCategory presets = builder.getOrCreateCategory(Text.translatable("config.okzoomer.category.presets"))
+		ConfigCategory other = builder.getOrCreateCategory(Text.translatable("config.okzoomer.category.other"))
 				.setCategoryBackground(new Identifier("minecraft:textures/block/yellow_wool.png"));
 
 		String[] presetArray = new String[]{"None", "Default", "Classic", "Persistent"};
-		presets.addEntry(entryBuilder.startSelector(Text.translatable("config.okzoomer.reset_to_preset"), presetArray, presetArray[0])
+		other.addEntry(entryBuilder.startSelector(Text.translatable("config.okzoomer.reset_to_preset"), presetArray, presetArray[0])
 				.setSaveConsumer(value -> {
 					if (value.equals("Default")) {
 						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.OFF;
@@ -241,7 +227,7 @@ public class OkZoomerConfigScreen {
 						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.SMOOTH;
 						Config.features.zoomMode = FeaturesGroup.ZoomModes.HOLD;
 						Config.features.zoomScrolling = true;
-						Config.features.extraKeybinds = true;
+						Config.features.resetZoomWithMouse = true;
 						Config.values.zoomDivisor = 4.0;
 						Config.values.minimumZoomDivisor = 1.0;
 						Config.values.maximumZoomDivisor = 50.0;
@@ -251,14 +237,13 @@ public class OkZoomerConfigScreen {
 						Config.values.smoothMultiplier = 0.75;
 						Config.values.minimumLinearStep = 0.125;
 						Config.values.maximumLinearStep = 0.25;
-						Config.tweaks.resetZoomWithMouse = true;
 					} else if (value.equals("Classic")) {
 						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.VANILLA;
 						Config.features.reduceSensitivity = false;
 						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.OFF;
 						Config.features.zoomMode = FeaturesGroup.ZoomModes.HOLD;
 						Config.features.zoomScrolling = false;
-						Config.features.extraKeybinds = false;
+						Config.features.resetZoomWithMouse = false;
 						Config.values.zoomDivisor = 4.0;
 						Config.values.minimumZoomDivisor = 1.0;
 						Config.values.maximumZoomDivisor = 50.0;
@@ -268,14 +253,13 @@ public class OkZoomerConfigScreen {
 						Config.values.smoothMultiplier = 0.75;
 						Config.values.minimumLinearStep = 0.125;
 						Config.values.maximumLinearStep = 0.25;
-						Config.tweaks.resetZoomWithMouse = false;
 					} else if (value.equals("Persistent")) {
 						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.OFF;
 						Config.features.reduceSensitivity = true;
 						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.SMOOTH;
 						Config.features.zoomMode = FeaturesGroup.ZoomModes.PERSISTENT;
 						Config.features.zoomScrolling = true;
-						Config.features.extraKeybinds = true;
+						Config.features.resetZoomWithMouse = true;
 						Config.values.zoomDivisor = 1.0;
 						Config.values.minimumZoomDivisor = 1.0;
 						Config.values.maximumZoomDivisor = 50.0;
@@ -285,7 +269,6 @@ public class OkZoomerConfigScreen {
 						Config.values.smoothMultiplier = 0.75;
 						Config.values.minimumLinearStep = 0.125;
 						Config.values.maximumLinearStep = 0.25;
-						Config.tweaks.resetZoomWithMouse = true;
 					}
 					value = presetArray[0];
 				})
