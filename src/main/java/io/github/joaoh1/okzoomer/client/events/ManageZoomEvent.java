@@ -1,7 +1,6 @@
 package io.github.joaoh1.okzoomer.client.events;
 
 import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
-import io.github.joaoh1.okzoomer.client.packets.ZoomPackets;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomModes;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
@@ -17,11 +16,6 @@ public class ManageZoomEvent {
     
     public static void registerEvent() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-			//If zoom is disabled, do not allow for zooming at all.
-			if (ZoomPackets.disableZoom) {
-				return;
-			}
-
 			//Handle zoom mode changes.
 			if (!OkZoomerConfigPojo.features.zoomMode.equals(ZoomModes.HOLD)) {
 				if (!persistentZoom) {

@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
-import io.github.joaoh1.okzoomer.client.packets.ZoomPackets;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomTransitionOptions;
 import net.minecraft.client.MinecraftClient;
@@ -36,11 +35,6 @@ public class ZoomUtils {
 
     //The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
 	public static final void changeZoomDivisor(boolean increase) {
-		//If the zoom is disabled, don't allow for zoom scrolling
-		if (ZoomPackets.disableZoom || ZoomPackets.disableZoomScrolling) {
-			return;
-		}
-
 		double changedZoomDivisor;
 		double lesserChangedZoomDivisor;
 
@@ -66,10 +60,6 @@ public class ZoomUtils {
 
 	//The method used by both the "Reset Zoom" keybind and the "Reset Zoom With Mouse" tweak.
 	public static final void resetZoomDivisor() {
-		if (ZoomPackets.disableZoom || ZoomPackets.disableZoomScrolling) {
-			return;
-		}
-
 		zoomDivisor = OkZoomerConfigPojo.values.zoomDivisor;
 		lastZoomState = true;
 	}

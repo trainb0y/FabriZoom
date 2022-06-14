@@ -1,7 +1,6 @@
 package io.github.joaoh1.okzoomer.client.events;
 
 import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
-import io.github.joaoh1.okzoomer.client.packets.ZoomPackets;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 
@@ -11,10 +10,6 @@ public class ManageExtraKeysEvent {
         //Register the event only if the "Extra Keybinds" option is enabled.
         if (ZoomKeybinds.areExtraKeybindsEnabled()) {
 			ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                if (ZoomPackets.disableZoomScrolling) {
-                    return;
-                };
-    
                 if (ZoomKeybinds.decreaseZoomKey.isPressed()) {
                     ZoomUtils.changeZoomDivisor(false);
                 }
