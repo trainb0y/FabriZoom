@@ -1,10 +1,6 @@
 package io.github.joaoh1.okzoomer.client.utils;
 
 import io.github.joaoh1.okzoomer.client.config.Config;
-import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.math.MathHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,9 +23,6 @@ public class ZoomUtils {
 	public static float zoomFovMultiplier = 1.0F;
 	public static float lastZoomFovMultiplier = 1.0F;
 
-	//The zoom overlay's alpha. Used by the InGameHud mixin.
-	public static float zoomOverlayAlpha = 0.0F;
-	public static float lastZoomOverlayAlpha = 0.0F;
 
 	//The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
 	public static final void changeZoomDivisor(boolean increase) {
@@ -85,30 +78,6 @@ public class ZoomUtils {
 				linearStep = Config.values.maximumLinearStep;
 			}
 			zoomFovMultiplier = MathHelper.stepTowards(zoomFovMultiplier, zoomMultiplier, (float) linearStep);
-		}
-	}
-
-	//Handles the zoom overlay transparency with transitions. Used by zoom overlay.
-	public static final void updateZoomOverlayAlpha() {
-		float zoomMultiplier = 0.0F;
-
-		if (ZoomUtils.zoomState) {
-			zoomMultiplier = 1.0F;
-		}
-
-		lastZoomOverlayAlpha = zoomOverlayAlpha;
-
-		if (Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.SMOOTH)) {
-			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * Config.values.smoothMultiplier;
-		} else if (Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.LINEAR)) {
-			double linearStep = 1.0F / zoomDivisor;
-			if (linearStep < Config.values.minimumLinearStep) {
-				linearStep = Config.values.minimumLinearStep;
-			}
-			if (linearStep > Config.values.maximumLinearStep) {
-				linearStep = Config.values.maximumLinearStep;
-			}
-			zoomOverlayAlpha = MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier, (float) linearStep);
 		}
 	}
 }

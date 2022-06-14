@@ -16,7 +16,7 @@ public class ManageZoomEvent {
 	public static void registerEvent() {
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			//Handle zoom mode changes.
-			if (!Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD)) {
+			if (!Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD)) {
 				if (!persistentZoom) {
 					persistentZoom = true;
 					lastZoomPress = true;
@@ -34,27 +34,23 @@ public class ManageZoomEvent {
 				return;
 			}
 
-			if (Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD)) {
+			if (Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD)) {
 				//If the zoom needs to be held, then the zoom signal is determined by if the key is pressed or not.
 				ZoomUtils.zoomState = ZoomKeybinds.zoomKey.isPressed();
 				ZoomUtils.zoomDivisor = Config.values.zoomDivisor;
-			} else if (Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.TOGGLE)) {
+			} else if (Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.TOGGLE)) {
 				//If the zoom needs to be toggled, toggle the zoom signal instead.
 				if (ZoomKeybinds.zoomKey.isPressed()) {
 					ZoomUtils.zoomState = !ZoomUtils.zoomState;
 					ZoomUtils.zoomDivisor = Config.values.zoomDivisor;
 				}
-			} else if (Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT)) {
+			} else if (Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT)) {
 				//If persistent zoom is enabled, just keep the zoom on.
 				ZoomUtils.zoomState = true;
 			}
 
 			//Manage the post-zoom signal.
-			if (!ZoomUtils.zoomState && lastZoomPress) {
-				ZoomUtils.lastZoomState = true;
-			} else {
-				ZoomUtils.lastZoomState = false;
-			}
+			ZoomUtils.lastZoomState = !ZoomUtils.zoomState && lastZoomPress;
 
 			//Set the previous zoom signal for the next tick.
 			lastZoomPress = ZoomKeybinds.zoomKey.isPressed();
