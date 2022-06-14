@@ -1,7 +1,6 @@
 package io.github.joaoh1.okzoomer.client;
 
 import io.github.joaoh1.okzoomer.client.events.LoadConfigEvent;
-import io.github.joaoh1.okzoomer.client.events.ManageExtraKeysEvent;
 import io.github.joaoh1.okzoomer.client.events.ManageZoomEvent;
 import net.fabricmc.api.ClientModInitializer;
 
@@ -12,6 +11,5 @@ public class OkZoomerClientMod implements ClientModInitializer {
 		//Load the events.
 		LoadConfigEvent.registerEvent();
 		ManageZoomEvent.registerEvent();
-		ManageExtraKeysEvent.registerEvent();
 	}
 }

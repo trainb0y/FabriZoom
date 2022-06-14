@@ -1,15 +1,11 @@
 package io.github.joaoh1.okzoomer.client.config;
 
 import io.github.joaoh1.okzoomer.client.config.Config.FeaturesGroup;
-import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Identifier;
 
 public class OkZoomerConfigScreen {
@@ -39,7 +35,7 @@ public class OkZoomerConfigScreen {
 					return Text.literal("Error");
 				})
 				.setSaveConsumer(value -> {
-					Config.features.cinematicCamera = (FeaturesGroup.CinematicCameraOptions) value;
+					Config.features.cinematicCamera = value;
 				})
 				.setTooltip(new Text[]{
 						Text.translatable("config.okzoomer.cinematic_camera.tooltip"),
@@ -70,7 +66,7 @@ public class OkZoomerConfigScreen {
 					return Text.literal("Error");
 				})
 				.setSaveConsumer(value -> {
-					Config.features.zoomTransition = (FeaturesGroup.ZoomTransitionOptions) value;
+					Config.features.zoomTransition = value;
 				})
 				.setTooltip(new Text[]{
 						Text.translatable("config.okzoomer.zoom_transition.tooltip"),
@@ -80,7 +76,7 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		features.addEntry(entryBuilder.startSelector(Text.translatable("config.okzoomer.zoom_mode"), FeaturesGroup.ZoomModes.values(), Config.features.zoomMode)
+		features.addEntry(entryBuilder.startSelector(Text.translatable("config.okzoomer.zoom_mode"), FeaturesGroup.ZoomModes.values(), FeaturesGroup.zoomMode)
 				.setDefaultValue(FeaturesGroup.ZoomModes.HOLD)
 				.setNameProvider(value -> {
 					if (value.equals(FeaturesGroup.ZoomModes.HOLD)) {
@@ -93,7 +89,7 @@ public class OkZoomerConfigScreen {
 					return Text.literal("Error");
 				})
 				.setSaveConsumer(value -> {
-					Config.features.zoomMode = (FeaturesGroup.ZoomModes) value;
+					FeaturesGroup.zoomMode = value;
 				})
 				.setTooltip(Text.translatable("config.okzoomer.zoom_mode.tooltip"))
 				.setTooltip(new Text[]{
@@ -225,7 +221,7 @@ public class OkZoomerConfigScreen {
 						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.OFF;
 						Config.features.reduceSensitivity = true;
 						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.SMOOTH;
-						Config.features.zoomMode = FeaturesGroup.ZoomModes.HOLD;
+						FeaturesGroup.zoomMode = FeaturesGroup.ZoomModes.HOLD;
 						Config.features.zoomScrolling = true;
 						Config.features.resetZoomWithMouse = true;
 						Config.values.zoomDivisor = 4.0;
@@ -241,7 +237,7 @@ public class OkZoomerConfigScreen {
 						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.VANILLA;
 						Config.features.reduceSensitivity = false;
 						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.OFF;
-						Config.features.zoomMode = FeaturesGroup.ZoomModes.HOLD;
+						FeaturesGroup.zoomMode = FeaturesGroup.ZoomModes.HOLD;
 						Config.features.zoomScrolling = false;
 						Config.features.resetZoomWithMouse = false;
 						Config.values.zoomDivisor = 4.0;
@@ -257,7 +253,7 @@ public class OkZoomerConfigScreen {
 						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.OFF;
 						Config.features.reduceSensitivity = true;
 						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.SMOOTH;
-						Config.features.zoomMode = FeaturesGroup.ZoomModes.PERSISTENT;
+						FeaturesGroup.zoomMode = FeaturesGroup.ZoomModes.PERSISTENT;
 						Config.features.zoomScrolling = true;
 						Config.features.resetZoomWithMouse = true;
 						Config.values.zoomDivisor = 1.0;
