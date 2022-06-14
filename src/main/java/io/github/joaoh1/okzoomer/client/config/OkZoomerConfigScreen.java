@@ -240,14 +240,6 @@ public class OkZoomerConfigScreen {
 				.setTooltip(Text.translatable("config.okzoomer.reset_zoom_with_mouse.tooltip"))
 				.build());
 
-		tweaks.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config.okzoomer.print_owo_on_start"), Config.tweaks.printOwoOnStart)
-				.setDefaultValue(false)
-				.setSaveConsumer(value -> {
-					Config.tweaks.printOwoOnStart = value;
-				})
-				.setTooltip(Text.translatable("config.okzoomer.print_owo_on_start.tooltip"))
-				.build());
-
 		tweaks.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config.okzoomer.hide_zoom_overlay"), Config.tweaks.hideZoomOverlay)
 				.setDefaultValue(false)
 				.setSaveConsumer(value -> {

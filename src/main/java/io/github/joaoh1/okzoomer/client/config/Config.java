@@ -83,8 +83,6 @@ public class Config {
 		public boolean resetZoomWithMouse = true;
 		// If enabled, the \"Save Toolbar Activator\" keybind will be unbound if there's a conflict with the zoom key.
 		public boolean unbindConflictingKey = true;
-		// Prints a random owo in the console when the game starts.
-		public boolean printOwoOnStart = false;
 		// Hides the zoom overlay while the HUD's hidden.
 		public boolean hideZoomOverlay = false;
 	}
