@@ -40,9 +40,6 @@ public class Config {
 
 		// Adds zoom manipulation keys along with the zoom key.
 		public boolean extraKeybinds = true;
-
-		// Adds an overlay in the screen during zoom. The overlay texture can be found at: assets/okzoomer/textures/misc/zoom_overlay.png
-		public boolean zoomOverlay = false;
 	}
 
 	public static ValuesGroup values = new ValuesGroup();
@@ -81,9 +78,5 @@ public class Config {
 	public static class TweaksGroup {
 		// Allows for resetting the zoom with the middle mouse button
 		public boolean resetZoomWithMouse = true;
-		// If enabled, the \"Save Toolbar Activator\" keybind will be unbound if there's a conflict with the zoom key.
-		public boolean unbindConflictingKey = true;
-		// Hides the zoom overlay while the HUD's hidden.
-		public boolean hideZoomOverlay = false;
 	}
 }

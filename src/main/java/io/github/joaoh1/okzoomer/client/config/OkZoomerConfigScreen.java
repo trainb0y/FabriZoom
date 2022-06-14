@@ -126,18 +126,6 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		features.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config.okzoomer.zoom_overlay"), Config.features.zoomOverlay)
-				.setDefaultValue(false)
-				.setSaveConsumer(value -> {
-					Config.features.zoomOverlay = value;
-				})
-				.setTooltip(new Text[]{
-						Text.translatable("config.okzoomer.zoom_overlay.tooltip.1"),
-						Text.translatable("config.okzoomer.zoom_overlay.tooltip.2"),
-						Text.translatable("config.okzoomer.zoom_overlay.tooltip.3")
-				})
-				.build());
-
 		ConfigCategory values = builder.getOrCreateCategory(Text.translatable("config.okzoomer.category.values"))
 				.setCategoryBackground(new Identifier("minecraft:textures/block/yellow_concrete_powder.png"));
 
@@ -240,13 +228,6 @@ public class OkZoomerConfigScreen {
 				.setTooltip(Text.translatable("config.okzoomer.reset_zoom_with_mouse.tooltip"))
 				.build());
 
-		tweaks.addEntry(entryBuilder.startBooleanToggle(Text.translatable("config.okzoomer.hide_zoom_overlay"), Config.tweaks.hideZoomOverlay)
-				.setDefaultValue(false)
-				.setSaveConsumer(value -> {
-					Config.tweaks.hideZoomOverlay = value;
-				})
-				.setTooltip(Text.translatable("config.okzoomer.hide_zoom_overlay.tooltip"))
-				.build());
 
 		ConfigCategory presets = builder.getOrCreateCategory(Text.translatable("config.okzoomer.category.presets"))
 				.setCategoryBackground(new Identifier("minecraft:textures/block/yellow_wool.png"));
@@ -261,7 +242,6 @@ public class OkZoomerConfigScreen {
 						Config.features.zoomMode = FeaturesGroup.ZoomModes.HOLD;
 						Config.features.zoomScrolling = true;
 						Config.features.extraKeybinds = true;
-						Config.features.zoomOverlay = false;
 						Config.values.zoomDivisor = 4.0;
 						Config.values.minimumZoomDivisor = 1.0;
 						Config.values.maximumZoomDivisor = 50.0;
@@ -272,7 +252,6 @@ public class OkZoomerConfigScreen {
 						Config.values.minimumLinearStep = 0.125;
 						Config.values.maximumLinearStep = 0.25;
 						Config.tweaks.resetZoomWithMouse = true;
-						Config.tweaks.printOwoOnStart = false;
 					} else if (value.equals("Classic")) {
 						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.VANILLA;
 						Config.features.reduceSensitivity = false;
@@ -280,7 +259,6 @@ public class OkZoomerConfigScreen {
 						Config.features.zoomMode = FeaturesGroup.ZoomModes.HOLD;
 						Config.features.zoomScrolling = false;
 						Config.features.extraKeybinds = false;
-						Config.features.zoomOverlay = false;
 						Config.values.zoomDivisor = 4.0;
 						Config.values.minimumZoomDivisor = 1.0;
 						Config.values.maximumZoomDivisor = 50.0;
@@ -291,7 +269,6 @@ public class OkZoomerConfigScreen {
 						Config.values.minimumLinearStep = 0.125;
 						Config.values.maximumLinearStep = 0.25;
 						Config.tweaks.resetZoomWithMouse = false;
-						Config.tweaks.printOwoOnStart = false;
 					} else if (value.equals("Persistent")) {
 						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.OFF;
 						Config.features.reduceSensitivity = true;
@@ -299,7 +276,6 @@ public class OkZoomerConfigScreen {
 						Config.features.zoomMode = FeaturesGroup.ZoomModes.PERSISTENT;
 						Config.features.zoomScrolling = true;
 						Config.features.extraKeybinds = true;
-						Config.features.zoomOverlay = false;
 						Config.values.zoomDivisor = 1.0;
 						Config.values.minimumZoomDivisor = 1.0;
 						Config.values.maximumZoomDivisor = 50.0;
@@ -310,7 +286,6 @@ public class OkZoomerConfigScreen {
 						Config.values.minimumLinearStep = 0.125;
 						Config.values.maximumLinearStep = 0.25;
 						Config.tweaks.resetZoomWithMouse = true;
-						Config.tweaks.printOwoOnStart = false;
 					}
 					value = presetArray[0];
 				})
