@@ -1,7 +1,6 @@
 package io.github.joaoh1.okzoomer.client.keybinds;
 
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfig;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
+import io.github.joaoh1.okzoomer.client.config.Config;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -27,10 +26,11 @@ public class ZoomKeybinds {
 
 	//The method used to check if the zoom manipulation keybinds should be disabled, can be used by other mods.
 	public static final boolean areExtraKeybindsEnabled() {
-		if (!OkZoomerConfig.isConfigLoaded) {
+		/* if (!OkZoomerConfig.isConfigLoaded) {
 			OkZoomerConfig.loadModConfig();
 		}
-		extraKeybinds = OkZoomerConfigPojo.features.extraKeybinds;
+		 */
+		extraKeybinds = Config.features.extraKeybinds;
 		return extraKeybinds;
 	}
 

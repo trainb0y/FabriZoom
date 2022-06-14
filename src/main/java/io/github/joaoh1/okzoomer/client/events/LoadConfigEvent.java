@@ -1,7 +1,5 @@
 package io.github.joaoh1.okzoomer.client.events;
 
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfig;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 
@@ -9,6 +7,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 public class LoadConfigEvent {
 	public static void registerEvent() {
 		ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
+			/*
 			//Attempt to load the config if it hasn't been loaded yet, which is unlikely due to extra keybinds.
 			if (!OkZoomerConfig.isConfigLoaded) {
 				OkZoomerConfig.loadModConfig();
@@ -20,6 +19,7 @@ public class LoadConfigEvent {
 				OkZoomerConfigPojo.tweaks.unbindConflictingKey = false;
 				OkZoomerConfig.saveModConfig();
 			}
+			 */
 		});
 	}
 }

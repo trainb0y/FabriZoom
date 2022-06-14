@@ -1,8 +1,6 @@
 package io.github.joaoh1.okzoomer.client.config;
 
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.CinematicCameraOptions;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomModes;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomTransitionOptions;
+import io.github.joaoh1.okzoomer.client.config.Config.FeaturesGroup;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -27,20 +25,20 @@ public class OkZoomerConfigScreen {
 
 		ConfigCategory features = builder.getOrCreateCategory(new TranslatableText("config.okzoomer.category.features"));
 
-		features.addEntry(entryBuilder.startSelector(new TranslatableText("config.okzoomer.cinematic_camera"), CinematicCameraOptions.values(), OkZoomerConfigPojo.features.cinematicCamera)
-				.setDefaultValue(CinematicCameraOptions.OFF)
+		features.addEntry(entryBuilder.startSelector(new TranslatableText("config.okzoomer.cinematic_camera"), FeaturesGroup.CinematicCameraOptions.values(), Config.features.cinematicCamera)
+				.setDefaultValue(FeaturesGroup.CinematicCameraOptions.OFF)
 				.setNameProvider(value -> {
-					if (value.equals(CinematicCameraOptions.OFF)) {
+					if (value.equals(FeaturesGroup.CinematicCameraOptions.OFF)) {
 						return new TranslatableText("config.okzoomer.cinematic_camera.off");
-					} else if (value.equals(CinematicCameraOptions.VANILLA)) {
+					} else if (value.equals(FeaturesGroup.CinematicCameraOptions.VANILLA)) {
 						return new TranslatableText("config.okzoomer.cinematic_camera.vanilla");
-					} else if (value.equals(CinematicCameraOptions.MULTIPLIED)) {
+					} else if (value.equals(FeaturesGroup.CinematicCameraOptions.MULTIPLIED)) {
 						return new TranslatableText("config.okzoomer.cinematic_camera.multiplied");
 					}
 					return new LiteralText("Error");
 				})
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.features.cinematicCamera = (CinematicCameraOptions) value;
+					Config.features.cinematicCamera = (FeaturesGroup.CinematicCameraOptions) value;
 				})
 				.setTooltip(new TranslatableText[]{
 						new TranslatableText("config.okzoomer.cinematic_camera.tooltip"),
@@ -50,28 +48,28 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		features.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.reduce_sensitivity"), OkZoomerConfigPojo.features.reduceSensitivity)
+		features.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.reduce_sensitivity"), Config.features.reduceSensitivity)
 				.setDefaultValue(true)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.features.reduceSensitivity = value;
+					Config.features.reduceSensitivity = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.reduce_sensitivity.tooltip"))
 				.build());
 
-		features.addEntry(entryBuilder.startSelector(new TranslatableText("config.okzoomer.zoom_transition"), ZoomTransitionOptions.values(), OkZoomerConfigPojo.features.zoomTransition)
-				.setDefaultValue(ZoomTransitionOptions.SMOOTH)
+		features.addEntry(entryBuilder.startSelector(new TranslatableText("config.okzoomer.zoom_transition"), FeaturesGroup.ZoomTransitionOptions.values(), Config.features.zoomTransition)
+				.setDefaultValue(FeaturesGroup.ZoomTransitionOptions.SMOOTH)
 				.setNameProvider(value -> {
-					if (value.equals(ZoomTransitionOptions.OFF)) {
+					if (value.equals(FeaturesGroup.ZoomTransitionOptions.OFF)) {
 						return new TranslatableText("config.okzoomer.zoom_transition.off");
-					} else if (value.equals(ZoomTransitionOptions.SMOOTH)) {
+					} else if (value.equals(FeaturesGroup.ZoomTransitionOptions.SMOOTH)) {
 						return new TranslatableText("config.okzoomer.zoom_transition.smooth");
-					} else if (value.equals(ZoomTransitionOptions.LINEAR)) {
+					} else if (value.equals(FeaturesGroup.ZoomTransitionOptions.LINEAR)) {
 						return new TranslatableText("config.okzoomer.zoom_transition.linear");
 					}
 					return new LiteralText("Error");
 				})
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.features.zoomTransition = (ZoomTransitionOptions) value;
+					Config.features.zoomTransition = (FeaturesGroup.ZoomTransitionOptions) value;
 				})
 				.setTooltip(new TranslatableText[]{
 						new TranslatableText("config.okzoomer.zoom_transition.tooltip"),
@@ -81,20 +79,20 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		features.addEntry(entryBuilder.startSelector(new TranslatableText("config.okzoomer.zoom_mode"), ZoomModes.values(), OkZoomerConfigPojo.features.zoomMode)
-				.setDefaultValue(ZoomModes.HOLD)
+		features.addEntry(entryBuilder.startSelector(new TranslatableText("config.okzoomer.zoom_mode"), FeaturesGroup.ZoomModes.values(), Config.features.zoomMode)
+				.setDefaultValue(FeaturesGroup.ZoomModes.HOLD)
 				.setNameProvider(value -> {
-					if (value.equals(ZoomModes.HOLD)) {
+					if (value.equals(FeaturesGroup.ZoomModes.HOLD)) {
 						return new TranslatableText("options.key.hold");
-					} else if (value.equals(ZoomModes.TOGGLE)) {
+					} else if (value.equals(FeaturesGroup.ZoomModes.TOGGLE)) {
 						return new TranslatableText("options.key.toggle");
-					} else if (value.equals(ZoomModes.PERSISTENT)) {
+					} else if (value.equals(FeaturesGroup.ZoomModes.PERSISTENT)) {
 						return new TranslatableText("config.okzoomer.zoom_mode.persistent");
 					}
 					return new LiteralText("Error");
 				})
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.features.zoomMode = (ZoomModes) value;
+					Config.features.zoomMode = (FeaturesGroup.ZoomModes) value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.zoom_mode.tooltip"))
 				.setTooltip(new TranslatableText[]{
@@ -105,21 +103,21 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		features.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.zoom_scrolling"), OkZoomerConfigPojo.features.zoomScrolling)
+		features.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.zoom_scrolling"), Config.features.zoomScrolling)
 				.setDefaultValue(true)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.features.zoomScrolling = value;
+					Config.features.zoomScrolling = value;
 				})
 				.setTooltip(new TranslatableText[]{
 						new TranslatableText("config.okzoomer.zoom_scrolling.tooltip")
 				})
 				.build());
 
-		features.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.extra_keybinds"), OkZoomerConfigPojo.features.extraKeybinds)
+		features.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.extra_keybinds"), Config.features.extraKeybinds)
 				.requireRestart()
 				.setDefaultValue(true)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.features.extraKeybinds = value;
+					Config.features.extraKeybinds = value;
 				})
 				.setTooltip(new TranslatableText[]{
 						new TranslatableText("config.okzoomer.extra_keybinds.tooltip"),
@@ -127,10 +125,10 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		features.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.zoom_overlay"), OkZoomerConfigPojo.features.zoomOverlay)
+		features.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.zoom_overlay"), Config.features.zoomOverlay)
 				.setDefaultValue(false)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.features.zoomOverlay = value;
+					Config.features.zoomOverlay = value;
 				})
 				.setTooltip(new TranslatableText[]{
 						new TranslatableText("config.okzoomer.zoom_overlay.tooltip.1"),
@@ -142,38 +140,38 @@ public class OkZoomerConfigScreen {
 		ConfigCategory values = builder.getOrCreateCategory(new TranslatableText("config.okzoomer.category.values"))
 				.setCategoryBackground(new Identifier("minecraft:textures/block/yellow_concrete_powder.png"));
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.zoom_divisor"), OkZoomerConfigPojo.values.zoomDivisor)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.zoom_divisor"), Config.values.zoomDivisor)
 				.setDefaultValue(4.0)
 				.setMin(Double.MIN_VALUE)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.zoomDivisor = value;
+					Config.values.zoomDivisor = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.zoom_divisor.tooltip"))
 				.build());
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.minimum_zoom_divisor"), OkZoomerConfigPojo.values.minimumZoomDivisor)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.minimum_zoom_divisor"), Config.values.minimumZoomDivisor)
 				.setDefaultValue(1.0)
 				.setMin(Double.MIN_VALUE)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.minimumZoomDivisor = value;
+					Config.values.minimumZoomDivisor = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.minimum_zoom_divisor.tooltip"))
 				.build());
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.maximum_zoom_divisor"), OkZoomerConfigPojo.values.maximumZoomDivisor)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.maximum_zoom_divisor"), Config.values.maximumZoomDivisor)
 				.setDefaultValue(50.0)
 				.setMin(Double.MIN_VALUE)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.maximumZoomDivisor = value;
+					Config.values.maximumZoomDivisor = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.maximum_zoom_divisor.tooltip"))
 				.build());
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.scroll_step"), OkZoomerConfigPojo.values.scrollStep)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.scroll_step"), Config.values.scrollStep)
 				.setDefaultValue(1.0)
 				.setMin(0.0)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.scrollStep = value;
+					Config.values.scrollStep = value;
 				})
 				.setTooltip(new TranslatableText[]{
 						new TranslatableText("config.okzoomer.scroll_step.tooltip.1"),
@@ -181,11 +179,11 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.lesser_scroll_step"), OkZoomerConfigPojo.values.lesserScrollStep)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.lesser_scroll_step"), Config.values.lesserScrollStep)
 				.setDefaultValue(0.5)
 				.setMin(0.0)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.lesserScrollStep = value;
+					Config.values.lesserScrollStep = value;
 				})
 				.setTooltip(new TranslatableText[]{
 						new TranslatableText("config.okzoomer.lesser_scroll_step.tooltip.1"),
@@ -193,39 +191,39 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.cinematic_multiplier"), OkZoomerConfigPojo.values.cinematicMultiplier)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.cinematic_multiplier"), Config.values.cinematicMultiplier)
 				.setDefaultValue(4.0)
 				.setMin(Double.MIN_VALUE)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.cinematicMultiplier = value;
+					Config.values.cinematicMultiplier = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.cinematic_multiplier.tooltip"))
 				.build());
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.smooth_multiplier"), OkZoomerConfigPojo.values.smoothMultiplier)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.smooth_multiplier"), Config.values.smoothMultiplier)
 				.setDefaultValue(0.75)
 				.setMin(Double.MIN_VALUE)
 				.setMax(1.0)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.smoothMultiplier = value;
+					Config.values.smoothMultiplier = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.smooth_multiplier.tooltip"))
 				.build());
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.minimum_linear_step"), OkZoomerConfigPojo.values.minimumLinearStep)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.minimum_linear_step"), Config.values.minimumLinearStep)
 				.setDefaultValue(0.125)
 				.setMin(0)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.minimumLinearStep = value;
+					Config.values.minimumLinearStep = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.minimum_linear_step.tooltip"))
 				.build());
 
-		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.maximum_linear_step"), OkZoomerConfigPojo.values.maximumLinearStep)
+		values.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.okzoomer.maximum_linear_step"), Config.values.maximumLinearStep)
 				.setDefaultValue(0.25)
 				.setMin(Double.MIN_VALUE)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.values.maximumLinearStep = value;
+					Config.values.maximumLinearStep = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.maximum_linear_step.tooltip"))
 				.build());
@@ -233,15 +231,15 @@ public class OkZoomerConfigScreen {
 		ConfigCategory tweaks = builder.getOrCreateCategory(new TranslatableText("config.okzoomer.category.tweaks"))
 				.setCategoryBackground(new Identifier("minecraft:textures/block/yellow_glazed_terracotta.png"));
 
-		tweaks.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.reset_zoom_with_mouse"), OkZoomerConfigPojo.tweaks.resetZoomWithMouse)
+		tweaks.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.reset_zoom_with_mouse"), Config.tweaks.resetZoomWithMouse)
 				.setDefaultValue(true)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.tweaks.resetZoomWithMouse = value;
+					Config.tweaks.resetZoomWithMouse = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.reset_zoom_with_mouse.tooltip"))
 				.build());
 
-		tweaks.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.unbind_conflicting_key"), OkZoomerConfigPojo.tweaks.unbindConflictingKey)
+		tweaks.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.unbind_conflicting_key"), Config.tweaks.unbindConflictingKey)
 				.setDefaultValue(false)
 				.setSaveConsumer(value -> {
 					if (value.equals(true)) {
@@ -255,18 +253,18 @@ public class OkZoomerConfigScreen {
 				})
 				.build());
 
-		tweaks.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.print_owo_on_start"), OkZoomerConfigPojo.tweaks.printOwoOnStart)
+		tweaks.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.print_owo_on_start"), Config.tweaks.printOwoOnStart)
 				.setDefaultValue(false)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.tweaks.printOwoOnStart = value;
+					Config.tweaks.printOwoOnStart = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.print_owo_on_start.tooltip"))
 				.build());
 
-		tweaks.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.hide_zoom_overlay"), OkZoomerConfigPojo.tweaks.hideZoomOverlay)
+		tweaks.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.okzoomer.hide_zoom_overlay"), Config.tweaks.hideZoomOverlay)
 				.setDefaultValue(false)
 				.setSaveConsumer(value -> {
-					OkZoomerConfigPojo.tweaks.hideZoomOverlay = value;
+					Config.tweaks.hideZoomOverlay = value;
 				})
 				.setTooltip(new TranslatableText("config.okzoomer.hide_zoom_overlay.tooltip"))
 				.build());
@@ -278,62 +276,62 @@ public class OkZoomerConfigScreen {
 		presets.addEntry(entryBuilder.startSelector(new TranslatableText("config.okzoomer.reset_to_preset"), presetArray, presetArray[0])
 				.setSaveConsumer(value -> {
 					if (value.equals("Default")) {
-						OkZoomerConfigPojo.features.cinematicCamera = CinematicCameraOptions.OFF;
-						OkZoomerConfigPojo.features.reduceSensitivity = true;
-						OkZoomerConfigPojo.features.zoomTransition = ZoomTransitionOptions.SMOOTH;
-						OkZoomerConfigPojo.features.zoomMode = ZoomModes.HOLD;
-						OkZoomerConfigPojo.features.zoomScrolling = true;
-						OkZoomerConfigPojo.features.extraKeybinds = true;
-						OkZoomerConfigPojo.features.zoomOverlay = false;
-						OkZoomerConfigPojo.values.zoomDivisor = 4.0;
-						OkZoomerConfigPojo.values.minimumZoomDivisor = 1.0;
-						OkZoomerConfigPojo.values.maximumZoomDivisor = 50.0;
-						OkZoomerConfigPojo.values.scrollStep = 1.0;
-						OkZoomerConfigPojo.values.lesserScrollStep = 0.5;
-						OkZoomerConfigPojo.values.cinematicMultiplier = 4.0;
-						OkZoomerConfigPojo.values.smoothMultiplier = 0.75;
-						OkZoomerConfigPojo.values.minimumLinearStep = 0.125;
-						OkZoomerConfigPojo.values.maximumLinearStep = 0.25;
-						OkZoomerConfigPojo.tweaks.resetZoomWithMouse = true;
-						OkZoomerConfigPojo.tweaks.printOwoOnStart = false;
+						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.OFF;
+						Config.features.reduceSensitivity = true;
+						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.SMOOTH;
+						Config.features.zoomMode = FeaturesGroup.ZoomModes.HOLD;
+						Config.features.zoomScrolling = true;
+						Config.features.extraKeybinds = true;
+						Config.features.zoomOverlay = false;
+						Config.values.zoomDivisor = 4.0;
+						Config.values.minimumZoomDivisor = 1.0;
+						Config.values.maximumZoomDivisor = 50.0;
+						Config.values.scrollStep = 1.0;
+						Config.values.lesserScrollStep = 0.5;
+						Config.values.cinematicMultiplier = 4.0;
+						Config.values.smoothMultiplier = 0.75;
+						Config.values.minimumLinearStep = 0.125;
+						Config.values.maximumLinearStep = 0.25;
+						Config.tweaks.resetZoomWithMouse = true;
+						Config.tweaks.printOwoOnStart = false;
 					} else if (value.equals("Classic")) {
-						OkZoomerConfigPojo.features.cinematicCamera = CinematicCameraOptions.VANILLA;
-						OkZoomerConfigPojo.features.reduceSensitivity = false;
-						OkZoomerConfigPojo.features.zoomTransition = ZoomTransitionOptions.OFF;
-						OkZoomerConfigPojo.features.zoomMode = ZoomModes.HOLD;
-						OkZoomerConfigPojo.features.zoomScrolling = false;
-						OkZoomerConfigPojo.features.extraKeybinds = false;
-						OkZoomerConfigPojo.features.zoomOverlay = false;
-						OkZoomerConfigPojo.values.zoomDivisor = 4.0;
-						OkZoomerConfigPojo.values.minimumZoomDivisor = 1.0;
-						OkZoomerConfigPojo.values.maximumZoomDivisor = 50.0;
-						OkZoomerConfigPojo.values.scrollStep = 1.0;
-						OkZoomerConfigPojo.values.lesserScrollStep = 0.5;
-						OkZoomerConfigPojo.values.cinematicMultiplier = 4.0;
-						OkZoomerConfigPojo.values.smoothMultiplier = 0.75;
-						OkZoomerConfigPojo.values.minimumLinearStep = 0.125;
-						OkZoomerConfigPojo.values.maximumLinearStep = 0.25;
-						OkZoomerConfigPojo.tweaks.resetZoomWithMouse = false;
-						OkZoomerConfigPojo.tweaks.printOwoOnStart = false;
+						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.VANILLA;
+						Config.features.reduceSensitivity = false;
+						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.OFF;
+						Config.features.zoomMode = FeaturesGroup.ZoomModes.HOLD;
+						Config.features.zoomScrolling = false;
+						Config.features.extraKeybinds = false;
+						Config.features.zoomOverlay = false;
+						Config.values.zoomDivisor = 4.0;
+						Config.values.minimumZoomDivisor = 1.0;
+						Config.values.maximumZoomDivisor = 50.0;
+						Config.values.scrollStep = 1.0;
+						Config.values.lesserScrollStep = 0.5;
+						Config.values.cinematicMultiplier = 4.0;
+						Config.values.smoothMultiplier = 0.75;
+						Config.values.minimumLinearStep = 0.125;
+						Config.values.maximumLinearStep = 0.25;
+						Config.tweaks.resetZoomWithMouse = false;
+						Config.tweaks.printOwoOnStart = false;
 					} else if (value.equals("Persistent")) {
-						OkZoomerConfigPojo.features.cinematicCamera = CinematicCameraOptions.OFF;
-						OkZoomerConfigPojo.features.reduceSensitivity = true;
-						OkZoomerConfigPojo.features.zoomTransition = ZoomTransitionOptions.SMOOTH;
-						OkZoomerConfigPojo.features.zoomMode = ZoomModes.PERSISTENT;
-						OkZoomerConfigPojo.features.zoomScrolling = true;
-						OkZoomerConfigPojo.features.extraKeybinds = true;
-						OkZoomerConfigPojo.features.zoomOverlay = false;
-						OkZoomerConfigPojo.values.zoomDivisor = 1.0;
-						OkZoomerConfigPojo.values.minimumZoomDivisor = 1.0;
-						OkZoomerConfigPojo.values.maximumZoomDivisor = 50.0;
-						OkZoomerConfigPojo.values.scrollStep = 1.0;
-						OkZoomerConfigPojo.values.lesserScrollStep = 0.5;
-						OkZoomerConfigPojo.values.cinematicMultiplier = 4.0;
-						OkZoomerConfigPojo.values.smoothMultiplier = 0.75;
-						OkZoomerConfigPojo.values.minimumLinearStep = 0.125;
-						OkZoomerConfigPojo.values.maximumLinearStep = 0.25;
-						OkZoomerConfigPojo.tweaks.resetZoomWithMouse = true;
-						OkZoomerConfigPojo.tweaks.printOwoOnStart = false;
+						Config.features.cinematicCamera = FeaturesGroup.CinematicCameraOptions.OFF;
+						Config.features.reduceSensitivity = true;
+						Config.features.zoomTransition = FeaturesGroup.ZoomTransitionOptions.SMOOTH;
+						Config.features.zoomMode = FeaturesGroup.ZoomModes.PERSISTENT;
+						Config.features.zoomScrolling = true;
+						Config.features.extraKeybinds = true;
+						Config.features.zoomOverlay = false;
+						Config.values.zoomDivisor = 1.0;
+						Config.values.minimumZoomDivisor = 1.0;
+						Config.values.maximumZoomDivisor = 50.0;
+						Config.values.scrollStep = 1.0;
+						Config.values.lesserScrollStep = 0.5;
+						Config.values.cinematicMultiplier = 4.0;
+						Config.values.smoothMultiplier = 0.75;
+						Config.values.minimumLinearStep = 0.125;
+						Config.values.maximumLinearStep = 0.25;
+						Config.tweaks.resetZoomWithMouse = true;
+						Config.tweaks.printOwoOnStart = false;
 					}
 					value = presetArray[0];
 				})
@@ -359,7 +357,7 @@ public class OkZoomerConfigScreen {
 				.build());
 
 		builder.setSavingRunnable(() -> {
-			OkZoomerConfig.saveModConfig();
+			// OkZoomerConfig.saveModConfig();
 		});
 
 		return builder.build();

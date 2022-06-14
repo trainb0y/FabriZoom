@@ -1,7 +1,6 @@
 package io.github.joaoh1.okzoomer.client.events;
 
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomModes;
+import io.github.joaoh1.okzoomer.client.config.Config;
 import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -17,11 +16,11 @@ public class ManageZoomEvent {
 	public static void registerEvent() {
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			//Handle zoom mode changes.
-			if (!OkZoomerConfigPojo.features.zoomMode.equals(ZoomModes.HOLD)) {
+			if (!Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD)) {
 				if (!persistentZoom) {
 					persistentZoom = true;
 					lastZoomPress = true;
-					ZoomUtils.zoomDivisor = OkZoomerConfigPojo.values.zoomDivisor;
+					ZoomUtils.zoomDivisor = Config.values.zoomDivisor;
 				}
 			} else {
 				if (persistentZoom) {
@@ -35,17 +34,17 @@ public class ManageZoomEvent {
 				return;
 			}
 
-			if (OkZoomerConfigPojo.features.zoomMode.equals(ZoomModes.HOLD)) {
+			if (Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD)) {
 				//If the zoom needs to be held, then the zoom signal is determined by if the key is pressed or not.
 				ZoomUtils.zoomState = ZoomKeybinds.zoomKey.isPressed();
-				ZoomUtils.zoomDivisor = OkZoomerConfigPojo.values.zoomDivisor;
-			} else if (OkZoomerConfigPojo.features.zoomMode.equals(ZoomModes.TOGGLE)) {
+				ZoomUtils.zoomDivisor = Config.values.zoomDivisor;
+			} else if (Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.TOGGLE)) {
 				//If the zoom needs to be toggled, toggle the zoom signal instead.
 				if (ZoomKeybinds.zoomKey.isPressed()) {
 					ZoomUtils.zoomState = !ZoomUtils.zoomState;
-					ZoomUtils.zoomDivisor = OkZoomerConfigPojo.values.zoomDivisor;
+					ZoomUtils.zoomDivisor = Config.values.zoomDivisor;
 				}
-			} else if (OkZoomerConfigPojo.features.zoomMode.equals(ZoomModes.PERSISTENT)) {
+			} else if (Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT)) {
 				//If persistent zoom is enabled, just keep the zoom on.
 				ZoomUtils.zoomState = true;
 			}

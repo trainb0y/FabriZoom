@@ -1,9 +1,6 @@
 package io.github.joaoh1.okzoomer.client.mixin;
 
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.CinematicCameraOptions;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomModes;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomTransitionOptions;
+import io.github.joaoh1.okzoomer.client.config.Config;
 import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import net.minecraft.client.MinecraftClient;
@@ -60,8 +57,8 @@ public class MouseMixin {
 	)
 	private double applyReduceSensitivity(double g) {
 		double modifiedMouseSensitivity = this.client.options.mouseSensitivity;
-		if (OkZoomerConfigPojo.features.reduceSensitivity) {
-			if (!OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.OFF)) {
+		if (Config.features.reduceSensitivity) {
+			if (!Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.OFF)) {
 				modifiedMouseSensitivity *= ZoomUtils.zoomFovMultiplier;
 			} else if (ZoomUtils.zoomState) {
 				modifiedMouseSensitivity /= ZoomUtils.zoomDivisor;
@@ -90,7 +87,7 @@ public class MouseMixin {
 			ordinal = 1
 	)
 	private double applyCinematicModeX(double l) {
-		if (!OkZoomerConfigPojo.features.cinematicCamera.equals(CinematicCameraOptions.OFF)) {
+		if (!Config.features.cinematicCamera.equals(Config.FeaturesGroup.CinematicCameraOptions.OFF)) {
 			if (ZoomUtils.zoomState) {
 				if (this.client.options.smoothCameraEnabled) {
 					l = this.cursorXSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
@@ -98,8 +95,8 @@ public class MouseMixin {
 				} else {
 					l = this.cursorXZoomSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
 				}
-				if (OkZoomerConfigPojo.features.cinematicCamera.equals(CinematicCameraOptions.MULTIPLIED)) {
-					l *= OkZoomerConfigPojo.values.cinematicMultiplier;
+				if (Config.features.cinematicCamera.equals(Config.FeaturesGroup.CinematicCameraOptions.MULTIPLIED)) {
+					l *= Config.values.cinematicMultiplier;
 				}
 			} else {
 				this.cursorXZoomSmoother.clear();
@@ -116,7 +113,7 @@ public class MouseMixin {
 			ordinal = 2
 	)
 	private double applyCinematicModeY(double m) {
-		if (!OkZoomerConfigPojo.features.cinematicCamera.equals(CinematicCameraOptions.OFF)) {
+		if (!Config.features.cinematicCamera.equals(Config.FeaturesGroup.CinematicCameraOptions.OFF)) {
 			if (ZoomUtils.zoomState) {
 				if (this.client.options.smoothCameraEnabled) {
 					m = this.cursorYSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
@@ -124,8 +121,8 @@ public class MouseMixin {
 				} else {
 					m = this.cursorYZoomSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
 				}
-				if (OkZoomerConfigPojo.features.cinematicCamera.equals(CinematicCameraOptions.MULTIPLIED)) {
-					m *= OkZoomerConfigPojo.values.cinematicMultiplier;
+				if (Config.features.cinematicCamera.equals(Config.FeaturesGroup.CinematicCameraOptions.MULTIPLIED)) {
+					m *= Config.values.cinematicMultiplier;
 				}
 			} else {
 				this.cursorYZoomSmoother.clear();
@@ -143,8 +140,8 @@ public class MouseMixin {
 	)
 	private void zoomerOnMouseScroll(CallbackInfo info) {
 		if (this.eventDeltaWheel != 0.0) {
-			if (OkZoomerConfigPojo.features.zoomScrolling) {
-				if (OkZoomerConfigPojo.features.zoomMode.equals(ZoomModes.PERSISTENT)) {
+			if (Config.features.zoomScrolling) {
+				if (Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT)) {
 					if (!ZoomKeybinds.zoomKey.isPressed()) {
 						return;
 					}
@@ -171,8 +168,8 @@ public class MouseMixin {
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	private void zoomerOnMouseButton(long window, int button, int action, int mods, CallbackInfo info, boolean bl, int i) {
-		if (OkZoomerConfigPojo.features.zoomScrolling) {
-			if (OkZoomerConfigPojo.features.zoomMode.equals(ZoomModes.PERSISTENT)) {
+		if (Config.features.zoomScrolling) {
+			if (Config.features.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT)) {
 				if (!ZoomKeybinds.zoomKey.isPressed()) {
 					return;
 				}
@@ -180,7 +177,7 @@ public class MouseMixin {
 
 			if (button == 2 && bl == true) {
 				if (ZoomKeybinds.zoomKey.isPressed()) {
-					if (OkZoomerConfigPojo.tweaks.resetZoomWithMouse) {
+					if (Config.tweaks.resetZoomWithMouse) {
 						ZoomUtils.resetZoomDivisor();
 						info.cancel();
 					}

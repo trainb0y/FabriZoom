@@ -1,8 +1,7 @@
 package io.github.joaoh1.okzoomer.client.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomTransitionOptions;
+import io.github.joaoh1.okzoomer.client.config.Config;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
@@ -35,12 +34,12 @@ public class GameRendererMixin {
 	)
 	private void zoomTick(CallbackInfo info) {
 		//If zoom transitions are enabled, update the zoom FOV multiplier.
-		if (!OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.OFF)) {
+		if (!Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.OFF)) {
 			ZoomUtils.updateZoomFovMultiplier();
 		}
 
 		//If the zoom overlay is enabled, update the zoom overlay alpha.
-		if (OkZoomerConfigPojo.features.zoomOverlay == true) {
+		if (Config.features.zoomOverlay == true) {
 			ZoomUtils.updateZoomOverlayAlpha();
 		}
 	}
@@ -54,7 +53,7 @@ public class GameRendererMixin {
 	private double getZoomedFov(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
 
-		if (!OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.OFF)) {
+		if (!Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.OFF)) {
 			//Handle the zoom with smooth transitions enabled.
 			if (ZoomUtils.zoomFovMultiplier != 1.0F) {
 				fov *= MathHelper.lerp(tickDelta, ZoomUtils.lastZoomFovMultiplier, ZoomUtils.zoomFovMultiplier);
@@ -84,9 +83,9 @@ public class GameRendererMixin {
 			method = "render(FJZ)V"
 	)
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
-		if (OkZoomerConfigPojo.features.zoomOverlay) {
+		if (Config.features.zoomOverlay) {
 			if (this.client.options.hudHidden) {
-				if (OkZoomerConfigPojo.tweaks.hideZoomOverlay) {
+				if (Config.tweaks.hideZoomOverlay) {
 					return;
 				}
 			}
@@ -94,7 +93,7 @@ public class GameRendererMixin {
 			RenderSystem.defaultAlphaFunc();
 			RenderSystem.enableBlend();
 			//If zoom transitions is on, apply the transition to the overlay.
-			if (!OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.OFF)) {
+			if (!Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.OFF)) {
 				if (ZoomUtils.zoomFovMultiplier != 0.0F) {
 					float transparency = MathHelper.lerp(tickDelta, ZoomUtils.lastZoomOverlayAlpha, ZoomUtils.zoomOverlayAlpha);
 					this.renderZoomOverlay(transparency);

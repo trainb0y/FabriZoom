@@ -1,7 +1,6 @@
 package io.github.joaoh1.okzoomer.client.utils;
 
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomTransitionOptions;
+import io.github.joaoh1.okzoomer.client.config.Config;
 import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
@@ -22,7 +21,7 @@ public class ZoomUtils {
 	public static boolean lastZoomState = false;
 
 	//The zoom divisor, managed by the zoom press and zoom scrolling. Used by other mixins.
-	public static double zoomDivisor = OkZoomerConfigPojo.values.zoomDivisor;
+	public static double zoomDivisor = Config.values.zoomDivisor;
 
 	//The zoom FOV multipliers. Used by the GameRenderer mixin.
 	public static float zoomFovMultiplier = 1.0F;
@@ -38,20 +37,20 @@ public class ZoomUtils {
 		double lesserChangedZoomDivisor;
 
 		if (increase) {
-			changedZoomDivisor = zoomDivisor + OkZoomerConfigPojo.values.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor + OkZoomerConfigPojo.values.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor + Config.values.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor + Config.values.lesserScrollStep;
 		} else {
-			changedZoomDivisor = zoomDivisor - OkZoomerConfigPojo.values.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor - OkZoomerConfigPojo.values.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor - Config.values.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor - Config.values.lesserScrollStep;
 			lastZoomState = true;
 		}
 
-		if (lesserChangedZoomDivisor <= OkZoomerConfigPojo.values.zoomDivisor) {
+		if (lesserChangedZoomDivisor <= Config.values.zoomDivisor) {
 			changedZoomDivisor = lesserChangedZoomDivisor;
 		}
 
-		if (changedZoomDivisor >= OkZoomerConfigPojo.values.minimumZoomDivisor) {
-			if (changedZoomDivisor <= OkZoomerConfigPojo.values.maximumZoomDivisor) {
+		if (changedZoomDivisor >= Config.values.minimumZoomDivisor) {
+			if (changedZoomDivisor <= Config.values.maximumZoomDivisor) {
 				zoomDivisor = changedZoomDivisor;
 			}
 		}
@@ -59,7 +58,7 @@ public class ZoomUtils {
 
 	//The method used by both the "Reset Zoom" keybind and the "Reset Zoom With Mouse" tweak.
 	public static final void resetZoomDivisor() {
-		zoomDivisor = OkZoomerConfigPojo.values.zoomDivisor;
+		zoomDivisor = Config.values.zoomDivisor;
 		lastZoomState = true;
 	}
 
@@ -92,15 +91,15 @@ public class ZoomUtils {
 
 		lastZoomFovMultiplier = zoomFovMultiplier;
 
-		if (OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.SMOOTH)) {
-			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * OkZoomerConfigPojo.values.smoothMultiplier;
-		} else if (OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.LINEAR)) {
+		if (Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.SMOOTH)) {
+			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * Config.values.smoothMultiplier;
+		} else if (Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.LINEAR)) {
 			double linearStep = dividedZoomMultiplier;
-			if (linearStep < OkZoomerConfigPojo.values.minimumLinearStep) {
-				linearStep = OkZoomerConfigPojo.values.minimumLinearStep;
+			if (linearStep < Config.values.minimumLinearStep) {
+				linearStep = Config.values.minimumLinearStep;
 			}
-			if (linearStep > OkZoomerConfigPojo.values.maximumLinearStep) {
-				linearStep = OkZoomerConfigPojo.values.maximumLinearStep;
+			if (linearStep > Config.values.maximumLinearStep) {
+				linearStep = Config.values.maximumLinearStep;
 			}
 			zoomFovMultiplier = MathHelper.stepTowards(zoomFovMultiplier, zoomMultiplier, (float) linearStep);
 		}
@@ -116,15 +115,15 @@ public class ZoomUtils {
 
 		lastZoomOverlayAlpha = zoomOverlayAlpha;
 
-		if (OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.SMOOTH)) {
-			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * OkZoomerConfigPojo.values.smoothMultiplier;
-		} else if (OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.LINEAR)) {
+		if (Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.SMOOTH)) {
+			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * Config.values.smoothMultiplier;
+		} else if (Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.LINEAR)) {
 			double linearStep = 1.0F / zoomDivisor;
-			if (linearStep < OkZoomerConfigPojo.values.minimumLinearStep) {
-				linearStep = OkZoomerConfigPojo.values.minimumLinearStep;
+			if (linearStep < Config.values.minimumLinearStep) {
+				linearStep = Config.values.minimumLinearStep;
 			}
-			if (linearStep > OkZoomerConfigPojo.values.maximumLinearStep) {
-				linearStep = OkZoomerConfigPojo.values.maximumLinearStep;
+			if (linearStep > Config.values.maximumLinearStep) {
+				linearStep = Config.values.maximumLinearStep;
 			}
 			zoomOverlayAlpha = MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier, (float) linearStep);
 		}
