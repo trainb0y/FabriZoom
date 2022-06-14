@@ -48,19 +48,15 @@ public class GameRendererMixin {
 				fov *= MathHelper.lerp(tickDelta, ZoomUtils.lastZoomFovMultiplier, ZoomUtils.zoomFovMultiplier);
 				info.setReturnValue(fov);
 			}
-		} else {
+		} else if (ZoomUtils.zoomState){
 			//Handle the zoom without smooth transitions.
-			if (ZoomUtils.zoomState) {
-				double zoomedFov = fov / ZoomUtils.zoomDivisor;
-				info.setReturnValue(zoomedFov);
-			}
+			double zoomedFov = fov / ZoomUtils.zoomDivisor;
+			info.setReturnValue(zoomedFov);
 		}
 
 		//Regardless of the mode, if the zoom is over, update the terrain in order to stop terrain glitches.
-		if (ZoomUtils.lastZoomState) {
-			if (changingFov) {
-				this.client.worldRenderer.scheduleTerrainUpdate();
-			}
+		if (ZoomUtils.lastZoomState && changingFov) {
+			this.client.worldRenderer.scheduleTerrainUpdate();
 		}
 
 		return fov;

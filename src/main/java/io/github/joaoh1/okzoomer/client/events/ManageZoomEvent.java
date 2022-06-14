@@ -16,23 +16,17 @@ public class ManageZoomEvent {
 	public static void registerEvent() {
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			//Handle zoom mode changes.
-			if (!Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD)) {
-				if (!persistentZoom) {
-					persistentZoom = true;
-					lastZoomPress = true;
-					ZoomUtils.zoomDivisor = Config.values.zoomDivisor;
-				}
-			} else {
-				if (persistentZoom) {
-					persistentZoom = false;
-					lastZoomPress = true;
-				}
+			if (!Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD) && !persistentZoom) {
+				persistentZoom = true;
+				lastZoomPress = true;
+				ZoomUtils.zoomDivisor = Config.values.zoomDivisor;
+			} else if (persistentZoom){
+				persistentZoom = false;
+				lastZoomPress = true;
 			}
 
 			//If the press state is the same as the previous tick's, cancel the rest. Makes toggling usable and the zoom divisor adjustable.
-			if (ZoomKeybinds.zoomKey.isPressed() == lastZoomPress) {
-				return;
-			}
+			if (ZoomKeybinds.zoomKey.isPressed() == lastZoomPress) return;
 
 			if (Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.HOLD)) {
 				//If the zoom needs to be held, then the zoom signal is determined by if the key is pressed or not.

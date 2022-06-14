@@ -25,7 +25,7 @@ public class ZoomUtils {
 
 
 	//The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
-	public static final void changeZoomDivisor(boolean increase) {
+	public static void changeZoomDivisor(boolean increase) {
 		double changedZoomDivisor;
 		double lesserChangedZoomDivisor;
 
@@ -38,45 +38,36 @@ public class ZoomUtils {
 			lastZoomState = true;
 		}
 
-		if (lesserChangedZoomDivisor <= Config.values.zoomDivisor) {
+		if (lesserChangedZoomDivisor <= Config.values.zoomDivisor)
 			changedZoomDivisor = lesserChangedZoomDivisor;
-		}
 
-		if (changedZoomDivisor >= Config.values.minimumZoomDivisor) {
-			if (changedZoomDivisor <= Config.values.maximumZoomDivisor) {
-				zoomDivisor = changedZoomDivisor;
-			}
-		}
+
+		if (changedZoomDivisor >= Config.values.minimumZoomDivisor &&
+				changedZoomDivisor <= Config.values.maximumZoomDivisor)
+			zoomDivisor = changedZoomDivisor;
 	}
 
 	//The method used by both the "Reset Zoom" keybind and the "Reset Zoom With Mouse" tweak.
-	public static final void resetZoomDivisor() {
+	public static void resetZoomDivisor() {
 		zoomDivisor = Config.values.zoomDivisor;
 		lastZoomState = true;
 	}
 
-
 	//The equivalent of GameRenderer's updateFovMultiplier but for zooming. Used by zoom transitions.
-	public static final void updateZoomFovMultiplier() {
+	public static void updateZoomFovMultiplier() {
 		float zoomMultiplier = 1.0F;
 		double dividedZoomMultiplier = 1.0 / ZoomUtils.zoomDivisor;
-
-		if (ZoomUtils.zoomState) {
-			zoomMultiplier = (float) dividedZoomMultiplier;
-		}
+		if (ZoomUtils.zoomState) zoomMultiplier = (float) dividedZoomMultiplier;
 
 		lastZoomFovMultiplier = zoomFovMultiplier;
 
 		if (Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.SMOOTH)) {
 			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * Config.values.smoothMultiplier;
 		} else if (Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.LINEAR)) {
-			double linearStep = dividedZoomMultiplier;
-			if (linearStep < Config.values.minimumLinearStep) {
-				linearStep = Config.values.minimumLinearStep;
-			}
-			if (linearStep > Config.values.maximumLinearStep) {
-				linearStep = Config.values.maximumLinearStep;
-			}
+			double linearStep = Math.max(
+					Config.values.minimumLinearStep,
+					Math.min(dividedZoomMultiplier, Config.values.maximumLinearStep)
+			);
 			zoomFovMultiplier = MathHelper.stepTowards(zoomFovMultiplier, zoomMultiplier, (float) linearStep);
 		}
 	}
