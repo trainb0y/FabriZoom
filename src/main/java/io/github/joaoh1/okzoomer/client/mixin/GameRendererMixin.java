@@ -86,7 +86,7 @@ public class GameRendererMixin {
 
 	//This applies the zoom overlay itself.
 	@Inject(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/options/GameOptions;hudHidden:Z"),
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z"),
 		method = "render(FJZ)V"
 	)
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
