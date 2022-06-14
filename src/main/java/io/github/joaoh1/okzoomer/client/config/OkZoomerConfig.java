@@ -1,9 +1,5 @@
 package io.github.joaoh1.okzoomer.client.config;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 import io.github.fablabsmc.fablabs.api.fiber.v1.annotation.AnnotatedSettings;
 import io.github.fablabsmc.fablabs.api.fiber.v1.annotation.SettingNamingConvention;
 import io.github.fablabsmc.fablabs.api.fiber.v1.exception.FiberException;
@@ -16,6 +12,10 @@ import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import net.fabricmc.loader.api.FabricLoader;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 //The class responsible for loading and saving the config.
 //TODO - Remove backward-compatibility on the next major MC version.
 public class OkZoomerConfig {
@@ -23,20 +23,20 @@ public class OkZoomerConfig {
 	public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("okzoomer.json5");
 	public static final Path LEGACY_CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("okzoomer-legacy.json5");
 	private static final AnnotatedSettings ANNOTATED_SETTINGS = AnnotatedSettings.builder()
-		.useNamingConvention(SettingNamingConvention.SNAKE_CASE)
-		.build();
+			.useNamingConvention(SettingNamingConvention.SNAKE_CASE)
+			.build();
 	private static final OkZoomerConfigPojo POJO = new OkZoomerConfigPojo();
 	public static final ConfigTree TREE = ConfigTree.builder()
-		.applyFromPojo(POJO, ANNOTATED_SETTINGS)
-		.build();
+			.applyFromPojo(POJO, ANNOTATED_SETTINGS)
+			.build();
 	private static final AnnotatedSettings LEGACY_ANNOTATED_SETTINGS = AnnotatedSettings.builder()
-		.useNamingConvention(SettingNamingConvention.NONE)
-		.build();
+			.useNamingConvention(SettingNamingConvention.NONE)
+			.build();
 	private static final OkZoomerLegacyConfigPojo LEGACY_POJO = new OkZoomerLegacyConfigPojo();
 	public static final ConfigTree LEGACY_TREE = ConfigTree.builder()
-		.applyFromPojo(LEGACY_POJO, LEGACY_ANNOTATED_SETTINGS)
-		.build();
-	
+			.applyFromPojo(LEGACY_POJO, LEGACY_ANNOTATED_SETTINGS)
+			.build();
+
 	private static JanksonValueSerializer serializer = new JanksonValueSerializer(false);
 
 	public static void loadModConfig() {

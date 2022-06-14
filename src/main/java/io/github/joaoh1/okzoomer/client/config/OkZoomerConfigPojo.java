@@ -10,34 +10,34 @@ public class OkZoomerConfigPojo {
 	public static class FeaturesGroup {
 		@Setting(comment = "Defines the cinematic camera while zooming.\n\"OFF\" disables the cinematic camera.\n\"VANILLA\" uses Vanilla's cinematic camera.\n\"MULTIPLIED\" is a multiplied variant of \"VANILLA\".")
 		public CinematicCameraOptions cinematicCamera = CinematicCameraOptions.OFF;
-	
+
 		public enum CinematicCameraOptions {
 			OFF,
 			VANILLA,
 			MULTIPLIED
 		}
-	
+
 		@Setting(comment = "Reduces the mouse sensitivity when zooming.")
 		public boolean reduceSensitivity = true;
-	
+
 		@Setting(comment = "Adds transitions between zooms.\n\"OFF\" disables transitions.\n\"SMOOTH\" replicates Vanilla's dynamic FOV.\n\"LINEAR\" removes the smoothiness.")
 		public ZoomTransitionOptions zoomTransition = ZoomTransitionOptions.SMOOTH;
-	
+
 		public enum ZoomTransitionOptions {
 			OFF,
 			SMOOTH,
 			LINEAR
 		}
-	
+
 		@Setting(comment = "The behavior of the zoom key.\n\"HOLD\" needs the zoom key to be hold.\n\"TOGGLE\" has the zoom key toggle the zoom.\n\"PERSISTENT\" makes the zoom permanent.")
 		public ZoomModes zoomMode = ZoomModes.HOLD;
-	
+
 		public enum ZoomModes {
 			HOLD,
 			TOGGLE,
 			PERSISTENT
 		}
-	
+
 		@Setting(comment = "Allows to increase or decrease zoom by scrolling.")
 		public boolean zoomScrolling = true;
 
@@ -59,7 +59,7 @@ public class OkZoomerConfigPojo {
 		@Setting.Constrain.Range(min = Double.MIN_NORMAL)
 		@Setting(comment = "The minimum value that you can scroll down.")
 		public double minimumZoomDivisor = 1.0;
-	
+
 		@Setting.Constrain.Range(min = Double.MIN_NORMAL)
 		@Setting(comment = "The maximum value that you can scroll up.")
 		public double maximumZoomDivisor = 50.0;
@@ -93,7 +93,7 @@ public class OkZoomerConfigPojo {
 
 	public static class TweaksGroup {
 		@Setting(comment = "Allows for resetting the zoom with the middle mouse button.")
-		public boolean resetZoomWithMouse = true; 
+		public boolean resetZoomWithMouse = true;
 		@Setting(comment = "If enabled, the \"Save Toolbar Activator\" keybind will be unbound if there's a conflict with the zoom key.")
 		public boolean unbindConflictingKey = true;
 		@Setting(comment = "Prints a random owo in the console when the game starts.")

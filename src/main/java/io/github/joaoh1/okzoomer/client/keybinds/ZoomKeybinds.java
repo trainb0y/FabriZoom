@@ -1,19 +1,18 @@
 package io.github.joaoh1.okzoomer.client.keybinds;
 
-import org.lwjgl.glfw.GLFW;
-
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfig;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import org.lwjgl.glfw.GLFW;
 
 //Manages the zoom keybinds themselves.
 public class ZoomKeybinds {
-    //The zoom keybinding, which will be registered.
+	//The zoom keybinding, which will be registered.
 	public static final KeyBinding zoomKey = KeyBindingHelper.registerKeyBinding(
-		new KeyBinding("key.okzoomer.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C, "key.okzoomer.category"));
-	
+			new KeyBinding("key.okzoomer.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C, "key.okzoomer.category"));
+
 	//The "Decrease Zoom" keybinding.
 	public static final KeyBinding decreaseZoomKey = getExtraKeybind("key.okzoomer.decrease_zoom");
 
@@ -34,12 +33,12 @@ public class ZoomKeybinds {
 		extraKeybinds = OkZoomerConfigPojo.features.extraKeybinds;
 		return extraKeybinds;
 	}
-    
-    //The method used to get the extra keybinds, if disabled, return null.
+
+	//The method used to get the extra keybinds, if disabled, return null.
 	public static final KeyBinding getExtraKeybind(String translationKey) {
 		if (areExtraKeybindsEnabled()) {
 			return KeyBindingHelper.registerKeyBinding(
-				new KeyBinding(translationKey, InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.getCode(), "key.okzoomer.category"));
+					new KeyBinding(translationKey, InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.getCode(), "key.okzoomer.category"));
 		}
 		return null;
 	}

@@ -1,22 +1,21 @@
 package io.github.joaoh1.okzoomer.client.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomTransitionOptions;
+import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.math.MathHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 //The class that contains most of the logic behind the zoom itself.
 public class ZoomUtils {
-    //The logger, used everywhere to print messages to the console.
+	//The logger, used everywhere to print messages to the console.
 	public static final Logger modLogger = LogManager.getFormatterLogger("Ok Zoomer");
-    
-    //The zoom signal, which is managed in an event and used by other mixins.
+
+	//The zoom signal, which is managed in an event and used by other mixins.
 	public static boolean zoomState = false;
 
 	//Used for post-zoom actions like updating the terrain.
@@ -33,7 +32,7 @@ public class ZoomUtils {
 	public static float zoomOverlayAlpha = 0.0F;
 	public static float lastZoomOverlayAlpha = 0.0F;
 
-    //The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
+	//The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
 	public static final void changeZoomDivisor(boolean increase) {
 		double changedZoomDivisor;
 		double lesserChangedZoomDivisor;
@@ -88,11 +87,11 @@ public class ZoomUtils {
 		double dividedZoomMultiplier = 1.0 / ZoomUtils.zoomDivisor;
 
 		if (ZoomUtils.zoomState) {
-			zoomMultiplier = (float)dividedZoomMultiplier;
+			zoomMultiplier = (float) dividedZoomMultiplier;
 		}
 
 		lastZoomFovMultiplier = zoomFovMultiplier;
-		
+
 		if (OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.SMOOTH)) {
 			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * OkZoomerConfigPojo.values.smoothMultiplier;
 		} else if (OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.LINEAR)) {
@@ -103,7 +102,7 @@ public class ZoomUtils {
 			if (linearStep > OkZoomerConfigPojo.values.maximumLinearStep) {
 				linearStep = OkZoomerConfigPojo.values.maximumLinearStep;
 			}
-			zoomFovMultiplier = MathHelper.stepTowards(zoomFovMultiplier, zoomMultiplier, (float)linearStep);
+			zoomFovMultiplier = MathHelper.stepTowards(zoomFovMultiplier, zoomMultiplier, (float) linearStep);
 		}
 	}
 
@@ -116,7 +115,7 @@ public class ZoomUtils {
 		}
 
 		lastZoomOverlayAlpha = zoomOverlayAlpha;
-		
+
 		if (OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.SMOOTH)) {
 			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * OkZoomerConfigPojo.values.smoothMultiplier;
 		} else if (OkZoomerConfigPojo.features.zoomTransition.equals(ZoomTransitionOptions.LINEAR)) {
@@ -127,7 +126,7 @@ public class ZoomUtils {
 			if (linearStep > OkZoomerConfigPojo.values.maximumLinearStep) {
 				linearStep = OkZoomerConfigPojo.values.maximumLinearStep;
 			}
-			zoomOverlayAlpha = MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier, (float)linearStep);
+			zoomOverlayAlpha = MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier, (float) linearStep);
 		}
 	}
 }

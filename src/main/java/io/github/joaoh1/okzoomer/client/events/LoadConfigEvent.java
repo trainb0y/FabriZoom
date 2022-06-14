@@ -7,8 +7,8 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 
 //The event that makes sure to load the config and puts any load-once options in effect if enabled through the config file.
 public class LoadConfigEvent {
-    public static void registerEvent() {
-        ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
+	public static void registerEvent() {
+		ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
 			//Attempt to load the config if it hasn't been loaded yet, which is unlikely due to extra keybinds.
 			if (!OkZoomerConfig.isConfigLoaded) {
 				OkZoomerConfig.loadModConfig();
@@ -21,5 +21,5 @@ public class LoadConfigEvent {
 				OkZoomerConfig.saveModConfig();
 			}
 		});
-    }
+	}
 }

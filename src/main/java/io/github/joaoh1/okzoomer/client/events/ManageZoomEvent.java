@@ -1,21 +1,21 @@
 package io.github.joaoh1.okzoomer.client.events;
 
-import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
 import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomModes;
+import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
 import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 
 //This event is responsible for managing the zoom signal.
 public class ManageZoomEvent {
-    //Used internally in order to make zoom toggling possible.
+	//Used internally in order to make zoom toggling possible.
 	private static boolean lastZoomPress = false;
 
 	//Used internally in order to make persistent zoom less buggy.
-    private static boolean persistentZoom = false;
-    
-    public static void registerEvent() {
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+	private static boolean persistentZoom = false;
+
+	public static void registerEvent() {
+		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			//Handle zoom mode changes.
 			if (!OkZoomerConfigPojo.features.zoomMode.equals(ZoomModes.HOLD)) {
 				if (!persistentZoom) {
@@ -60,5 +60,5 @@ public class ManageZoomEvent {
 			//Set the previous zoom signal for the next tick.
 			lastZoomPress = ZoomKeybinds.zoomKey.isPressed();
 		});
-    }
+	}
 }

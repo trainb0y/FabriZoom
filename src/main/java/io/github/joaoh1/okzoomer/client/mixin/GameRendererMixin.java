@@ -1,7 +1,13 @@
 package io.github.joaoh1.okzoomer.client.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-
+import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
+import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomTransitionOptions;
+import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.*;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -10,18 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo;
-import io.github.joaoh1.okzoomer.client.config.OkZoomerConfigPojo.FeaturesGroup.ZoomTransitionOptions;
-import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormats;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 
 //This mixin is responsible for managing the fov-changing part of the zoom.
 @Mixin(GameRenderer.class)
@@ -36,8 +30,8 @@ public class GameRendererMixin {
 
 	//Handle transitioned zoom FOV multiplier and zoom overlay alphas each tick.
 	@Inject(
-		at = @At("HEAD"),
-		method = "tick()V"
+			at = @At("HEAD"),
+			method = "tick()V"
 	)
 	private void zoomTick(CallbackInfo info) {
 		//If zoom transitions are enabled, update the zoom FOV multiplier.
@@ -50,12 +44,12 @@ public class GameRendererMixin {
 			ZoomUtils.updateZoomOverlayAlpha();
 		}
 	}
-	
+
 	//Handles zooming of both modes (Transitionless and with Smooth Transitions).
 	@Inject(
-		at = @At("RETURN"),
-		method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D",
-		cancellable = true
+			at = @At("RETURN"),
+			method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D",
+			cancellable = true
 	)
 	private double getZoomedFov(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
@@ -86,8 +80,8 @@ public class GameRendererMixin {
 
 	//This applies the zoom overlay itself.
 	@Inject(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z"),
-		method = "render(FJZ)V"
+			at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z"),
+			method = "render(FJZ)V"
 	)
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
 		if (OkZoomerConfigPojo.features.zoomOverlay) {
@@ -112,7 +106,7 @@ public class GameRendererMixin {
 				}
 			}
 			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-     	 	RenderSystem.enableAlphaTest();
+			RenderSystem.enableAlphaTest();
 			RenderSystem.clear(256, MinecraftClient.IS_SYSTEM_MAC);
 		}
 	}
@@ -129,9 +123,9 @@ public class GameRendererMixin {
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
 		bufferBuilder.begin(7, VertexFormats.POSITION_TEXTURE);
-		bufferBuilder.vertex(0.0D, (double)this.client.getWindow().getScaledHeight(), -90.0D).texture(0.0F, 1.0F).next();
-		bufferBuilder.vertex((double)this.client.getWindow().getScaledWidth(), (double)this.client.getWindow().getScaledHeight(), -90.0D).texture(1.0F, 1.0F).next();
-		bufferBuilder.vertex((double)this.client.getWindow().getScaledWidth(), 0.0D, -90.0D).texture(1.0F, 0.0F).next();
+		bufferBuilder.vertex(0.0D, (double) this.client.getWindow().getScaledHeight(), -90.0D).texture(0.0F, 1.0F).next();
+		bufferBuilder.vertex((double) this.client.getWindow().getScaledWidth(), (double) this.client.getWindow().getScaledHeight(), -90.0D).texture(1.0F, 1.0F).next();
+		bufferBuilder.vertex((double) this.client.getWindow().getScaledWidth(), 0.0D, -90.0D).texture(1.0F, 0.0F).next();
 		bufferBuilder.vertex(0.0D, 0.0D, -90.0D).texture(0.0F, 0.0F).next();
 		tessellator.draw();
 		RenderSystem.depthMask(true);
