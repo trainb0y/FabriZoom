@@ -9,9 +9,9 @@
     "trainb0y"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/ok-zoomer",
-    "issues": "https://github.com/joaoh1/OkZoomer/issues",
-    "sources": "https://github.com/joaoh1/OkZoomer"
+    "homepage": "https://github.com/trainb0y1/OkZoomer-Fabric",
+    "issues": "https://github.com/trainb0y1/OkZoomer-Fabric/issues",
+    "sources": "https://github.com/trainb0y1/OkZoomer-Fabric"
   },
   "license": "MIT",
   "icon": "assets/okzoomer/icon.png",
