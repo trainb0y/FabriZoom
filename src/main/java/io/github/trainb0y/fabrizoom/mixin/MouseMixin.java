@@ -147,7 +147,7 @@ public class MouseMixin {
 	private void onMouseScroll(CallbackInfo info) {
 		if (this.eventDeltaWheel == 0.0 || !Config.features.zoomScrolling) return;
 		if (Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT))
-			if (!ZoomKeybinds.zoomKey.isPressed()) return;
+			if (!ZoomKeybinds.getZoomKey().isPressed()) return;
 
 		if (ZoomUtils.zoomState) {
 			ZoomUtils.changeZoomDivisor(this.eventDeltaWheel > 0.0);
@@ -168,9 +168,9 @@ public class MouseMixin {
 	private void onMouseButton(long window, int button, int action, int mods, CallbackInfo info, boolean bl, int i) {
 		if (!Config.features.zoomScrolling) return;
 		if (Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT))
-			if (!ZoomKeybinds.zoomKey.isPressed()) return; // is this needed?
+			if (!ZoomKeybinds.getZoomKey().isPressed()) return; // is this needed?
 
-		if (button == 2 && bl && ZoomKeybinds.zoomKey.isPressed()) {
+		if (button == 2 && bl && ZoomKeybinds.getZoomKey().isPressed()) {
 			if (Config.features.resetZoomWithMouse) {
 				ZoomUtils.resetZoomDivisor();
 				info.cancel();

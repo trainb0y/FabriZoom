@@ -1,24 +1,33 @@
 {
   "schemaVersion": 1,
   "id": "fabrizoom",
-  "version": "v0.1.0",
+  "version": "$version",
   "name": "FabriZoom",
   "description": "Adds a highly configurable zoom button. Fork of OkZoomer v4",
   "authors": [
     "joaoh1",
-    "trainb0y"
+    {
+      "name": "trainb0y",
+      "contact": {
+        "email": "trainb0ydev@gmail.com",
+        "discord": "trainb0y#7688"
+      }
+    }
   ],
   "contact": {
-    "homepage": "https://github.com/trainb0y1/FabriZoom",
     "issues": "https://github.com/trainb0y1/FabriZoom/issues",
-    "sources": "https://github.com/trainb0y1/FabriZoom"
+    "sources": "https://github.com/trainb0y1/FabriZoom",
+    "discord": "https://discord.gg/PPCvtMTXvP"
   },
   "license": "MIT",
   "icon": "assets/fabrizoom/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "io.github.trainb0y.fabrizoom.FabriZoom"
+      {
+        "adapter": "kotlin",
+        "value": "io.github.trainb0y.fabrizoom.FabriZoom"
+      }
     ],
     "modmenu": [
       "io.github.trainb0y.fabrizoom.config.modmenu.ModMenuIntegration"
@@ -28,8 +37,8 @@
     "fabrizoom.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.0",
-    "fabric": ">=0.56.0"
+    "fabricloader": ">=0.14.8",
+    "fabric-language-kotlin": ">=1.8.3+kotlin.1.7.10"
   },
   "recommends": {
     "modmenu": ">=4.0.0",
