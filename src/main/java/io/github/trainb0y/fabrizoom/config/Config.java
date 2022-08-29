@@ -1,4 +1,4 @@
-package io.github.joaoh1.okzoomer.client.config;
+package io.github.trainb0y.fabrizoom.config;
 
 
 public class Config {

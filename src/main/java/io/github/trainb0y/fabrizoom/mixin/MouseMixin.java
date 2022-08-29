@@ -1,8 +1,8 @@
-package io.github.joaoh1.okzoomer.client.mixin;
+package io.github.trainb0y.fabrizoom.mixin;
 
-import io.github.joaoh1.okzoomer.client.config.Config;
-import io.github.joaoh1.okzoomer.client.keybinds.ZoomKeybinds;
-import io.github.joaoh1.okzoomer.client.utils.ZoomUtils;
+import io.github.trainb0y.fabrizoom.config.Config;
+import io.github.trainb0y.fabrizoom.keybinds.ZoomKeybinds;
+import io.github.trainb0y.fabrizoom.utils.ZoomUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.util.SmoothUtil;

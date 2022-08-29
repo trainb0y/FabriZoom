@@ -1,6 +1,6 @@
-package io.github.joaoh1.okzoomer.client.utils;
+package io.github.trainb0y.fabrizoom.utils;
 
-import io.github.joaoh1.okzoomer.client.config.Config;
+import io.github.trainb0y.fabrizoom.config.Config;
 import net.minecraft.util.math.MathHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
