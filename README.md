@@ -1,3 +1,6 @@
+#Credit
+[trainb0y](https://github.com/trainb0y/OkZoomer-Fabric)
+
 # Ok Zoomer - Fabric
 (temporary name, will change to differentiate from OkZoomer if this goes anywhere)
 
