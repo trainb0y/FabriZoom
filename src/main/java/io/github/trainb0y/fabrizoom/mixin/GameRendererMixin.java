@@ -1,7 +1,7 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
+import io.github.trainb0y.fabrizoom.Zoom;
 import io.github.trainb0y.fabrizoom.config.Config;
-import io.github.trainb0y.fabrizoom.utils.ZoomUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.util.math.MathHelper;
@@ -28,8 +28,8 @@ public class GameRendererMixin {
 	)
 	private void zoomTick(CallbackInfo info) {
 		//If zoom transitions are enabled, update the zoom FOV multiplier.
-		if (!Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.OFF)) {
-			ZoomUtils.updateZoomFovMultiplier();
+		if (Config.getZoomTransition() && Zoom.getZooming()) {
+			Zoom.updateZoomFovMultiplier();
 		}
 	}
 
@@ -42,22 +42,24 @@ public class GameRendererMixin {
 	private double getZoomedFov(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
 
-		if (!Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.OFF)) {
+		if (Config.getZoomTransition()) {
 			//Handle the zoom with smooth transitions enabled.
-			if (ZoomUtils.zoomFovMultiplier != 1.0F) {
-				fov *= MathHelper.lerp(tickDelta, ZoomUtils.lastZoomFovMultiplier, ZoomUtils.zoomFovMultiplier);
+			if (Zoom.getCurrentZoomFovMultiplier() != 1.0F) {
+				fov *= MathHelper.lerp(tickDelta, Zoom.getLastZoomFovMultiplier(), Zoom.getCurrentZoomFovMultiplier());
 				info.setReturnValue(fov);
 			}
-		} else if (ZoomUtils.zoomState){
+		} else if (Zoom.getZooming()){
 			//Handle the zoom without smooth transitions.
-			double zoomedFov = fov / ZoomUtils.zoomDivisor;
+			double zoomedFov = fov / Zoom.getZoomDivisor();
 			info.setReturnValue(zoomedFov);
 		}
 
+		/* //todo: fix this
 		//Regardless of the mode, if the zoom is over, update the terrain in order to stop terrain glitches.
-		if (ZoomUtils.lastZoomState && changingFov) {
+		if (Zoom.getLastZoomState() && changingFov) {
 			this.client.worldRenderer.scheduleTerrainUpdate();
 		}
+		 */
 
 		return fov;
 	}

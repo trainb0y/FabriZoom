@@ -1,11 +1,9 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
+import io.github.trainb0y.fabrizoom.Zoom;
 import io.github.trainb0y.fabrizoom.config.Config;
-import io.github.trainb0y.fabrizoom.keybinds.ZoomKeybinds;
-import io.github.trainb0y.fabrizoom.utils.ZoomUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
-import net.minecraft.client.util.SmoothUtil;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,120 +17,64 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 //This mixin is responsible for the mouse-behavior-changing part of the zoom.
 @Mixin(Mouse.class)
 public class MouseMixin {
-	@Final
-	@Shadow
-	private MinecraftClient client;
-
-	@Shadow
-	private final SmoothUtil cursorXSmoother = new SmoothUtil();
-
-	@Shadow
-	private final SmoothUtil cursorYSmoother = new SmoothUtil();
-
-	@Shadow
-	private double cursorDeltaX;
-
-	@Shadow
-	private double cursorDeltaY;
-
 	@Shadow
 	private double eventDeltaWheel;
 
+
+	@Shadow @Final private MinecraftClient client;
 	@Unique
-	private final SmoothUtil cursorXZoomSmoother = new SmoothUtil();
+	private boolean modifyMouse;
 
 	@Unique
-	private final SmoothUtil cursorYZoomSmoother = new SmoothUtil();
+	private double finalCursorDeltaX;
 
 	@Unique
-	private double extractedE;
-	@Unique
-	private double adjustedG;
+	private double finalCursorDeltaY;
 
-	//This mixin handles the "Reduce Sensitivity" option and extracts the g variable for the cinematic cameras.
-	@ModifyVariable(
-			at = @At(
-					value = "FIELD",
-					target = "Lnet/minecraft/client/Mouse;client:Lnet/minecraft/client/MinecraftClient;",
-					ordinal = 2
-			),
-			method = "updateMouse()V",
-			ordinal = 2
-	)
-	private double applyReduceSensitivity(double g) {
-		double modifiedMouseSensitivity = this.client.options.getMouseSensitivity().getValue();
-		if (Config.features.reduceSensitivity) {
-			if (!Config.features.zoomTransition.equals(Config.FeaturesGroup.ZoomTransitionOptions.OFF))
-				modifiedMouseSensitivity *= ZoomUtils.zoomFovMultiplier;
-			else if (ZoomUtils.zoomState) modifiedMouseSensitivity /= ZoomUtils.zoomDivisor;
-		}
-		double appliedMouseSensitivity = modifiedMouseSensitivity * 0.6 + 0.2;
-		g = appliedMouseSensitivity * appliedMouseSensitivity * appliedMouseSensitivity * 8.0;
-		this.adjustedG = g;
-		return g;
-	}
-
-	//Extracts the e variable for the cinematic cameras.
 	@Inject(
+			method = "updateMouse()V",
 			at = @At(
 					value = "INVOKE",
-					target = "net/minecraft/client/Mouse.isCursorLocked()Z"
+					target = "Lnet/minecraft/client/option/GameOptions;getInvertYMouse()Lnet/minecraft/client/option/SimpleOption;"
 			),
-			method = "updateMouse()V",
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void obtainCinematicCameraValues(CallbackInfo info, double d, double e) {
-		this.extractedE = e;
+	public void applyZoomChanges(CallbackInfo ci, double d, double e, double k, double l, double f, double g, double h, int m) {
+		this.modifyMouse = false;
+		if (Zoom.getZooming()) {
+			k = Zoom.applyMouseXModifier(k, h, e);
+			l = Zoom.applyMouseYModifier(l, h, e);
+			this.modifyMouse = true;
+		}
+		Zoom.tick(client);
+		this.finalCursorDeltaX = k;
+		this.finalCursorDeltaY = l;
 	}
 
-	//Applies the cinematic camera on the mouse's X.
 	@ModifyVariable(
+			method = "updateMouse",
 			at = @At(
-					value = "FIELD",
-					target = "Lnet/minecraft/client/Mouse;cursorDeltaX:D",
-					ordinal = 3,
-					shift = At.Shift.BEFORE
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/option/GameOptions;getInvertYMouse()Lnet/minecraft/client/option/SimpleOption;"
 			),
-			method = "updateMouse()V",
-			ordinal = 1
-	)
-	private double applyCinematicModeX(double l) {
-		if (Config.features.cinematicCamera.equals(Config.FeaturesGroup.CinematicCameraOptions.OFF)) return l;
-		if (ZoomUtils.zoomState) {
-			l = this.cursorXZoomSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
-			if (this.client.options.smoothCameraEnabled) this.cursorXZoomSmoother.clear();
-
-			if (Config.features.cinematicCamera.equals(Config.FeaturesGroup.CinematicCameraOptions.MULTIPLIED))
-				l *= Config.values.cinematicMultiplier;
-
-		} else this.cursorXZoomSmoother.clear();
-
-		return l;
-	}
-
-	//Applies the cinematic camera on the mouse's Y.
-	@ModifyVariable(
-			at = @At(
-					value = "FIELD",
-					target = "Lnet/minecraft/client/Mouse;cursorDeltaY:D",
-					ordinal = 3,
-					shift = At.Shift.BEFORE
-			),
-			method = "updateMouse()V",
 			ordinal = 2
 	)
-	private double applyCinematicModeY(double m) {
-		if (Config.features.cinematicCamera.equals(Config.FeaturesGroup.CinematicCameraOptions.OFF)) return m;
-		if (ZoomUtils.zoomState) {
-			this.cursorYZoomSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
-			if (this.client.options.smoothCameraEnabled) this.cursorYZoomSmoother.clear();
-
-			if (Config.features.cinematicCamera.equals(Config.FeaturesGroup.CinematicCameraOptions.MULTIPLIED))
-				m *= Config.values.cinematicMultiplier;
-
-		} else this.cursorYZoomSmoother.clear();
-		return m;
+	private double modifyFinalCursorDeltaX(double k) {
+		return this.modifyMouse ? finalCursorDeltaX : k;
 	}
+
+	@ModifyVariable(
+			method = "updateMouse",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/option/GameOptions;getInvertYMouse()Lnet/minecraft/client/option/SimpleOption;"
+			),
+			ordinal = 3
+	)
+	private double modifyFinalCursorDeltaY(double l) {
+		return this.modifyMouse ? finalCursorDeltaY : l;
+	}
+
 
 	//Handles zoom scrolling.
 	@Inject(
@@ -145,36 +87,11 @@ public class MouseMixin {
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo info) {
-		if (this.eventDeltaWheel == 0.0 || !Config.features.zoomScrolling) return;
-		if (Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT))
-			if (!ZoomKeybinds.getZoomKey().isPressed()) return;
+		if (this.eventDeltaWheel == 0.0) return;
 
-		if (ZoomUtils.zoomState) {
-			ZoomUtils.changeZoomDivisor(this.eventDeltaWheel > 0.0);
+		if (Zoom.getZooming()) {
+			Zoom.changeZoomDivisor(this.eventDeltaWheel > 0.0);
 			info.cancel();
-		}
-	}
-
-	//Handles the zoom scrolling reset through the middle button.
-	@Inject(
-			at = @At(
-					value = "INVOKE",
-					target = "net/minecraft/client/option/KeyBinding.setKeyPressed(Lnet/minecraft/client/util/InputUtil$Key;Z)V"
-			),
-			method = "onMouseButton(JIII)V",
-			cancellable = true,
-			locals = LocalCapture.CAPTURE_FAILHARD
-	)
-	private void onMouseButton(long window, int button, int action, int mods, CallbackInfo info, boolean bl, int i) {
-		if (!Config.features.zoomScrolling) return;
-		if (Config.FeaturesGroup.zoomMode.equals(Config.FeaturesGroup.ZoomModes.PERSISTENT))
-			if (!ZoomKeybinds.getZoomKey().isPressed()) return; // is this needed?
-
-		if (button == 2 && bl && ZoomKeybinds.getZoomKey().isPressed()) {
-			if (Config.features.resetZoomWithMouse) {
-				ZoomUtils.resetZoomDivisor();
-				info.cancel();
-			}
 		}
 	}
 }
