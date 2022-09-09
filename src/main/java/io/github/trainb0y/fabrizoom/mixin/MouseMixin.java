@@ -1,6 +1,6 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
-import io.github.trainb0y.fabrizoom.Zoom;
+import io.github.trainb0y.fabrizoom.ZoomLogic;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import org.spongepowered.asm.mixin.Final;
@@ -40,12 +40,12 @@ public class MouseMixin {
 	)
 	public void applyZoomChanges(CallbackInfo ci, double d, double e, double k, double l, double f, double g, double h, int m) {
 		this.modifyMouse = false;
-		if (Zoom.getZooming()) {
-			k = Zoom.applyMouseXModifier(k, h, e);
-			l = Zoom.applyMouseYModifier(l, h, e);
+		if (ZoomLogic.getZooming()) {
+			k = ZoomLogic.applyMouseXModifier(k, h, e);
+			l = ZoomLogic.applyMouseYModifier(l, h, e);
 			this.modifyMouse = true;
 		}
-		Zoom.tick(client); // should this go here?
+		ZoomLogic.tick(client); // should this go here?
 		this.finalCursorDeltaX = k;
 		this.finalCursorDeltaY = l;
 	}
@@ -85,9 +85,9 @@ public class MouseMixin {
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo info) {
-		if (this.eventDeltaWheel == 0.0 || ! Zoom.getZooming()) return;
+		if (this.eventDeltaWheel == 0.0 || ! ZoomLogic.getZooming()) return;
 
-		Zoom.changeZoomDivisor(this.eventDeltaWheel > 0.0);
+		ZoomLogic.changeZoomDivisor(this.eventDeltaWheel > 0.0);
 		info.cancel();
 	}
 }

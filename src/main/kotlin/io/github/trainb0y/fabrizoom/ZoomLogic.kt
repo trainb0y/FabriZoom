@@ -5,7 +5,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.SmoothUtil
 import net.minecraft.util.math.MathHelper
 
-object Zoom {
+object ZoomLogic {
 	@JvmStatic
 	var zooming = false
 

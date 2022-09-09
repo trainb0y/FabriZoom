@@ -1,6 +1,6 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
-import io.github.trainb0y.fabrizoom.Zoom;
+import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //This mixin is responsible for managing the fov-changing part of the zoom.
@@ -33,13 +32,13 @@ public class GameRendererMixin {
 
 		if (Config.getZoomTransition()) {
 			//Handle the zoom with smooth transitions enabled.
-			if (Zoom.getCurrentZoomFovMultiplier() != 1.0F) {
-				fov *= MathHelper.lerp(tickDelta, Zoom.getLastZoomFovMultiplier(), Zoom.getCurrentZoomFovMultiplier());
+			if (ZoomLogic.getCurrentZoomFovMultiplier() != 1.0F) {
+				fov *= MathHelper.lerp(tickDelta, ZoomLogic.getLastZoomFovMultiplier(), ZoomLogic.getCurrentZoomFovMultiplier());
 				info.setReturnValue(fov);
 			}
 		} else {// if (Zoom.getZooming()){
 			//Handle the zoom without smooth transitions.
-			info.setReturnValue( fov / Zoom.getZoomDivisor());
+			info.setReturnValue( fov / ZoomLogic.getZoomDivisor());
 		}
 
 		/* //todo: fix this
