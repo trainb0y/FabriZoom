@@ -14,9 +14,7 @@ import org.slf4j.LoggerFactory
 class FabriZoom : ClientModInitializer {
 	override fun onInitializeClient() {
 		ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient? ->
-			val shouldZoom = zoomKey.isPressed
-			ZoomLogic.zooming = shouldZoom
-			if (!shouldZoom) ZoomLogic.currentZoomFovMultiplier = 1f
+			ZoomLogic.zooming = zoomKey.isPressed
 		})
 	}
 
