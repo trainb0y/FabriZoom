@@ -1,7 +1,6 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.Zoom;
-import io.github.trainb0y.fabrizoom.config.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import org.spongepowered.asm.mixin.Final;
@@ -46,7 +45,7 @@ public class MouseMixin {
 			l = Zoom.applyMouseYModifier(l, h, e);
 			this.modifyMouse = true;
 		}
-		Zoom.tick(client);
+		Zoom.tick(client); // should this go here?
 		this.finalCursorDeltaX = k;
 		this.finalCursorDeltaY = l;
 	}
@@ -76,7 +75,6 @@ public class MouseMixin {
 	}
 
 
-	//Handles zoom scrolling.
 	@Inject(
 			at = @At(
 					value = "FIELD",
@@ -87,11 +85,9 @@ public class MouseMixin {
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo info) {
-		if (this.eventDeltaWheel == 0.0) return;
+		if (this.eventDeltaWheel == 0.0 || ! Zoom.getZooming()) return;
 
-		if (Zoom.getZooming()) {
-			Zoom.changeZoomDivisor(this.eventDeltaWheel > 0.0);
-			info.cancel();
-		}
+		Zoom.changeZoomDivisor(this.eventDeltaWheel > 0.0);
+		info.cancel();
 	}
 }

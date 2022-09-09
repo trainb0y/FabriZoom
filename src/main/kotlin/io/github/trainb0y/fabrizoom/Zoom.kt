@@ -51,11 +51,12 @@ object Zoom {
 
 	@JvmStatic
 	fun tick(client: MinecraftClient) {
-		this.cinematicCameraEnabled = client.options.smoothCameraEnabled
+		this.cinematicCameraEnabled = client.options.smoothCameraEnabled // todo: put this somewhere else?
 		if (!zooming) {
 			this.cursorXZoomSmoother.clear()
 			this.cursorYZoomSmoother.clear()
 		}
+		updateZoomFovMultiplier()
 	}
 
 	//The equivalent of GameRenderer's updateFovMultiplier but for zooming. Used by zoom transitions.

@@ -21,17 +21,6 @@ public class GameRendererMixin {
 	@Shadow
 	private MinecraftClient client;
 
-	//Handle transitioned zoom FOV multiplier and zoom overlay alphas each tick.
-	@Inject(
-			at = @At("HEAD"),
-			method = "tick()V"
-	)
-	private void zoomTick(CallbackInfo info) {
-		//If zoom transitions are enabled, update the zoom FOV multiplier.
-		if (Config.getZoomTransition() && Zoom.getZooming()) {
-			Zoom.updateZoomFovMultiplier();
-		}
-	}
 
 	//Handles zooming of both modes (Transitionless and with Smooth Transitions).
 	@Inject(
@@ -48,10 +37,9 @@ public class GameRendererMixin {
 				fov *= MathHelper.lerp(tickDelta, Zoom.getLastZoomFovMultiplier(), Zoom.getCurrentZoomFovMultiplier());
 				info.setReturnValue(fov);
 			}
-		} else if (Zoom.getZooming()){
+		} else {// if (Zoom.getZooming()){
 			//Handle the zoom without smooth transitions.
-			double zoomedFov = fov / Zoom.getZoomDivisor();
-			info.setReturnValue(zoomedFov);
+			info.setReturnValue( fov / Zoom.getZoomDivisor());
 		}
 
 		/* //todo: fix this
