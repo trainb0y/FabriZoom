@@ -88,4 +88,19 @@ object ZoomLogic {
 			changedZoomDivisor <= Config.maximumZoomDivisor
 		) zoomDivisor = changedZoomDivisor
 	}
+
+	@JvmStatic
+	fun getFov(fov: Double, delta: Float): Double {
+		if (Config.zoomTransition)
+		{
+			//Handle the zoom with smooth transitions enabled.
+			if (currentZoomFovMultiplier != 1.0f) {
+				return fov * MathHelper.lerp(delta, lastZoomFovMultiplier, currentZoomFovMultiplier).toDouble()
+			}
+		} else { // if (Zoom.getZooming()){
+			//Handle the zoom without smooth transitions.
+			return fov / zoomDivisor
+		}
+		return fov
+	}
 }
