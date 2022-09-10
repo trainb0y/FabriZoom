@@ -62,40 +62,32 @@ object ZoomLogic {
 	//The equivalent of GameRenderer's updateFovMultiplier but for zooming. Used by zoom transitions.
 	@JvmStatic
 	fun updateZoomFovMultiplier() {
-		val zoomMultiplier = if (zooming) { 1.0 / zoomDivisor } else { 1.0 }
-
 		lastZoomFovMultiplier = currentZoomFovMultiplier
 
-		val linearStep = MathHelper.clamp(zoomMultiplier, Config.minimumLinearStep, Config.maximumLinearStep)
+		val zoomMultiplier = if (zooming) { 1.0 / zoomDivisor } else { 1.0 }
 
-		this.currentZoomFovMultiplier = MathHelper.stepTowards(currentZoomFovMultiplier, zoomMultiplier.toFloat(), linearStep.toFloat())
+		this.currentZoomFovMultiplier = MathHelper.stepTowards(
+			currentZoomFovMultiplier,
+			zoomMultiplier.toFloat(),
+			zoomMultiplier.coerceIn(Config.minimumLinearStep, Config.maximumLinearStep).toFloat()
+		)
 	}
 
 	//The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
 	@JvmStatic
 	fun changeZoomDivisor(increase: Boolean) {
-		val changedZoomDivisor = if (increase) {
-			zoomDivisor + Config.scrollStep
-		} else {
-			zoomDivisor - Config.scrollStep
-		}
-		if (changedZoomDivisor >= Config.minimumZoomDivisor &&
-			changedZoomDivisor <= Config.maximumZoomDivisor
-		) zoomDivisor = changedZoomDivisor
+		val changedZoomDivisor =
+			if (increase) zoomDivisor + Config.scrollStep
+			else zoomDivisor - Config.scrollStep
+
+		zoomDivisor = changedZoomDivisor.coerceIn(Config.minimumZoomDivisor, Config.maximumZoomDivisor)
 	}
 
 	@JvmStatic
-	fun getFov(fov: Double, delta: Float): Double {
-		if (Config.zoomTransition)
-		{
-			//Handle the zoom with smooth transitions enabled.
-			if (currentZoomFovMultiplier != 1.0f) {
-				return fov * MathHelper.lerp(delta, lastZoomFovMultiplier, currentZoomFovMultiplier).toDouble()
-			}
-		} else { // if (Zoom.getZooming()){
-			//Handle the zoom without smooth transitions.
-			return fov / zoomDivisor
-		}
-		return fov
-	}
+	fun getFov(fov: Double, delta: Float): Double =
+		if (Config.zoomTransition) { //Handle the zoom with smooth transitions enabled.
+			if (currentZoomFovMultiplier != 1.0f) fov * MathHelper.lerp(delta, lastZoomFovMultiplier, currentZoomFovMultiplier).toDouble()
+			else fov
+
+		} else fov / zoomDivisor //Handle the zoom without smooth transitions.
 }
