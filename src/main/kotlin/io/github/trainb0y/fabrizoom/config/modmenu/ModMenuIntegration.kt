@@ -2,14 +2,11 @@ package io.github.trainb0y.fabrizoom.config.modmenu
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi
-import net.fabricmc.api.EnvType
-import net.fabricmc.api.Environment
+import io.github.trainb0y.fabrizoom.config.ConfigScreen
+import net.minecraft.client.gui.screen.Screen
 
-@Environment(EnvType.CLIENT)
 class ModMenuIntegration : ModMenuApi {
-	/*
-	override fun getModConfigScreenFactory(): ConfigScreenFactory<*>? {
-
+	override fun getModConfigScreenFactory(): ConfigScreenFactory<*> {
+		return ConfigScreenFactory<Screen> { parent: Screen? -> ConfigScreen(parent) }
 	}
-	 */
 }
