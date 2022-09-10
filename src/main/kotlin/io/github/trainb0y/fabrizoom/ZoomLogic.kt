@@ -74,16 +74,11 @@ object ZoomLogic {
 	//The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
 	@JvmStatic
 	fun changeZoomDivisor(increase: Boolean) {
-		var changedZoomDivisor: Double
-		val lesserChangedZoomDivisor: Double
-		if (increase) {
-			changedZoomDivisor = zoomDivisor + Config.scrollStep
-			lesserChangedZoomDivisor = zoomDivisor + Config.lesserScrollStep
+		val changedZoomDivisor = if (increase) {
+			zoomDivisor + Config.scrollStep
 		} else {
-			changedZoomDivisor = zoomDivisor - Config.scrollStep
-			lesserChangedZoomDivisor = zoomDivisor - Config.lesserScrollStep
+			zoomDivisor - Config.scrollStep
 		}
-		if (lesserChangedZoomDivisor <= Config.zoomDivisor) changedZoomDivisor = lesserChangedZoomDivisor
 		if (changedZoomDivisor >= Config.minimumZoomDivisor &&
 			changedZoomDivisor <= Config.maximumZoomDivisor
 		) zoomDivisor = changedZoomDivisor

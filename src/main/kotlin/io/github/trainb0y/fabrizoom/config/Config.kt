@@ -20,7 +20,7 @@ object Config {
 	var minimumLinearStep = 0.125
 	var maximumLinearStep = 0.25
 
-	var lesserScrollStep = 0.5
+	// Zoom scrolling step
 	var scrollStep = 1.0
 
 	var minimumZoomDivisor = 4.0
