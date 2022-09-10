@@ -14,18 +14,13 @@ import org.slf4j.LoggerFactory
 @Suppress("Unused")
 class FabriZoom : ClientModInitializer {
 	override fun onInitializeClient() {
-		ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient? ->
-			if (!zoomKey.isPressed && ZoomLogic.zooming) {
-				ZoomLogic.zoomDivisor = Config.zoomDivisor
-			}
-			ZoomLogic.zooming = zoomKey.isPressed
-		})
+		Keybinds.register()
+		ClientTickEvents.END_CLIENT_TICK.register(
+			ClientTickEvents.EndTick { Keybinds.onTick() }
+		)
 	}
 
 	companion object {
-		val zoomKey: KeyBinding = KeyBindingHelper.registerKeyBinding(
-			KeyBinding("key.fabrizoom.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C, "key.fabrizoom.category")
-		)
 		val logger: Logger = LoggerFactory.getLogger("fabrizoom")
 	}
 }

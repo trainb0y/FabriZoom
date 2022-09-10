@@ -1,3 +1,7 @@
 {
-
+  "category.fabrizoom.keybinds": "FabriZoom",
+  "key.fabrizoom.zoom": "Zoom",
+  "key.fabrizoom.increase": "Increase Zoom",
+  "key.fabrizoom.decrease": "Decrease Zoom",
+  "key.fabrizoom.reset": "Reset Zoom"
 }
