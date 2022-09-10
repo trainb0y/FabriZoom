@@ -1,21 +1,32 @@
 package io.github.trainb0y.fabrizoom.config
 
+import org.spongepowered.configurate.objectmapping.ConfigSerializable
+
+@ConfigSerializable
 object Config {
-	@JvmStatic
-	val cinematicCameraMultiplier = 4.0
+
+	private const val version = "1" // config version, doesn't necc. match mod version
 
 	@JvmStatic
-	val zoomTransition = true
+	var cinematicCameraMultiplier = 4.0
 
 	@JvmStatic
-	val zoomDivisor = 4.0
+	var zoomTransition = true
 
 	@JvmStatic
-	val smoothMultiplier = 2.0
+	var zoomDivisor = 4.0
 
-	val lesserScrollStep = 0.5
-	val scrollStep = 1.0
+	// Zoom transition stepping
+	var minimumLinearStep = 0.125
+	var maximumLinearStep = 0.25
 
-	val minimumZoomDivisor = 4.0
-	val maximumZoomDivisor = 50.0
+	var lesserScrollStep = 0.5
+	var scrollStep = 1.0
+
+	var minimumZoomDivisor = 4.0
+	var maximumZoomDivisor = 50.0
+
+	fun saveConfig() {}
+	fun loadConfig() {}
+	fun applyDefaultConfig() {}
 }

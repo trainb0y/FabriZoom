@@ -66,7 +66,7 @@ object ZoomLogic {
 
 		lastZoomFovMultiplier = currentZoomFovMultiplier
 
-		val linearStep = MathHelper.clamp(zoomMultiplier, 0.125, 0.25)// minimumLinearStep, maximumLinearStep
+		val linearStep = MathHelper.clamp(zoomMultiplier, Config.minimumLinearStep, Config.maximumLinearStep)
 
 		this.currentZoomFovMultiplier = MathHelper.stepTowards(currentZoomFovMultiplier, zoomMultiplier.toFloat(), linearStep.toFloat())
 	}
