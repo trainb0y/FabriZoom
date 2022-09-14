@@ -61,13 +61,13 @@ object ZoomLogic {
 		val zoomMultiplier = if (zooming) { 1.0 / zoomDivisor } else { 1.0 }
 
 		currentZoomFovMultiplier = when (Config.transition) {
+			Config.Transition.NONE -> lastZoomFovMultiplier
 			Config.Transition.LINEAR ->  MathHelper.stepTowards(
 					currentZoomFovMultiplier,
 					zoomMultiplier.toFloat(),
 					zoomMultiplier.coerceIn(Config.minimumLinearStep, Config.maximumLinearStep).toFloat()
 				)
-			Config.Transition.SMOOTH -> lastZoomFovMultiplier //TODO: SMOOTH
-			Config.Transition.NONE -> lastZoomFovMultiplier
+			Config.Transition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * Config.smoothMultiplier
 		}
 	}
 
@@ -85,10 +85,9 @@ object ZoomLogic {
 	fun getFov(fov: Double, delta: Float): Double =
 		when (Config.transition) {
 			Config.Transition.NONE -> if(zooming) {fov / zoomDivisor} else {fov}
-			Config.Transition.LINEAR -> {
+			else -> {
 				if (currentZoomFovMultiplier != 1.0f) fov * MathHelper.lerp(delta, lastZoomFovMultiplier, currentZoomFovMultiplier).toDouble()
 				else fov
 			}
-			Config.Transition.SMOOTH -> { fov / zoomDivisor } //TODO: SMOOTH
 		}
 }
