@@ -14,11 +14,8 @@ object ZoomLogic {
 
 	private val cursorXZoomSmoother = SmoothUtil()
 	private val cursorYZoomSmoother = SmoothUtil()
-	private var cinematicCameraEnabled = false
 
-	@JvmStatic
 	var currentZoomFovMultiplier = 1.0f
-	@JvmStatic
 	var lastZoomFovMultiplier = 1.0f
 
 	@JvmStatic
@@ -27,12 +24,13 @@ object ZoomLogic {
 		cursorSensitivity: Double,
 		mouseUpdateTimeDelta: Double,
 	): Double {
-		if (this.cinematicCameraEnabled) {
+		return if (!Config.cinematicCameraEnabled) {
 			this.cursorXZoomSmoother.clear()
-			return cursorDeltaX
+			cursorDeltaX * mouseUpdateTimeDelta * cursorSensitivity * Config.mouseSensitivity
+		} else {
+			val smoother: Double = mouseUpdateTimeDelta * Config.cinematicCameraMultiplier * cursorSensitivity
+			this.cursorXZoomSmoother.smooth(cursorDeltaX, smoother)
 		}
-		val smoother: Double = mouseUpdateTimeDelta * Config.cinematicCameraMultiplier * cursorSensitivity
-		return this.cursorXZoomSmoother.smooth(cursorDeltaX, smoother)
 	}
 
 	@JvmStatic
@@ -41,17 +39,18 @@ object ZoomLogic {
 		cursorSensitivity: Double,
 		mouseUpdateTimeDelta: Double,
 	): Double {
-		if (this.cinematicCameraEnabled) {
+		return if (!Config.cinematicCameraEnabled) {
 			this.cursorYZoomSmoother.clear()
-			return cursorDeltaY
+			cursorDeltaY * mouseUpdateTimeDelta * cursorSensitivity * Config.mouseSensitivity
+		} else {
+			val smoother: Double = mouseUpdateTimeDelta * Config.cinematicCameraMultiplier * cursorSensitivity
+			this.cursorYZoomSmoother.smooth(cursorDeltaY, smoother)
 		}
-		val smoother: Double = mouseUpdateTimeDelta * Config.cinematicCameraMultiplier * cursorSensitivity
-		return this.cursorYZoomSmoother.smooth(cursorDeltaY, smoother)
 	}
 
 	@JvmStatic
 	fun tick(client: MinecraftClient) {
-		this.cinematicCameraEnabled = client.options.smoothCameraEnabled // todo: put this somewhere else?
+		Config.cinematicCameraEnabled = client.options.smoothCameraEnabled // todo: put this somewhere else?
 		if (!zooming) {
 			this.cursorXZoomSmoother.clear()
 			this.cursorYZoomSmoother.clear()

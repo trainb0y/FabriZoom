@@ -5,18 +5,23 @@ import org.spongepowered.configurate.objectmapping.ConfigSerializable
 @ConfigSerializable
 object Config {
 
+	@Suppress("Unused")
 	private const val version = "1" // config version, doesn't necc. match mod version
 
+	// Normal camera mouse mode
+	var mouseSensitivity = 30 // reasonable 10-40
+
+	// Cinematic camera mouse mode
 	@JvmStatic
+	var cinematicCameraEnabled = false
 	var cinematicCameraMultiplier = 4.0
 
-	@JvmStatic
-	var zoomTransition = true
-
+	// Amount to initially zoom
 	@JvmStatic
 	var zoomDivisor = 4.0
 
-	// Zoom transition stepping
+	// Linear zoom transition
+	var zoomTransition = true
 	var minimumLinearStep = 0.125
 	var maximumLinearStep = 0.25
 
