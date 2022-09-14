@@ -50,26 +50,27 @@ object ZoomLogic {
 
 	@JvmStatic
 	fun tick(client: MinecraftClient) {
-		Config.cinematicCameraEnabled = client.options.smoothCameraEnabled // todo: put this somewhere else?
 		if (!zooming) {
 			this.cursorXZoomSmoother.clear()
 			this.cursorYZoomSmoother.clear()
 		}
-		updateZoomFovMultiplier()
-	}
 
-	//The equivalent of GameRenderer's updateFovMultiplier but for zooming. Used by zoom transitions.
-	@JvmStatic
-	fun updateZoomFovMultiplier() {
+		// update zoom fov multiplier
 		lastZoomFovMultiplier = currentZoomFovMultiplier
 
 		val zoomMultiplier = if (zooming) { 1.0 / zoomDivisor } else { 1.0 }
 
-		this.currentZoomFovMultiplier = MathHelper.stepTowards(
-			currentZoomFovMultiplier,
-			zoomMultiplier.toFloat(),
-			zoomMultiplier.coerceIn(Config.minimumLinearStep, Config.maximumLinearStep).toFloat()
-		)
+		this.currentZoomFovMultipler = when (Config.transition) {
+			Config.Transition.LINEAR -> {
+				this.currentZoomFovMultiplier = MathHelper.stepTowards(
+					currentZoomFovMultiplier,
+					zoomMultiplier.toFloat(),
+					zoomMultiplier.coerceIn(Config.minimumLinearStep, Config.maximumLinearStep).toFloat()
+				)
+			}
+			Config.Transition.SMOOTH -> {} //TODO: SMOOTH
+			Config.Transition.NONE -> {}
+		}
 	}
 
 	//The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
@@ -84,9 +85,12 @@ object ZoomLogic {
 
 	@JvmStatic
 	fun getFov(fov: Double, delta: Float): Double =
-		if (Config.zoomTransition) { //Handle the zoom with smooth transitions enabled.
-			if (currentZoomFovMultiplier != 1.0f) fov * MathHelper.lerp(delta, lastZoomFovMultiplier, currentZoomFovMultiplier).toDouble()
-			else fov
-
-		} else fov / zoomDivisor //Handle the zoom without smooth transitions.
+		when (Config.transition) {
+			Config.Transition.NONE -> fov / zoomDivisor
+			Config.Transition.LINEAR -> {
+				if (currentZoomFovMultiplier != 1.0f) fov * MathHelper.lerp(delta, lastZoomFovMultiplier, currentZoomFovMultiplier).toDouble()
+				else fov
+			}
+			Config.Transition.SMOOTH -> { fov / zoomDivisor} //TODO: SMOOTH
+		}
 }
