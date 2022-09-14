@@ -17,7 +17,7 @@ object Keybinds {
 	fun register() {
 		// can't register and initialize at the same time, because they won't appear in the keybind menu
 		zoomKey = KeyBindingHelper.registerKeyBinding(
-		KeyBinding("key.fabrizoom.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C, category)
+			KeyBinding("key.fabrizoom.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C, category)
 		)
 		increaseKey = KeyBindingHelper.registerKeyBinding(
 			KeyBinding("key.fabrizoom.increase", InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.code, category)
@@ -30,7 +30,7 @@ object Keybinds {
 		)
 	}
 
-	
+
 	fun onTick() {
 		if (ZoomLogic.zooming) {
 			if (decreaseKey.isPressed) ZoomLogic.changeZoomDivisor(false)

@@ -1,7 +1,6 @@
 package io.github.trainb0y.fabrizoom.config
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable
-import java.lang.IndexOutOfBoundsException
 
 @ConfigSerializable
 object Config {
@@ -37,7 +36,7 @@ object Config {
 
 	var transition = Transition.LINEAR
 
-	enum class Transition(val key: String){
+	enum class Transition(val key: String) {
 		LINEAR("transition.fabrihud.linear"),
 		SMOOTH("transition.fabrihud.smooth"),
 		NONE("transition.fabrihud.none");

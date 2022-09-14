@@ -20,7 +20,9 @@ public class MouseMixin {
 	private double eventDeltaWheel;
 
 
-	@Shadow @Final private MinecraftClient client;
+	@Shadow
+	@Final
+	private MinecraftClient client;
 	@Unique
 	private boolean modifyMouse;
 
@@ -85,7 +87,7 @@ public class MouseMixin {
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo info) {
-		if (this.eventDeltaWheel == 0.0 || ! ZoomLogic.getZooming()) return;
+		if (this.eventDeltaWheel == 0.0 || !ZoomLogic.getZooming()) return;
 
 		ZoomLogic.changeZoomDivisor(this.eventDeltaWheel > 0.0);
 		info.cancel();
