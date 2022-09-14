@@ -37,9 +37,9 @@ object Config {
 	var transition = Transition.LINEAR
 
 	enum class Transition(val key: String) {
-		LINEAR("transition.fabrihud.linear"),
-		SMOOTH("transition.fabrihud.smooth"),
-		NONE("transition.fabrihud.none");
+		LINEAR("transition.fabrizoom.linear"),
+		SMOOTH("transition.fabrizoom.smooth"),
+		NONE("transition.fabrizoom.none");
 
 		fun next(): Transition { // used for toggle button in gui
 			return try {

@@ -27,14 +27,14 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 		val tabbed = SpruceTabbedWidget(Position.of(this, 0, 4), this.width, this.height - 35 - 4, this.title)
 
 
-		tabbed.addTabEntry(Text.translatable("config.fabrizoom.title"), null) { w, h ->
+		tabbed.addTabEntry(Text.translatable("category.fabrizoom.general"), null) { w, h ->
 			val optionList = SpruceOptionListWidget(Position.of(4, 4), w, h)
-
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("config.fabrizoom.general", true, null))
 			optionList.addSmallSingleOptionEntry(
 				SpruceDoubleInputOption(
 					"config.fabrizoom.zoomdivisor",
 					{ Config.zoomDivisor },
-					{ value -> Config.zoomDivisor = value },
+					{ value -> Config.zoomDivisor = value.coerceIn(Config.minimumZoomDivisor, Config.maximumZoomDivisor) },
 					Text.translatable("config.fabrizoom.zoomdivisor.tooltip")
 				)
 			)
@@ -86,11 +86,11 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 		}
 
 		tabbed.addTabEntry(
-			Text.translatable("config.fabrizoom.mouse.title"),
-			Text.translatable("config.fabrizoom.mouse.description")
+			Text.translatable("category.fabrizoom.mouse"),
+			Text.translatable("category.fabrizoom.mouse.description")
 		) { w, h ->
 			val optionList = SpruceOptionListWidget(Position.of(4, 4), w, h)
-			// mouse sensitivity
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("config.fabrizoom.mouse.normal.title", true, null))
 			optionList.addSingleOptionEntry(
 				SpruceIntegerInputOption(
 					"config.fabrizoom.mouse.sensitivity",
@@ -99,7 +99,7 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 					Text.translatable("config.fabrizoom.mouse.sensitivity.tooltip")
 				)
 			)
-			optionList.addSingleOptionEntry(SpruceSeparatorOption("config.fabrizoom.cinematic.title", true, null))
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("config.fabrizoom.mouse.cinematic.title", true, null))
 			optionList.addOptionEntry(
 				SpruceToggleBooleanOption(
 					"config.fabrizoom.mouse.cinematic",
@@ -109,7 +109,7 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				), SpruceDoubleInputOption(
 					"config.fabrizoom.mouse.cinematicmultiplier",
 					{ Config.cinematicCameraMultiplier },
-					{ value -> Config.cinematicCameraMultiplier = value },
+					{ value -> Config.cinematicCameraMultiplier = value.coerceIn(0.1, 10.0) },
 					Text.translatable("config.fabrizoom.mouse.cinematicmultiplier.tooltip")
 				)
 			)
@@ -117,10 +117,11 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 		}
 
 		tabbed.addTabEntry(
-			Text.translatable("config.fabrizoom.transition.title"),
-			Text.translatable("config.fabrizoom.transition.description")
+			Text.translatable("category.fabrizoom.transition"),
+			Text.translatable("category.fabrizoom.transition.description")
 		) { w, h ->
 			val optionList = SpruceOptionListWidget(Position.of(4, 4), w, h)
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("config.fabrizoom.transition", true, null))
 			optionList.addSingleOptionEntry(
 				SpruceCyclingOption(
 					"config.fabrizoom.transition",
@@ -129,7 +130,7 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 					Text.translatable("config.fabrizoom.transition.tooltip")
 				)
 			)
-			optionList.addSingleOptionEntry(SpruceSeparatorOption("config.fabrizoom.linearstep.title", true, null))
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("config.fabrizoom.transition.linear", true, null))
 			optionList.addOptionEntry(
 				SpruceDoubleInputOption(
 					"config.fabrizoom.linearstep.min",
@@ -143,13 +144,14 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 					Text.translatable("config.fabrizoom.linearstep.max.tooltip")
 				)
 			)
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("config.fabrizoom.transition.smooth", true, null))
 			optionList.addSmallSingleOptionEntry(
 				SpruceFloatInputOption(
 					"config.fabrizoom.smoothmultiplier",
 					{ Config.smoothMultiplier },
 					{ value ->
-						Config.smoothMultiplier = value.coerceIn(0f, 1f)
-					}, // todo: move this min and max elsewhere?
+						Config.smoothMultiplier = value.coerceIn(0.1f, 1f)
+					},
 					Text.translatable("config.fabrizoom.smoothmultiplier.tooltip")
 				)
 			)
