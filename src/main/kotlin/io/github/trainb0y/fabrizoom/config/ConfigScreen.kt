@@ -3,6 +3,7 @@ package io.github.trainb0y.fabrizoom.config
 import dev.lambdaurora.spruceui.Position
 import dev.lambdaurora.spruceui.option.SpruceCyclingOption
 import dev.lambdaurora.spruceui.option.SpruceDoubleInputOption
+import dev.lambdaurora.spruceui.option.SpruceFloatInputOption
 import dev.lambdaurora.spruceui.option.SpruceIntegerInputOption
 import dev.lambdaurora.spruceui.option.SpruceSeparatorOption
 import dev.lambdaurora.spruceui.option.SpruceSimpleActionOption
@@ -11,6 +12,7 @@ import dev.lambdaurora.spruceui.screen.SpruceScreen
 import dev.lambdaurora.spruceui.widget.SpruceButtonWidget
 import dev.lambdaurora.spruceui.widget.container.SpruceOptionListWidget
 import dev.lambdaurora.spruceui.widget.container.tabbed.SpruceTabbedWidget
+import dev.lambdaurora.spruceui.widget.option.SpruceOptionSliderWidget
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.text.Text
 
@@ -29,6 +31,27 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 
 		tabbed.addTabEntry(Text.translatable("config.fabrizoom.title"), null) { w, h ->
 			val optionList = SpruceOptionListWidget(Position.of(4, 4), w, h)
+
+			optionList.addSmallSingleOptionEntry(SpruceDoubleInputOption(
+				"config.fabrizoom.zoomdivisor",
+				{Config.zoomDivisor},
+				{value -> Config.zoomDivisor = value},
+				Text.translatable("config.fabrizoom.zoomdivisor.tooltip")
+			))
+
+			optionList.addOptionEntry(SpruceDoubleInputOption(
+				"config.fabrizoom.minzoomdivisor",
+				{Config.minimumZoomDivisor},
+				{value -> Config.minimumZoomDivisor = value},
+				Text.translatable("config.fabrizoom.minzoomdivisor.tooltip")
+			), SpruceDoubleInputOption(
+				"config.fabrizoom.maxzoomdivisor",
+				{Config.maximumZoomDivisor},
+				{value -> Config.maximumZoomDivisor = value},
+				Text.translatable("config.fabrizoom.maxzoomdivisor.tooltip")
+			))
+
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("", false, null))
 			optionList.addOptionEntry(
 				SpruceSimpleActionOption.of(
 					"config.fabrizoom.reset",
@@ -104,6 +127,13 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				{value -> Config.maximumLinearStep = value},
 				Text.translatable("config.fabrizoom.linearstep.max.tooltip")
 			))
+			optionList.addSmallSingleOptionEntry(SpruceFloatInputOption(
+				"config.fabrizoom.smoothmultiplier",
+				{Config.smoothMultiplier},
+				{value -> Config.smoothMultiplier = value.coerceIn(0f, 1f)}, // todo: move this min and max elsewhere?
+				Text.translatable("config.fabrizoom.smoothmultiplier.tooltip")
+			))
+
 			optionList
 		}
 		addDrawableChild(tabbed)
