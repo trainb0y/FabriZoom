@@ -42,11 +42,11 @@ public class InGameHudMixin {
 		if (ZoomLogic.getZoomDivisor() == 1.0) return;
 
 		float f;
-		//If zoom transitions is on, apply the transition to the overlay.
-		if (Config.getValues().getTransition() != Config.Transition.NONE) {
+
+		if (Config.getValues().getTransition() != Config.Transition.NONE) { // smooth and linear transition
 			f = 1 - MathHelper.lerp(tickDelta, ZoomLogic.getLastZoomOverlayAlpha(), ZoomLogic.getZoomOverlayAlpha());
-		} else {
-			f = 1f;
+		} else { // none
+			f = ZoomLogic.getZoomOverlayAlpha();
 		}
 
 		RenderSystem.disableDepthTest();
@@ -54,6 +54,7 @@ public class InGameHudMixin {
 		RenderSystem.defaultBlendFunc();
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, f);
+
 		RenderSystem.setShaderTexture(0, ZOOM_OVERLAY);
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
@@ -63,6 +64,7 @@ public class InGameHudMixin {
 		bufferBuilder.vertex(this.client.getWindow().getScaledWidth(), 0.0D, -90.0D).texture(1.0F, 0.0F).next();
 		bufferBuilder.vertex(0.0D, 0.0D, -90.0D).texture(0.0F, 0.0F).next();
 		tessellator.draw();
+
 		RenderSystem.depthMask(true);
 		RenderSystem.enableDepthTest();
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

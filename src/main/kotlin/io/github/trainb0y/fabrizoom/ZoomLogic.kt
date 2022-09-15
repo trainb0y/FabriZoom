@@ -67,7 +67,7 @@ object ZoomLogic {
 			this.cursorYZoomSmoother.clear()
 		}
 
-		// update zoom fov multiplier
+		// calculate zoom fov multiplier
 		lastZoomFovMultiplier = currentZoomFovMultiplier
 
 		val zoomMultiplier = if (zooming) {
@@ -87,13 +87,15 @@ object ZoomLogic {
 			Config.Transition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier
 		}
 
+		// Calculate zoom overlay alpha
 		lastZoomOverlayAlpha = zoomOverlayAlpha
-
-		if (values.transition == Config.Transition.SMOOTH) {
-			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha).toFloat() * values.smoothMultiplier
-		} else if (values.transition == Config.Transition.LINEAR) {
-			val linearStep = (1.0f / zoomDivisor).coerceIn(values.minimumLinearStep, values.maximumLinearStep)
-			zoomOverlayAlpha = MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat())
+		zoomOverlayAlpha = when (values.transition) {
+			Config.Transition.SMOOTH -> zoomOverlayAlpha + (zoomMultiplier - zoomOverlayAlpha).toFloat() * values.smoothMultiplier
+			Config.Transition.LINEAR -> {
+				val linearStep = (1.0f / zoomDivisor).coerceIn(values.minimumLinearStep, values.maximumLinearStep)
+				MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat())
+			}
+			Config.Transition.NONE -> if (zooming) {1f} else {0f}
 		}
 	}
 
