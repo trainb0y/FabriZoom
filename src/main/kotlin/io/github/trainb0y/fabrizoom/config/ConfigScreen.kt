@@ -44,12 +44,12 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				SpruceDoubleInputOption(
 					"config.fabrizoom.minzoomdivisor",
 					{ values.minimumZoomDivisor },
-					{ value -> values.minimumZoomDivisor = value },
+					{ value -> values.minimumZoomDivisor = value.coerceIn(1.0, values.maximumZoomDivisor) },
 					Text.translatable("config.fabrizoom.minzoomdivisor.tooltip")
 				), SpruceDoubleInputOption(
 					"config.fabrizoom.maxzoomdivisor",
 					{ values.maximumZoomDivisor },
-					{ value -> values.maximumZoomDivisor = value },
+					{ value -> values.maximumZoomDivisor = value.coerceIn(values.minimumZoomDivisor, 20.0) },
 					Text.translatable("config.fabrizoom.maxzoomdivisor.tooltip")
 				)
 			)
@@ -96,7 +96,7 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				SpruceIntegerInputOption(
 					"config.fabrizoom.mouse.sensitivity",
 					{ values.mouseSensitivity },
-					{ value -> values.mouseSensitivity = value },
+					{ value -> values.mouseSensitivity = value.coerceIn(10, 40) },
 					Text.translatable("config.fabrizoom.mouse.sensitivity.tooltip")
 				)
 			)
