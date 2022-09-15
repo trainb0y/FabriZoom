@@ -1,6 +1,7 @@
 package io.github.trainb0y.fabrizoom
 
 import io.github.trainb0y.fabrizoom.config.Config
+import io.github.trainb0y.fabrizoom.config.Config.values
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.SmoothUtil
 import net.minecraft.util.math.MathHelper
@@ -10,7 +11,7 @@ object ZoomLogic {
 	var zooming = false
 
 	@JvmStatic
-	var zoomDivisor = Config.zoomDivisor
+	var zoomDivisor = values.zoomDivisor
 
 	private val cursorXZoomSmoother = SmoothUtil()
 	private val cursorYZoomSmoother = SmoothUtil()
@@ -24,12 +25,12 @@ object ZoomLogic {
 		cursorSensitivity: Double,
 		mouseUpdateTimeDelta: Double,
 	): Double {
-		return if (Config.cinematicCameraEnabled) {
-			val smoother: Double = mouseUpdateTimeDelta * Config.cinematicCameraMultiplier * cursorSensitivity
+		return if (values.cinematicCameraEnabled) {
+			val smoother: Double = mouseUpdateTimeDelta * values.cinematicCameraMultiplier * cursorSensitivity
 			this.cursorXZoomSmoother.smooth(cursorDeltaX, smoother)
 		} else {
 			this.cursorXZoomSmoother.clear()
-			cursorDeltaX * mouseUpdateTimeDelta * cursorSensitivity * Config.mouseSensitivity
+			cursorDeltaX * mouseUpdateTimeDelta * cursorSensitivity * values.mouseSensitivity
 		}
 	}
 
@@ -39,12 +40,12 @@ object ZoomLogic {
 		cursorSensitivity: Double,
 		mouseUpdateTimeDelta: Double,
 	): Double {
-		return if (Config.cinematicCameraEnabled) {
-			val smoother: Double = mouseUpdateTimeDelta * Config.cinematicCameraMultiplier * cursorSensitivity
+		return if (values.cinematicCameraEnabled) {
+			val smoother: Double = mouseUpdateTimeDelta * values.cinematicCameraMultiplier * cursorSensitivity
 			this.cursorYZoomSmoother.smooth(cursorDeltaY, smoother)
 		} else {
 			this.cursorYZoomSmoother.clear()
-			cursorDeltaY * mouseUpdateTimeDelta * cursorSensitivity * Config.mouseSensitivity
+			cursorDeltaY * mouseUpdateTimeDelta * cursorSensitivity * values.mouseSensitivity
 		}
 	}
 
@@ -64,15 +65,15 @@ object ZoomLogic {
 			1.0
 		}
 
-		currentZoomFovMultiplier = when (Config.transition) {
+		currentZoomFovMultiplier = when (values.transition) {
 			Config.Transition.NONE -> lastZoomFovMultiplier
 			Config.Transition.LINEAR -> MathHelper.stepTowards(
 				currentZoomFovMultiplier,
 				zoomMultiplier.toFloat(),
-				zoomMultiplier.coerceIn(Config.minimumLinearStep, Config.maximumLinearStep).toFloat()
+				zoomMultiplier.coerceIn(values.minimumLinearStep, values.maximumLinearStep).toFloat()
 			)
 
-			Config.Transition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * Config.smoothMultiplier
+			Config.Transition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier
 		}
 	}
 
@@ -80,15 +81,15 @@ object ZoomLogic {
 	@JvmStatic
 	fun changeZoomDivisor(increase: Boolean) {
 		val changedZoomDivisor =
-			if (increase) zoomDivisor + Config.scrollStep
-			else zoomDivisor - Config.scrollStep
+			if (increase) zoomDivisor + values.scrollStep
+			else zoomDivisor - values.scrollStep
 
-		zoomDivisor = changedZoomDivisor.coerceIn(Config.minimumZoomDivisor, Config.maximumZoomDivisor)
+		zoomDivisor = changedZoomDivisor.coerceIn(values.minimumZoomDivisor, values.maximumZoomDivisor)
 	}
 
 	@JvmStatic
 	fun getFov(fov: Double, delta: Float): Double =
-		when (Config.transition) {
+		when (values.transition) {
 			Config.Transition.NONE -> if (zooming) {
 				fov / zoomDivisor
 			} else {

@@ -1,6 +1,7 @@
 package io.github.trainb0y.fabrizoom
 
 import io.github.trainb0y.fabrizoom.config.Config
+import io.github.trainb0y.fabrizoom.config.Config.values
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
@@ -35,7 +36,7 @@ object Keybinds {
 		if (ZoomLogic.zooming) {
 			if (decreaseKey.isPressed) ZoomLogic.changeZoomDivisor(false)
 			if (increaseKey.isPressed) ZoomLogic.changeZoomDivisor(true)
-			if (resetKey.isPressed || !zoomKey.isPressed) ZoomLogic.zoomDivisor = Config.zoomDivisor
+			if (resetKey.isPressed || !zoomKey.isPressed) ZoomLogic.zoomDivisor = values.zoomDivisor
 		}
 		ZoomLogic.zooming = zoomKey.isPressed
 	}
