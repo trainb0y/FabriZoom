@@ -8,6 +8,14 @@ import net.minecraft.util.math.MathHelper
 
 object ZoomLogic {
 	@JvmStatic
+	var zoomOverlayAlpha: Float = 0f
+		private set;
+
+	@JvmStatic
+	var lastZoomOverlayAlpha: Float = zoomOverlayAlpha
+		private set;
+
+	@JvmStatic
 	var zooming = false
 
 	@JvmStatic
@@ -17,7 +25,10 @@ object ZoomLogic {
 	private val cursorYZoomSmoother = SmoothUtil()
 
 	var currentZoomFovMultiplier = 1.0f
+		private set;
+
 	var lastZoomFovMultiplier = 1.0f
+		private set;
 
 	@JvmStatic
 	fun applyMouseXModifier(
@@ -74,6 +85,15 @@ object ZoomLogic {
 			)
 
 			Config.Transition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier
+		}
+
+		lastZoomOverlayAlpha = zoomOverlayAlpha
+
+		if (values.transition == Config.Transition.SMOOTH) {
+			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha).toFloat() * values.smoothMultiplier
+		} else if (values.transition == Config.Transition.LINEAR) {
+			val linearStep = (1.0f / zoomDivisor).coerceIn(values.minimumLinearStep, values.maximumLinearStep)
+			zoomOverlayAlpha = MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat())
 		}
 	}
 

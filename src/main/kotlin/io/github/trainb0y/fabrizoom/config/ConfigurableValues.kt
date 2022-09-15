@@ -27,5 +27,8 @@ class ConfigurableValues {
 	// Zoom scrolling step
 	var scrollStep = 1.0
 
+	// ZOom Overlay
+	var zoomOverlayEnabled = false
+
 	var transition = Config.Transition.LINEAR
 }
