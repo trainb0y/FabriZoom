@@ -15,7 +15,7 @@ The mod has undergone an almost complete rewrite, and though it is still a work 
 * ~~Add config screen (SpruceUI)~~ (was Cloth Config)
 * ~~Add config persistence (Configurate)~~ (was Fiber)
 * ~~Re-add secondary zoom keybinds~~
-* Re-add zoom overlay
+* ~~Re-add zoom overlay~~
 * New icon?
 * New name?
 

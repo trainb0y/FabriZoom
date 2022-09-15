@@ -29,6 +29,10 @@
   "config.fabrizoom.maxzoomdivisor.tooltip": "The maximum amount of zoom allowed",
 
 
+  "config.fabrizoom.overlay": "Zoom Overlay",
+  "config.fabrizoom.overlay.tooltip": "Toggles the zoom vignette overlay",
+
+
   "category.fabrizoom.mouse": "§lMouse Settings",
   "category.fabrizoom.mouse.description": "Controls the mouse while zooming",
 
