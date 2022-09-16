@@ -1,5 +1,5 @@
 # FabriZoom
-(working name)
+(working name, but probably good enough)
 
 ### What? 
 Fork of OkZoomer v4, updated to Minecraft 1.19, ported to Kotlin, moved to different (actually maintained) GUI and configuration libraries, and updated with some code from modern OkZoomer (LibZoomer).
@@ -16,8 +16,7 @@ The mod has undergone an almost complete rewrite, and though it is still a work 
 * ~~Add config persistence (Configurate)~~ (was Fiber)
 * ~~Re-add secondary zoom keybinds~~
 * ~~Re-add zoom overlay~~
-* New icon?
-* New name?
+* ~~New icon?~~
 
 ### Quilt Statement
 When I (trainb0y) started this project, a few mods I relied on didn't function on Quilt, so I decided to try to get some version of OkZoomer working on Fabric because the maintainer of OkZoomer had [decided to drop fabric support](https://gist.github.com/EnnuiL/79885a99e5c908010fa5eca527590b98).
