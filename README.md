@@ -25,10 +25,18 @@ All contributions are welcome, including translations. The source code is licens
 If you have a feature request or run into an issue, please report it on the [GitHub](https://github.com/trainb0y/FabriZoom). For help join [the Discord](https://discord.gg/PPCvtMTXvP).
 
 Thanks to [Configurate](https://github.com/SpongePowered/Configurate) and [SpruceUI](https://github.com/LambdAurora/SpruceUI) for the excellent libraries. 
-
+Also [Devin's Badges](https://github.com/intergrav/devins-badges) are great.
 ### Quilt Statement
 When I (trainb0y) started this project, a few mods I relied on didn't function on Quilt, so I decided to try to get some version of OkZoomer working on Fabric because the maintainer of OkZoomer had [decided to drop fabric support](https://gist.github.com/EnnuiL/79885a99e5c908010fa5eca527590b98).
 
 Even though I now primarily use Quilt when playing Minecraft, I plan on keeping this mod on Fabric (as that's the whole point of it existing).
 
 This mod *does* work on Quilt, but you might as well use the original [OkZoomer](https://github.com/EnnuiL/OkZoomer).
+
+### Links
+[![~fabric~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/fabric_64h.png)](https://modrinth.com/mod/fabrizoom/)
+[![~quilt~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/quilt_64h.png)](https://modrinth.com/mod/fabrizoom/)
+[![~modrinth~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/modrinth_64h.png)](https://modrinth.com/mod/fabrizoom/)
+[![~curseforge~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/curseforge_64h.png)](https://www.curseforge.com/minecraft/mc-mods/fabrizoom)
+[![~discord~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/discord_64h.png)](https://discord.gg/PPCvtMTXvP)
+[![~github~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/github-repository_64h.png)](https://github.com/trainb0y/fabrizoom)
