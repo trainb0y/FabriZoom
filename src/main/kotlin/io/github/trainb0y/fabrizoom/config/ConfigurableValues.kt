@@ -13,8 +13,8 @@ class ConfigurableValues {
 
 	// Amount to initially zoom
 	var zoomDivisor = 4.0
-	var minimumZoomDivisor = 4.0
-	var maximumZoomDivisor = 50.0
+	var minimumZoomDivisor = 3.0
+	var maximumZoomDivisor = 20.0
 
 
 	// Linear zoom transition
@@ -22,7 +22,7 @@ class ConfigurableValues {
 	var maximumLinearStep = 0.25
 
 	// Smooth zoom transition
-	var smoothMultiplier = 0.3f
+	var smoothMultiplier = 0.4f
 
 	// Zoom scrolling step
 	var scrollStep = 1.0
@@ -30,5 +30,5 @@ class ConfigurableValues {
 	// ZOom Overlay
 	var zoomOverlayEnabled = false
 
-	var transition = Config.Transition.LINEAR
+	var transition = Config.Transition.SMOOTH
 }
