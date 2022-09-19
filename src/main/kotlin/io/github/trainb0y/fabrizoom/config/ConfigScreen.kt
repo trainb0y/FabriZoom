@@ -24,6 +24,7 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 
 	override fun init() {
 		super.init()
+		var preset = Presets.CUSTOM
 
 		val tabbed = SpruceTabbedWidget(Position.of(this, 0, 4), this.width, this.height - 35 - 4, this.title)
 
@@ -60,6 +61,19 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				{value -> values.zoomOverlayEnabled = value},
 				Text.translatable("config.fabrizoom.overlay.tooltip")
 			), null)
+
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("", false, null))
+
+			optionList.addOptionEntry(SpruceCyclingOption(
+				"config.fabrizoom.preset.select",
+				{ preset = preset.next() },
+				{ Text.translatable(preset.key) },
+				Text.translatable("config.fabrizoom.preset.select.tooltip")
+			), SpruceSimpleActionOption.of(
+				"config.fabrizoom.preset.apply",
+				{values = preset.values?.copy() ?: values},
+				Text.translatable("config.fabrizoom.preset.apply.tooltip")
+			))
 
 			optionList.addSingleOptionEntry(SpruceSeparatorOption("", false, null))
 			optionList.addOptionEntry(

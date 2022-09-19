@@ -3,32 +3,32 @@ package io.github.trainb0y.fabrizoom.config
 import org.spongepowered.configurate.objectmapping.ConfigSerializable
 
 @ConfigSerializable
-class ConfigurableValues {
+data class ConfigurableValues(
 	// Normal camera mouse mode
-	var mouseSensitivity = 30 // reasonable 10-40 // todo: force in gui
+	var mouseSensitivity: Int, // reasonable 10-40
 
 	// Cinematic camera mouse mode
-	var cinematicCameraEnabled = false
-	var cinematicCameraMultiplier = 4.0
+	var cinematicCameraEnabled: Boolean,
+	var cinematicCameraMultiplier: Double,
 
 	// Amount to initially zoom
-	var zoomDivisor = 4.0
-	var minimumZoomDivisor = 3.0
-	var maximumZoomDivisor = 20.0
+	var zoomDivisor: Double,
+	var minimumZoomDivisor: Double,
+	var maximumZoomDivisor: Double,
 
 
 	// Linear zoom transition
-	var minimumLinearStep = 0.125
-	var maximumLinearStep = 0.25
+	var minimumLinearStep: Double,
+	var maximumLinearStep: Double,
 
 	// Smooth zoom transition
-	var smoothMultiplier = 0.4f
+	var smoothMultiplier: Float,
 
 	// Zoom scrolling step
-	var scrollStep = 1.0
+	var scrollStep: Double,
 
 	// ZOom Overlay
-	var zoomOverlayEnabled = false
+	var zoomOverlayEnabled: Boolean,
 
-	var transition = Config.Transition.SMOOTH
-}
+	var transition: Config.Transition
+)

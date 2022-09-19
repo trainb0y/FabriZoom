@@ -17,8 +17,7 @@ object Config {
 	private const val version = "1" // config version, doesn't necc. match mod version
 
 	@JvmStatic
-	var values: ConfigurableValues = ConfigurableValues()
-		private set
+	var values = Presets.DEFAULT.values!!.copy()  // this should get overwritten
 
 	enum class Transition(val key: String) {
 		LINEAR("transition.fabrizoom.linear"),
@@ -76,6 +75,6 @@ object Config {
 	}
 
 	fun applyDefaultConfig() {
-		values = ConfigurableValues()
+		values = Presets.DEFAULT.values!!.copy()
 	}
 }

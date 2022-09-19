@@ -5,9 +5,18 @@
   "key.fabrizoom.decrease": "Decrease Zoom",
   "key.fabrizoom.reset": "Reset Zoom",
 
+  "presets.fabrizoom.custom": "Custom",
+  "presets.fabrizoom.optifine": "Optifine",
+  "presets.fabrizoom.default": "Default",
+
   "transition.fabrizoom.linear": "Linear",
   "transition.fabrizoom.smooth": "Smooth",
   "transition.fabrizoom.none": "None",
+
+  "config.fabrizoom.preset.select": "Select Preset",
+  "config.fabrizoom.preset.select.tooltip": "Available zoom presets",
+  "config.fabrizoom.preset.apply": "Apply Preset",
+  "config.fabrizoom.preset.apply.tooltip": "Applies the selected Preset",
 
   "config.fabrizoom.reset": "Reset",
   "config.fabrizoom.reset.tooltip": "Reset all options to defaults",
