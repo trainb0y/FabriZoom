@@ -28,7 +28,9 @@
 
   "config.fabrizoom.title": "FabriZoom Config",
 
-  "category.fabrizoom.general": "§lGeneral Settings",
+  "category.fabrizoom.basic": "§lBasic",
+
+  "category.fabrizoom.general": "§nZoom Settings",
   "config.fabrizoom.general": "Zoom Settings",
   "config.fabrizoom.zoomdivisor": "Zoom Divisor",
   "config.fabrizoom.zoomdivisor.tooltip": "The amount to initially zoom in",
@@ -38,12 +40,12 @@
   "config.fabrizoom.maxzoomdivisor": "Maximum Zoom Divisor",
   "config.fabrizoom.maxzoomdivisor.tooltip": "The maximum amount of zoom allowed",
 
-
   "config.fabrizoom.overlay": "Zoom Overlay",
   "config.fabrizoom.overlay.tooltip": "Toggles the zoom vignette overlay",
 
+  "category.fabrizoom.advanced": "§lAdvanced",
 
-  "category.fabrizoom.mouse": "§lMouse Settings",
+  "category.fabrizoom.mouse": "§nMouse Settings",
   "category.fabrizoom.mouse.description": "Controls the mouse while zooming",
 
   "config.fabrizoom.mouse.normal.title": "Normal Mode (Default)",
@@ -57,7 +59,7 @@
   "config.fabrizoom.mouse.cinematicmultiplier.tooltip": "Amount of cinematic camera effect. Lower is stronger",
 
 
-  "category.fabrizoom.transition": "§lZoom Transition",
+  "category.fabrizoom.transition": "§nZoom Transition",
   "category.fabrizoom.transition.description": "The transition to and from zooming",
 
   "config.fabrizoom.transition": "Zoom Transition",

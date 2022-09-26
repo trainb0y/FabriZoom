@@ -27,7 +27,7 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 		var preset = Presets.CUSTOM
 
 		val tabbed = SpruceTabbedWidget(Position.of(this, 0, 4), this.width, this.height - 35 - 4, this.title)
-
+		tabbed.addSeparatorEntry(Text.translatable("category.fabrizoom.basic"))
 
 		tabbed.addTabEntry(Text.translatable("category.fabrizoom.general"), null) { w, h ->
 			val optionList = SpruceOptionListWidget(Position.of(4, 4), w, h)
@@ -106,6 +106,8 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 			)
 			optionList
 		}
+
+		tabbed.addSeparatorEntry(Text.translatable("category.fabrizoom.advanced"))
 
 		tabbed.addTabEntry(
 			Text.translatable("category.fabrizoom.mouse"),
