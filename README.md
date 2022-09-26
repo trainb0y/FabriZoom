@@ -19,6 +19,8 @@ If you don't like the default "feel" of the zoom, you can configure it to be how
 
 Though not strictly required, ModMenu is the only way to access the configuration UI.
 
+### Future Plans
+- Zoom Presets (In Progress)
 
 ### Contributing
 All contributions are welcome, including translations. The source code is licensed under the MIT license.
