@@ -6,8 +6,9 @@
   "key.fabrizoom.reset": "Reset Zoom",
 
   "presets.fabrizoom.custom": "Custom",
-  "presets.fabrizoom.optifine": "Optifine",
+  "presets.fabrizoom.cinematic": "Cinematic",
   "presets.fabrizoom.default": "Default",
+  "presets.fabrizoom.quicktoggle": "Quick Toggle",
 
   "transition.fabrizoom.linear": "Linear",
   "transition.fabrizoom.smooth": "Smooth",

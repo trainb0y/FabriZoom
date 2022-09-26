@@ -16,11 +16,28 @@ enum class Presets(val key: String, val values: ConfigurableValues?) {
 			0.4f,
 			1.0,
 			false,
+			Config.Transition.LINEAR
+		)
+	),
+	CINEMATIC(
+		"presets.fabrizoom.cinematic",
+		ConfigurableValues(
+			30,
+			true,
+			4.0,
+			4.0,
+			3.0,
+			20.0,
+			0.125,
+			0.25,
+			0.4f,
+			1.0,
+			false,
 			Config.Transition.SMOOTH
 		)
 	),
-	OPTIFINE(
-		"presets.fabrizoom.optifine",
+	QUICK_TOGGLE(
+		"presets.fabrizoom.quicktoggle",
 		ConfigurableValues(
 			30,
 			false,
@@ -33,7 +50,7 @@ enum class Presets(val key: String, val values: ConfigurableValues?) {
 			0.4f,
 			1.0,
 			false,
-			Config.Transition.SMOOTH
+			Config.Transition.NONE
 		)
 	),
 	CUSTOM(
