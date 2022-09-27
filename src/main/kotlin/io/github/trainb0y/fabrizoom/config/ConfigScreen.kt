@@ -66,7 +66,7 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				), null
 			)
 
-			optionList.addSingleOptionEntry(SpruceSeparatorOption("", false, null))
+			optionList.addSingleOptionEntry(SpruceSeparatorOption("category.fabrizoom.preset", true, null))
 
 			optionList.addOptionEntry(
 				SpruceCyclingOption(

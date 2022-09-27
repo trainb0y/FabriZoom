@@ -14,6 +14,8 @@
   "transition.fabrizoom.smooth": "Smooth",
   "transition.fabrizoom.none": "None",
 
+  "category.fabrizoom.preset": "Zoom Presets",
+
   "config.fabrizoom.preset.select": "Select Preset",
   "config.fabrizoom.preset.select.tooltip": "Available zoom presets",
   "config.fabrizoom.preset.apply": "Apply Preset",
