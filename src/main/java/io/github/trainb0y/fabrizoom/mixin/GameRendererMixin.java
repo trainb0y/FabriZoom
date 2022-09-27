@@ -8,6 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Sets the game's Field of View (FOV) to the zoomed FOV
+ */
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
 

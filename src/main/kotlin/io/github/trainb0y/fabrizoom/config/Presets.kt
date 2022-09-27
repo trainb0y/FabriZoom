@@ -1,6 +1,18 @@
 package io.github.trainb0y.fabrizoom.config
 
-enum class Presets(val key: String, val values: ConfigurableValues?) {
+/**
+ * Presets of [ConfigurableValues]
+ */
+enum class Presets(
+	/** Translation key for the name of this preset */
+	val key: String,
+	/** The values of this preset */
+	val values: ConfigurableValues?
+) {
+	/**
+	 * Default configuration preset
+	 * @see Config.applyDefaultConfig
+	 */
 	DEFAULT(
 		"presets.fabrizoom.default",
 		ConfigurableValues(
@@ -18,6 +30,10 @@ enum class Presets(val key: String, val values: ConfigurableValues?) {
 			Config.Transition.LINEAR
 		)
 	),
+
+	/**
+	 * Configuration preset for cinematic transitions and mouse
+	 */
 	CINEMATIC(
 		"presets.fabrizoom.cinematic",
 		ConfigurableValues(
@@ -35,6 +51,10 @@ enum class Presets(val key: String, val values: ConfigurableValues?) {
 			Config.Transition.SMOOTH
 		)
 	),
+
+	/**
+	 * Configuration preset for a quick, abrupt toggle to zoom
+	 */
 	QUICK_TOGGLE(
 		"presets.fabrizoom.quicktoggle",
 		ConfigurableValues(
@@ -52,6 +72,10 @@ enum class Presets(val key: String, val values: ConfigurableValues?) {
 			Config.Transition.NONE
 		)
 	),
+
+	/**
+	 * Placeholder custom preset
+	 */
 	CUSTOM(
 		"presets.fabrizoom.custom",
 		null

@@ -20,8 +20,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Handles rendering the Zoom Overlay
+ */
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
+	/**
+	 * Internal identifier for the Zoom Overlay png
+	 */
 	private static final Identifier ZOOM_OVERLAY = new Identifier("fabrizoom:textures/misc/zoom_overlay.png");
 
 	@Shadow
@@ -29,7 +35,9 @@ public class InGameHudMixin {
 	private MinecraftClient client;
 
 
-	//This applies the zoom overlay itself.
+	/**
+	 * Renders the Zoom Overlay
+	 */
 	@Inject(
 			at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.getArmorStack(I)Lnet/minecraft/item/ItemStack;"),
 			method = "render(Lnet/minecraft/client/util/math/MatrixStack;F)V"
@@ -42,10 +50,12 @@ public class InGameHudMixin {
 
 		if (Config.getValues().getTransition() != Config.Transition.NONE) { // smooth and linear transition
 			f = 1 - MathHelper.lerp(tickDelta, ZoomLogic.getLastZoomOverlayAlpha(), ZoomLogic.getZoomOverlayAlpha());
-		} else { // none
+		} else { // no transition
 			f = ZoomLogic.getZoomOverlayAlpha();
 		}
 
+		// Bunch of rendering wizardry from LibZoomer
+		// I'm wayyy too dumb to come up with this myself
 		RenderSystem.disableDepthTest();
 		RenderSystem.depthMask(false);
 		RenderSystem.defaultBlendFunc();

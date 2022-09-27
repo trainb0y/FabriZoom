@@ -2,22 +2,34 @@ package io.github.trainb0y.fabrizoom
 
 import io.github.trainb0y.fabrizoom.config.Config
 import io.github.trainb0y.fabrizoom.config.Config.values
-import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.SmoothUtil
 import net.minecraft.util.math.MathHelper
 
+/**
+ * Handles the zoom logic
+ */
 object ZoomLogic {
+
+	/**
+	 * The current alpha of the zoom overlay
+	 * @see lastZoomOverlayAlpha
+	 */
 	@JvmStatic
 	var zoomOverlayAlpha: Float = 0f
-		private set;
+		private set
 
+	/**
+	 * The [zoomOverlayAlpha] before the last [tick]
+	 */
 	@JvmStatic
 	var lastZoomOverlayAlpha: Float = zoomOverlayAlpha
-		private set;
+		private set
 
+	/** Whether we are currently zooming */
 	@JvmStatic
 	var zooming = false
 
+	/** The current zoom divisor (amount to zoom in) */
 	@JvmStatic
 	var zoomDivisor = values.zoomDivisor
 
@@ -25,11 +37,20 @@ object ZoomLogic {
 	private val cursorYZoomSmoother = SmoothUtil()
 
 	var currentZoomFovMultiplier = 1.0f
-		private set;
+		private set
 
 	var lastZoomFovMultiplier = 1.0f
-		private set;
+		private set
 
+	/**
+	 * Calculates the cursor's X delta while zooming
+	 *
+	 * @param cursorDeltaX the original X delta
+	 * @param cursorSensitivity the cursor sensitivity multiplier
+	 * @param mouseUpdateTimeDelta the time since the last mouse update
+	 * @see applyMouseYModifier
+	 * @see io.github.trainb0y.fabrizoom.mixin.MouseMixin.applyZoomChanges
+	 */
 	@JvmStatic
 	fun applyMouseXModifier(
 		cursorDeltaX: Double,
@@ -45,6 +66,15 @@ object ZoomLogic {
 		}
 	}
 
+	/**
+	 * Calculates the cursor's Y delta while zooming
+	 *
+	 * @param cursorDeltaY the original Y delta
+	 * @param cursorSensitivity the cursor sensitivity multiplier
+	 * @param mouseUpdateTimeDelta the time since the last mouse update
+	 * @see applyMouseXModifier
+	 * @see io.github.trainb0y.fabrizoom.mixin.MouseMixin.applyZoomChanges
+	 */
 	@JvmStatic
 	fun applyMouseYModifier(
 		cursorDeltaY: Double,
@@ -60,8 +90,11 @@ object ZoomLogic {
 		}
 	}
 
+	/**
+	 * Update the current zoom state, including the overlay alpha and the zoom FOV multipliers
+	 */
 	@JvmStatic
-	fun tick(client: MinecraftClient) {
+	fun tick() {
 		if (!zooming) {
 			this.cursorXZoomSmoother.clear()
 			this.cursorYZoomSmoother.clear()
@@ -104,7 +137,14 @@ object ZoomLogic {
 		}
 	}
 
-	//The method used for changing the zoom divisor, used by zoom scrolling and the keybinds.
+	/**
+	 * Increase or decrease the [zoomDivisor] by the scroll step
+	 * Used by the keybinds and mouse zoom scrolling
+	 *
+	 * @param increase whether to increase or decrease the zoom
+	 * @see Config.values
+	 * @see io.github.trainb0y.fabrizoom.config.ConfigurableValues.scrollStep
+	 */
 	@JvmStatic
 	fun changeZoomDivisor(increase: Boolean) {
 		val changedZoomDivisor =
@@ -114,6 +154,11 @@ object ZoomLogic {
 		zoomDivisor = changedZoomDivisor.coerceIn(values.minimumZoomDivisor, values.maximumZoomDivisor)
 	}
 
+	/**
+	 * @return the zoom-modified client FOV
+	 * @param fov the vanilla FOV
+	 * @param delta the frame delta
+	 */
 	@JvmStatic
 	fun getFov(fov: Double, delta: Float): Double =
 		when (values.transition) {

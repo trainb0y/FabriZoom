@@ -17,7 +17,7 @@ import net.minecraft.text.Text
 
 
 /**
- * Primary configuration screen
+ * Primary mod configuration screen
  */
 class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable("config.fabrizoom.title")) {
 

@@ -13,25 +13,59 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-//This mixin is responsible for the mouse-behavior-changing part of the zoom.
+/**
+ * Handles modifying mouse behavior when zoomed in
+ */
 @Mixin(Mouse.class)
 public class MouseMixin {
+
+	/**
+	 * The amount the scroll wheel has moved
+	 */
 	@Shadow
 	private double eventDeltaWheel;
-
 
 	@Shadow
 	@Final
 	private MinecraftClient client;
+
+	/**
+	 * Whether to apply changes to the mouse
+	 *
+	 * @see MouseMixin#finalCursorDeltaX
+	 * @see MouseMixin#finalCursorDeltaY
+	 */
 	@Unique
 	private boolean modifyMouse;
 
+	/**
+	 * The actual mouse delta X
+	 * Only applied if modifyMouse is true
+	 *
+	 * @see MouseMixin#modifyMouse
+	 */
 	@Unique
 	private double finalCursorDeltaX;
 
+	/**
+	 * The actual mouse delta Y
+	 * Only applied if modifyMouse is true
+	 *
+	 * @see MouseMixin#modifyMouse
+	 */
 	@Unique
 	private double finalCursorDeltaY;
 
+	/**
+	 * Calculate finalCursorDeltaX and finalCursorDeltaY by applying mouse modifiers in ZoomLogic
+	 * If we should be zooming, sets modifyMouse to true
+	 *
+	 * @see MouseMixin#modifyMouse
+	 * @see MouseMixin#finalCursorDeltaX
+	 * @see MouseMixin#finalCursorDeltaY
+	 * @see ZoomLogic#applyMouseXModifier
+	 * @see ZoomLogic#applyMouseYModifier
+	 */
 	@Inject(
 			method = "updateMouse()V",
 			at = @At(
@@ -47,11 +81,19 @@ public class MouseMixin {
 			l = ZoomLogic.applyMouseYModifier(l, h, e);
 			this.modifyMouse = true;
 		}
-		ZoomLogic.tick(client); // should this go here?
+		ZoomLogic.tick(); // should this really go here?
 		this.finalCursorDeltaX = k;
 		this.finalCursorDeltaY = l;
 	}
 
+	/**
+	 * Apply the finalCursorDeltaX if modifyMouse
+	 *
+	 * @param k the vanilla X delta
+	 * @return the modified mouse X delta
+	 * @see MouseMixin#modifyMouse
+	 * @see MouseMixin#finalCursorDeltaX
+	 */
 	@ModifyVariable(
 			method = "updateMouse",
 			at = @At(
@@ -64,6 +106,14 @@ public class MouseMixin {
 		return this.modifyMouse ? finalCursorDeltaX : k;
 	}
 
+	/**
+	 * Apply the finalCursorDeltaY if modifyMouse
+	 *
+	 * @param l the vanilla Y delta
+	 * @return the modified mouse Y delta
+	 * @see MouseMixin#modifyMouse
+	 * @see MouseMixin#finalCursorDeltaY
+	 */
 	@ModifyVariable(
 			method = "updateMouse",
 			at = @At(
@@ -77,6 +127,12 @@ public class MouseMixin {
 	}
 
 
+	/**
+	 * Handle changing the zoom when the player scrolls while zooming
+	 *
+	 * @see MouseMixin#eventDeltaWheel
+	 * @see ZoomLogic#changeZoomDivisor
+	 */
 	@Inject(
 			at = @At(
 					value = "FIELD",

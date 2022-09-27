@@ -8,18 +8,28 @@ import org.spongepowered.configurate.kotlin.extensions.get
 import org.spongepowered.configurate.objectmapping.ConfigSerializable
 import java.nio.file.Path
 
+/**
+ * Handles loading and saving of the mod configuration
+ */
 @ConfigSerializable
 object Config {
 
+	/** The path to the config file */
 	private val configPath: Path = FabricLoader.getInstance().configDir.resolve("fabrizoom.conf")
 
+	/** The config version, doesn't necessarily match mod version */
 	@Suppress("Unused")
-	private const val version = "1" // config version, doesn't necc. match mod version
+	private const val version = "1"
 
+	/** The current configuration values */
 	@JvmStatic
 	var values = Presets.DEFAULT.values!!.copy()  // this should get overwritten
 
-	enum class Transition(val key: String) {
+	/** A type of Zoom Transition */
+	enum class Transition(
+		/** Translation key for the name of this zoom transition */
+		val key: String
+	) {
 		LINEAR("transition.fabrizoom.linear"),
 		SMOOTH("transition.fabrizoom.smooth"),
 		NONE("transition.fabrizoom.none");
@@ -33,6 +43,9 @@ object Config {
 		}
 	}
 
+	/**
+	 * Save the current configuration [values] to [configPath]
+	 */
 	fun saveConfig() {
 
 		val loader = HoconConfigurationLoader.builder()
@@ -50,6 +63,9 @@ object Config {
 
 	}
 
+	/**
+	 * Load configuration [values] from the file at [configPath]
+	 */
 	fun loadConfig() {
 		val loader = HoconConfigurationLoader.builder()
 			.path(configPath)
@@ -75,6 +91,11 @@ object Config {
 		applyDefaultConfig()
 	}
 
+	/**
+	 * Apply the default preset config [values]
+	 *
+	 * @see Presets.DEFAULT
+	 */
 	fun applyDefaultConfig() {
 		values = Presets.DEFAULT.values!!.copy()
 	}

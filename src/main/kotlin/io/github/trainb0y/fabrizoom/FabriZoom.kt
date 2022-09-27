@@ -6,6 +6,9 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/**
+ * Main mod entrypoint
+ */
 @Suppress("Unused")
 class FabriZoom : ClientModInitializer {
 	override fun onInitializeClient() {
@@ -17,6 +20,7 @@ class FabriZoom : ClientModInitializer {
 	}
 
 	companion object {
+		/** Logger for this mod, prefixes logs with the mod name */
 		val logger: Logger = LoggerFactory.getLogger("fabrizoom")
 	}
 }
