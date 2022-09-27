@@ -95,7 +95,12 @@ object ZoomLogic {
 				val linearStep = (1.0f / zoomDivisor).coerceIn(values.minimumLinearStep, values.maximumLinearStep)
 				MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat())
 			}
-			Config.Transition.NONE -> if (zooming) {1f} else {0f}
+
+			Config.Transition.NONE -> if (zooming) {
+				1f
+			} else {
+				0f
+			}
 		}
 	}
 

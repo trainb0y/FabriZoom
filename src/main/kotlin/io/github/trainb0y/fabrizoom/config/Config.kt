@@ -49,6 +49,7 @@ object Config {
 		}
 
 	}
+
 	fun loadConfig() {
 		val loader = HoconConfigurationLoader.builder()
 			.path(configPath)

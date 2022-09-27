@@ -27,7 +27,7 @@ data class ConfigurableValues(
 	// Zoom scrolling step
 	var scrollStep: Double,
 
-	// ZOom Overlay
+	// Zoom Overlay
 	var zoomOverlayEnabled: Boolean,
 
 	var transition: Config.Transition

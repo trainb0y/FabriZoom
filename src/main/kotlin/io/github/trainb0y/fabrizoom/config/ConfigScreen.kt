@@ -36,7 +36,9 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				SpruceDoubleInputOption(
 					"config.fabrizoom.zoomdivisor",
 					{ values.zoomDivisor },
-					{ value -> values.zoomDivisor = value.coerceIn(values.minimumZoomDivisor, values.maximumZoomDivisor) },
+					{ value ->
+						values.zoomDivisor = value.coerceIn(values.minimumZoomDivisor, values.maximumZoomDivisor)
+					},
 					Text.translatable("config.fabrizoom.zoomdivisor.tooltip")
 				)
 			)
@@ -55,25 +57,29 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				)
 			)
 
-			optionList.addOptionEntry(SpruceToggleBooleanOption(
-				"config.fabrizoom.overlay",
-				{values.zoomOverlayEnabled},
-				{value -> values.zoomOverlayEnabled = value},
-				Text.translatable("config.fabrizoom.overlay.tooltip")
-			), null)
+			optionList.addOptionEntry(
+				SpruceToggleBooleanOption(
+					"config.fabrizoom.overlay",
+					{ values.zoomOverlayEnabled },
+					{ value -> values.zoomOverlayEnabled = value },
+					Text.translatable("config.fabrizoom.overlay.tooltip")
+				), null
+			)
 
 			optionList.addSingleOptionEntry(SpruceSeparatorOption("", false, null))
 
-			optionList.addOptionEntry(SpruceCyclingOption(
-				"config.fabrizoom.preset.select",
-				{ preset = preset.next() },
-				{ Text.translatable(preset.key) },
-				Text.translatable("config.fabrizoom.preset.select.tooltip")
-			), SpruceSimpleActionOption.of(
-				"config.fabrizoom.preset.apply",
-				{values = preset.values?.copy() ?: values},
-				Text.translatable("config.fabrizoom.preset.apply.tooltip")
-			))
+			optionList.addOptionEntry(
+				SpruceCyclingOption(
+					"config.fabrizoom.preset.select",
+					{ preset = preset.next() },
+					{ Text.translatable(preset.key) },
+					Text.translatable("config.fabrizoom.preset.select.tooltip")
+				), SpruceSimpleActionOption.of(
+					"config.fabrizoom.preset.apply",
+					{ values = preset.values?.copy() ?: values },
+					Text.translatable("config.fabrizoom.preset.apply.tooltip")
+				)
+			)
 
 			optionList.addSingleOptionEntry(SpruceSeparatorOption("", false, null))
 			optionList.addOptionEntry(

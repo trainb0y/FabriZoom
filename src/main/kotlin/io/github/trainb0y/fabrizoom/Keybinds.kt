@@ -1,6 +1,5 @@
 package io.github.trainb0y.fabrizoom
 
-import io.github.trainb0y.fabrizoom.config.Config
 import io.github.trainb0y.fabrizoom.config.Config.values
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.minecraft.client.option.KeyBinding

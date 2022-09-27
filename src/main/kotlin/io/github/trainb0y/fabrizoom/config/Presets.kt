@@ -1,5 +1,4 @@
-import io.github.trainb0y.fabrizoom.config.Config
-import io.github.trainb0y.fabrizoom.config.ConfigurableValues
+package io.github.trainb0y.fabrizoom.config
 
 enum class Presets(val key: String, val values: ConfigurableValues?) {
 	DEFAULT(
