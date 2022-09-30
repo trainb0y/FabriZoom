@@ -76,7 +76,10 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 					Text.translatable("config.fabrizoom.preset.select.tooltip")
 				), SpruceSimpleActionOption.of(
 					"config.fabrizoom.preset.apply",
-					{ values = preset.values?.copy() ?: values },
+					{
+						values = preset.values?.copy() ?: values
+						close()
+					},
 					Text.translatable("config.fabrizoom.preset.apply.tooltip")
 				)
 			)
