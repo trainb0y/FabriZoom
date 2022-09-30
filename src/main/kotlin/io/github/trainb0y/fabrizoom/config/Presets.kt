@@ -74,6 +74,27 @@ enum class Presets(
 	),
 
 	/**
+	 * Configuration preset to mimic Optifine's zoom
+	 */
+	OPTIFINE(
+		"presets.fabrizoom.optifine",
+		ConfigurableValues(
+			30,
+			true,
+			1.5,
+			5.0,
+			3.0,
+			20.0,
+			0.125,
+			0.25,
+			0.4f,
+			1.0,
+			false,
+			Config.Transition.NONE
+		)
+	),
+
+	/**
 	 * Placeholder custom preset
 	 */
 	CUSTOM(
