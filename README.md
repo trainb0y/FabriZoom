@@ -20,7 +20,9 @@ If you don't like the default "feel" of the zoom, you can configure it to be how
 Though not strictly required, ModMenu is the only way to access the configuration UI.
 
 ### Future Plans
-- Nothing currently! Suggest features and report bugs on the Issues page, or in the Discord.
+- Clean up the configuration GUI, and make it more intuitive  
+
+Suggest features and report bugs on the Issues page, or in the Discord.
 
 ### Contributing
 All contributions are welcome, including translations. The source code is licensed under the MIT license.
