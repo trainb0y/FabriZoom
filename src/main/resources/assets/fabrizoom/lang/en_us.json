@@ -9,6 +9,7 @@
   "presets.fabrizoom.cinematic": "Cinematic",
   "presets.fabrizoom.default": "Default",
   "presets.fabrizoom.quicktoggle": "Quick Toggle",
+  "presets.fabrizoom.optifine": "Optifine",
 
   "transition.fabrizoom.linear": "Linear",
   "transition.fabrizoom.smooth": "Smooth",
