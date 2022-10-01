@@ -26,6 +26,7 @@ enum class Presets(
 			0.25,
 			0.4f,
 			1.0,
+			true,
 			false,
 			Config.Transition.LINEAR
 		)
@@ -48,6 +49,7 @@ enum class Presets(
 			0.4f,
 			1.0,
 			false,
+			true,
 			Config.Transition.SMOOTH
 		)
 	),
@@ -68,6 +70,7 @@ enum class Presets(
 			0.25,
 			0.4f,
 			1.0,
+			true,
 			false,
 			Config.Transition.NONE
 		)
@@ -89,6 +92,7 @@ enum class Presets(
 			0.25,
 			0.4f,
 			1.0,
+			false,
 			false,
 			Config.Transition.NONE
 		)

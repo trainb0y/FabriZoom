@@ -53,6 +53,11 @@ data class ConfigurableValues(
 	var scrollStep: Double,
 
 	/**
+	 * Whether scrolling should change the zoom
+	 */
+	var zoomScroll: Boolean,
+
+	/**
 	 * Whether to render the zoom overlay
 	 * @see io.github.trainb0y.fabrizoom.mixin.GameRendererMixin
 	 */
@@ -65,5 +70,5 @@ data class ConfigurableValues(
 	// All of these values *should* get overwritten by Configurate.
 	// If they don't, I'll need to think of something else
 	@Suppress("Unused")
-	constructor() : this(1, true, 1.0,1.0,1.0,1.0,1.0,1.0,1f,1.0,true,Config.Transition.NONE)
+	constructor() : this(1, true, 1.0,1.0,1.0,1.0,1.0,1.0,1f,1.0,true, true,Config.Transition.NONE)
 }

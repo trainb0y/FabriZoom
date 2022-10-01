@@ -1,6 +1,7 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.ZoomLogic;
+import io.github.trainb0y.fabrizoom.config.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import org.spongepowered.asm.mixin.Final;
@@ -143,7 +144,7 @@ public class MouseMixin {
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo info) {
-		if (this.eventDeltaWheel == 0.0 || !ZoomLogic.getZooming()) return;
+		if (this.eventDeltaWheel == 0.0 || !ZoomLogic.getZooming() || !Config.getValues().getZoomScroll()) return;
 
 		ZoomLogic.changeZoomDivisor(this.eventDeltaWheel > 0.0);
 		info.cancel();

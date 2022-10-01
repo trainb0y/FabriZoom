@@ -46,6 +46,9 @@
   "config.fabrizoom.overlay": "Zoom Overlay",
   "config.fabrizoom.overlay.tooltip": "Toggles the zoom vignette overlay",
 
+  "config.fabrizoom.scrolling": "Scroll to Zoom",
+  "config.fabrizoom.scrolling.tooltip": "Whether scrolling while zooming should change the zoom amount",
+
   "category.fabrizoom.advanced": "§lAdvanced",
 
   "category.fabrizoom.mouse": "§nMouse Settings",

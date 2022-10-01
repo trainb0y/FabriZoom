@@ -63,7 +63,12 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 					{ values.zoomOverlayEnabled },
 					{ value -> values.zoomOverlayEnabled = value },
 					Text.translatable("config.fabrizoom.overlay.tooltip")
-				), null
+				), SpruceToggleBooleanOption(
+					"config.fabrizoom.scrolling",
+					{ values.zoomScroll },
+					{ value -> values.zoomScroll = value },
+					Text.translatable("config.fabrizoom.scrolling.tooltip")
+				)
 			)
 
 			optionList.addSingleOptionEntry(SpruceSeparatorOption("category.fabrizoom.preset", true, null))
