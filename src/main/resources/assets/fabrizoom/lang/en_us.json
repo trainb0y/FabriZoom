@@ -43,6 +43,11 @@
   "config.fabrizoom.maxzoomdivisor": "Maximum Zoom Divisor",
   "config.fabrizoom.maxzoomdivisor.tooltip": "The maximum amount of zoom allowed",
 
+
+  "config.fabrizoom.zoomsound": "Zoom Sound",
+  "config.fabrizoom.zoomsound.tooltip": "Whether to play the spyglass sound on zoom",
+
+
   "config.fabrizoom.overlay": "Zoom Overlay",
   "config.fabrizoom.overlay.tooltip": "Toggles the zoom vignette overlay",
 

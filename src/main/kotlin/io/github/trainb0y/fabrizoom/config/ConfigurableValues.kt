@@ -26,6 +26,9 @@ data class ConfigurableValues(
 	/** The maximum allowed zoom factor */
 	var maximumZoomDivisor: Double,
 
+	/** Whether to play the spyglass sounds on zoom */
+	var zoomSound: Boolean,
+
 
 	/**
 	 * The minimum step for the linear zoom transition
@@ -70,5 +73,5 @@ data class ConfigurableValues(
 	// All of these values *should* get overwritten by Configurate.
 	// If they don't, I'll need to think of something else
 	@Suppress("Unused")
-	constructor() : this(1, true, 1.0,1.0,1.0,1.0,1.0,1.0,1f,1.0,true, true,Config.Transition.NONE)
+	constructor() : this(1, true, 1.0,1.0,1.0,1.0,true, 1.0,1.0,1f,1.0,true, true,Config.Transition.NONE)
 }

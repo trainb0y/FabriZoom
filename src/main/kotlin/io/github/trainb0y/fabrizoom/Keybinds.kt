@@ -1,10 +1,14 @@
 package io.github.trainb0y.fabrizoom
 
+import io.github.trainb0y.fabrizoom.config.Config
 import io.github.trainb0y.fabrizoom.config.Config.values
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
+import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
+import net.minecraft.sound.SoundEvents
 import org.lwjgl.glfw.GLFW
+
 
 /**
  * Handles the mod's zoom-related keybinds
@@ -55,6 +59,12 @@ object Keybinds {
 			if (increaseKey.isPressed) ZoomLogic.changeZoomDivisor(true)
 			if (resetKey.isPressed || !zoomKey.isPressed) ZoomLogic.zoomDivisor = values.zoomDivisor
 		}
+
+		if (values.zoomSound) { // todo: move this somewhere else, it doesn't belong with keybinds
+			if (!ZoomLogic.zooming && zoomKey.isPressed) MinecraftClient.getInstance().player?.playSound(SoundEvents.ITEM_SPYGLASS_USE, 1f, 1f)
+			if (ZoomLogic.zooming && !zoomKey.isPressed)  MinecraftClient.getInstance().player?.playSound(SoundEvents.ITEM_SPYGLASS_STOP_USING, 1f, 1f)
+		}
+
 		ZoomLogic.zooming = zoomKey.isPressed
 	}
 }
