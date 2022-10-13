@@ -142,7 +142,7 @@ class ConfigScreen(private val parent: Screen?) : SpruceScreen(Text.translatable
 				SpruceIntegerInputOption(
 					"config.fabrizoom.mouse.sensitivity",
 					{ values.mouseSensitivity },
-					{ value -> values.mouseSensitivity = value.coerceIn(10, 40) },
+					{ value -> values.mouseSensitivity = value.coerceIn(10, 60) },
 					Text.translatable("config.fabrizoom.mouse.sensitivity.tooltip")
 				)
 			)
