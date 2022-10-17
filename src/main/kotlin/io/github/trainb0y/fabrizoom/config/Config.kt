@@ -33,14 +33,6 @@ object Config {
 		LINEAR("transition.fabrizoom.linear"),
 		SMOOTH("transition.fabrizoom.smooth"),
 		NONE("transition.fabrizoom.none");
-
-		fun next(): Transition { // used for toggle button in gui
-			return try {
-				Transition.values()[this.ordinal + 1]
-			} catch (e: IndexOutOfBoundsException) {
-				Transition.values().first()
-			}
-		}
 	}
 
 	/**
