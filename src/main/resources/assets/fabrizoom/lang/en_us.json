@@ -15,7 +15,7 @@
   "transition.fabrizoom.smooth": "Smooth",
   "transition.fabrizoom.none": "None",
 
-  "category.fabrizoom.preset": "Zoom Presets",
+  "category.fabrizoom.presets": "Zoom Presets",
 
   "config.fabrizoom.preset.select": "Select Preset",
   "config.fabrizoom.preset.select.tooltip": "Available zoom presets",
@@ -23,6 +23,10 @@
   "config.fabrizoom.preset.apply.tooltip": "Applies the selected Preset",
 
   "category.fabrizoom.basic": "Basic",
+
+  "config.fabrizoom.general": "General",
+  "config.fabrizoom.preferences": "Preferences",
+  "config.fabrizoom.presets": "Presets",
 
   "config.fabrizoom.zoomdivisor": "Zoom Divisor",
   "config.fabrizoom.zoomdivisor.tooltip": "The amount to initially zoom in",
