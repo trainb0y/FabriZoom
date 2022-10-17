@@ -12,15 +12,14 @@ If you don't like the default "feel" of the zoom, you can configure it to be how
 
 ### Requirements
 - Minecraft `>1.19.2`
-- [Fabric Loader](https://fabricmc.net/) `>0.14.8` or the equivalent [Quilt](https://quiltmc.org/) version
-- [ModMenu](https://github.com/TerraformersMC/ModMenu) `>4.0.0`
-- [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `>1.8.2`
-- [Fabric API](https://modrinth.com/mod/fabric-api) `>0.58.0` or the equivalent [QFAPI](https://modrinth.com/mod/qsl) version if using Quilt
+- [Fabric Loader](https://fabricmc.net/) `>0.14.9` or the equivalent [Quilt](https://quiltmc.org/) version
+- [ModMenu](https://github.com/TerraformersMC/ModMenu) `>4.0.6`
+- [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `>1.8.5`
+- [Fabric API](https://modrinth.com/mod/fabric-api) `>0.63.0` or the equivalent [QFAPI](https://modrinth.com/mod/qsl) version if using Quilt
 
 Though not strictly required, ModMenu is the only way to access the configuration UI.
 
 ### Future Plans
-- Clean up the configuration GUI, and make it more intuitive  
 
 Suggest features and report bugs on the Issues page, or in the Discord.
 

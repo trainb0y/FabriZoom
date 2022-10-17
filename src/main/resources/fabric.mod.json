@@ -38,11 +38,11 @@
   ],
   "depends": {
     "fabricloader": ">=0.14.8",
-    "fabric-language-kotlin": ">=1.8.3+kotlin.1.7.10",
+    "fabric-language-kotlin": ">=1.8.5+kotlin.1.7.20",
     "fabric-key-binding-api-v1": "*"
   },
   "recommends": {
-    "modmenu": ">=4.0.0",
+    "modmenu": ">=4.0.6",
     "minecraft": ">=1.19"
   }
 }
