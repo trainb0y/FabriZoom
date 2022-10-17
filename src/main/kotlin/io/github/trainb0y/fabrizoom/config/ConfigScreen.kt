@@ -19,7 +19,13 @@ import net.minecraft.text.Text
 
 
 fun openConfigScreen(parent: Screen?): Screen {
-	var preset = Presets.DEFAULT
+	var preset = Presets.DEFAULT // currently selected preset
+
+	// Welcome to Builder Hell:tm:
+	// Have fun!
+
+	// tbh the SpruceUI config screen was a lot cleaner
+	// but it was causing too many issues.
 
 	return YetAnotherConfigLib.createBuilder()
 		.title(Text.literal("config.fabrizoom.title"))
