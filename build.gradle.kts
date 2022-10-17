@@ -16,6 +16,7 @@ group = property("maven_group")!!
 			// for more information about repositories.
 			maven(uri("https://maven.terraformersmc.com/"))
 			maven(uri("https://maven.gegy.dev"))
+			maven(uri("https://maven.isxander.dev/releases"))
 			mavenCentral()
 		}
 
@@ -38,7 +39,7 @@ dependencies {
 
 	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 	modImplementation("com.terraformersmc:modmenu:${property("mod_menu_version")}")
-	modImplementation("dev.lambdaurora:spruceui:${property("spruce_ui_version")}")
+	modImplementation("dev.isxander:yet-another-config-lib:${property("yacl_version")}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
 }
 
