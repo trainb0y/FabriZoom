@@ -29,7 +29,7 @@ Suggest features and report bugs on the Issues page, or in the Discord.
 All contributions are welcome, including translations. The source code is licensed under the MIT license.
 If you have a feature request or run into an issue, please report it on the [GitHub](https://github.com/trainb0y/FabriZoom). For help join [the Discord](https://discord.gg/PPCvtMTXvP).
 
-Thanks to [Configurate](https://github.com/SpongePowered/Configurate) and [SpruceUI](https://github.com/LambdAurora/SpruceUI) for the excellent libraries. 
+Thanks to [Configurate](https://github.com/SpongePowered/Configurate), [SpruceUI](https://github.com/LambdAurora/SpruceUI), and [YACL](https://github.com/isXander/YetAnotherConfigLib). Excellent libraries. 
 Also [Devin's Badges](https://github.com/intergrav/devins-badges) are great.
 ### Quilt Statement
 When I (trainb0y) started this project, a few mods I relied on didn't function on Quilt, so I decided to try to get some version of OkZoomer working on Fabric because the maintainer of OkZoomer had [decided to drop fabric support](https://gist.github.com/EnnuiL/79885a99e5c908010fa5eca527590b98).
