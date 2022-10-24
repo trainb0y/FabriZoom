@@ -20,6 +20,8 @@ If you don't like the default "feel" of the zoom, you can configure it to be how
 Though not strictly required, ModMenu is the only way to access the configuration UI.
 
 ### Future Plans
+- Scaling mouse sensitivity
+- Spyglass overlay option
 
 Suggest features and report bugs on the Issues page, or in the Discord.
 
