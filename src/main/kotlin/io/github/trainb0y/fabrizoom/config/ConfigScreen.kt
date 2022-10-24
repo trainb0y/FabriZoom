@@ -192,8 +192,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.controller { option ->
 						IntegerSliderController(
 							option,
-							10,
-							60,
+							1,
+							100,
 							1
 						)
 					}
