@@ -40,6 +40,7 @@ dependencies {
 	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 	modImplementation("com.terraformersmc:modmenu:${property("mod_menu_version")}")
 	modImplementation("dev.isxander:yet-another-config-lib:${property("yacl_version")}")
+	include("dev.isxander:yet-another-config-lib:${property("yacl_version")}") // this might? cause issues
 	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
 }
 
