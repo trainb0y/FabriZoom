@@ -165,6 +165,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.tooltip(Text.translatable("config.fabrizoom.preset.apply.tooltip"))
 					.action { screen: YACLScreen?, _: ButtonOption? ->
 						Config.values = preset.values?.copy() ?: Config.values
+						Config.saveConfig()
 						screen?.close()
 					}
 					.controller { option: ButtonOption? ->
