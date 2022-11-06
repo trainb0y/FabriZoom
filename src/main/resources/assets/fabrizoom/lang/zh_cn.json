@@ -1,0 +1,74 @@
+{
+  "category.fabrizoom.keybinds": "FabriZoom",
+  "key.fabrizoom.zoom": "缩放",
+  "key.fabrizoom.increase": "增加缩放",
+  "key.fabrizoom.decrease": "减少缩放",
+  "key.fabrizoom.reset": "重置缩放",
+
+  "presets.fabrizoom.custom": "预设",
+  "presets.fabrizoom.cinematic": "电影",
+  "presets.fabrizoom.default": "默认",
+  "presets.fabrizoom.quicktoggle": "快速切换",
+  "presets.fabrizoom.optifine": "Optifine",
+
+  "transition.fabrizoom.linear": "线性",
+  "transition.fabrizoom.smooth": "平滑",
+  "transition.fabrizoom.none": "无",
+
+  "category.fabrizoom.presets": "缩放预设",
+
+  "config.fabrizoom.preset.select": "选择预设",
+  "config.fabrizoom.preset.select.tooltip": "可用的缩放预设",
+  "config.fabrizoom.preset.apply": "应用预设",
+  "config.fabrizoom.preset.apply.tooltip": "应用选定的预设",
+
+  "category.fabrizoom.basic": "基本",
+
+  "config.fabrizoom.general": "常规",
+  "config.fabrizoom.preferences": "首选项",
+  "config.fabrizoom.presets": "预设",
+
+  "config.fabrizoom.zoomdivisor": "缩放倍数",
+  "config.fabrizoom.zoomdivisor.tooltip": "初始放大量",
+
+  "config.fabrizoom.minzoomdivisor": "最小缩放倍数",
+  "config.fabrizoom.minzoomdivisor.tooltip": "允许的最小缩放量",
+  "config.fabrizoom.maxzoomdivisor": "最大缩放倍数",
+  "config.fabrizoom.maxzoomdivisor.tooltip": "允许的最大缩放量",
+
+
+  "config.fabrizoom.zoomsound": "缩放声音",
+  "config.fabrizoom.zoomsound.tooltip": "是否在缩放时播放望远镜的声音",
+
+
+  "config.fabrizoom.overlay": "缩放覆盖",
+  "config.fabrizoom.overlay.tooltip": "切换缩放晕影覆盖",
+
+  "config.fabrizoom.scrolling": "滚动缩放",
+  "config.fabrizoom.scrolling.tooltip": "缩放时滚轮滚动是否应该改变缩放量",
+
+  "category.fabrizoom.advanced": "高级",
+
+  "config.fabrizoom.mouse.normal.title": "普通模式（默认）",
+  "config.fabrizoom.mouse.sensitivity": "鼠标灵敏度",
+  "config.fabrizoom.mouse.sensitivity.tooltip": "缩放时降低鼠标灵敏度量。越高就越敏感",
+
+  "config.fabrizoom.mouse.cinematic.title": "电影摄影机模式",
+  "config.fabrizoom.mouse.cinematic": "电影摄影机",
+  "config.fabrizoom.mouse.cinematic.tooltip": "缩放时是否对鼠标应用电影摄影效果",
+  "config.fabrizoom.mouse.cinematicmultiplier": "电影摄影机倍数",
+  "config.fabrizoom.mouse.cinematicmultiplier.tooltip": "电影摄影机效果量。越低就越强",
+
+  "config.fabrizoom.transition": "缩放过渡",
+  "config.fabrizoom.transition.linear": "线性过渡设置",
+  "config.fabrizoom.transition.smooth": "平滑过渡设置",
+  "config.fabrizoom.transition.tooltip": "缩放时到缩放结束的过渡",
+
+  "config.fabrizoom.linearstep.min": "最小线性步数",
+  "config.fabrizoom.linearstep.min.tooltip": "线性过渡的最小线性步数",
+  "config.fabrizoom.linearstep.max": "最大线性步数",
+  "config.fabrizoom.linearstep.max.tooltip": "线性过渡的最大线性步数",
+
+  "config.fabrizoom.smoothmultiplier": "平滑过渡倍数",
+  "config.fabrizoom.smoothmultiplier.tooltip": "平滑过渡的倍数。越低越强"
+}
