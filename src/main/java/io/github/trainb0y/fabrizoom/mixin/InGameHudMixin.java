@@ -59,7 +59,7 @@ public class InGameHudMixin {
 		RenderSystem.disableDepthTest();
 		RenderSystem.depthMask(false);
 		RenderSystem.defaultBlendFunc();
-		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShader(GameRenderer::getPositionTexProgram);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, f);
 
 		RenderSystem.setShaderTexture(0, ZOOM_OVERLAY);
