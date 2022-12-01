@@ -18,6 +18,7 @@ group = property("maven_group")!!
 			maven(uri("https://maven.gegy.dev"))
 			maven(uri("https://maven.isxander.dev/releases"))
 			mavenCentral()
+			mavenLocal()
 		}
 
 dependencies {
@@ -38,6 +39,7 @@ dependencies {
 	include("io.leangen.geantyref:geantyref:1.3.12") // reflection
 
 	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
 	modImplementation("com.terraformersmc:modmenu:${property("mod_menu_version")}")
 	modImplementation("dev.isxander:yet-another-config-lib:${property("yacl_version")}")
 	include("dev.isxander:yet-another-config-lib:${property("yacl_version")}") // this might? cause issues

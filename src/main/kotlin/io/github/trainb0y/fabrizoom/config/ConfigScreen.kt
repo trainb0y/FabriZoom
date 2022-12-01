@@ -9,7 +9,7 @@ import dev.isxander.yacl.api.YetAnotherConfigLib
 import dev.isxander.yacl.gui.YACLScreen
 import dev.isxander.yacl.gui.controllers.ActionController
 import dev.isxander.yacl.gui.controllers.BooleanController
-import dev.isxander.yacl.gui.controllers.EnumController
+import dev.isxander.yacl.gui.controllers.cycling.EnumController
 import dev.isxander.yacl.gui.controllers.TickBoxController
 import dev.isxander.yacl.gui.controllers.slider.DoubleSliderController
 import dev.isxander.yacl.gui.controllers.slider.FloatSliderController
@@ -156,6 +156,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 						{ value -> preset = value }
 					)
 					.controller { option ->
+
 						EnumController(option) { e: Presets -> Text.translatable(e.key) }
 					}
 					.build()
