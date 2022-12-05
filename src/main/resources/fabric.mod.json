@@ -37,12 +37,12 @@
     "fabrizoom.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.8",
+    "fabricloader": ">=0.14.10",
     "fabric-language-kotlin": ">=1.8.6+kotlin.1.7.21",
     "fabric-key-binding-api-v1": "*"
   },
   "recommends": {
-    "modmenu": ">=4.1.1",
+    "modmenu": ">=5.0.0",
     "minecraft": ">=1.19.3"
   }
 }
