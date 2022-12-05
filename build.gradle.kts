@@ -6,20 +6,20 @@ plugins {
 }
 
 group = property("maven_group")!!
-		version = property("mod_version")!!
+version = property("mod_version")!!
 
-		repositories {
-			// Add repositories to retrieve artifacts from in here.
-			// You should only use this when depending on other mods because
-			// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-			// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-			// for more information about repositories.
-			maven(uri("https://maven.terraformersmc.com/"))
-			maven(uri("https://maven.gegy.dev"))
-			maven(uri("https://maven.isxander.dev/releases"))
-			mavenCentral()
-			mavenLocal()
-		}
+repositories {
+	// Add repositories to retrieve artifacts from in here.
+	// You should only use this when depending on other mods because
+	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
+	// for more information about repositories.
+	maven(uri("https://maven.terraformersmc.com/"))
+	maven(uri("https://maven.gegy.dev"))
+	maven(uri("https://maven.isxander.dev/releases"))
+	maven(uri("https://maven.isxander.dev/snapshots")) // temporary for yacl 2.0
+	mavenCentral()
+}
 
 dependencies {
 	minecraft("com.mojang:minecraft:${property("minecraft_version")}")
@@ -41,8 +41,8 @@ dependencies {
 	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
 	modImplementation("com.terraformersmc:modmenu:${property("mod_menu_version")}")
-	modImplementation("dev.isxander:yet-another-config-lib:${property("yacl_version")}")
-	include("dev.isxander:yet-another-config-lib:${property("yacl_version")}") // this might? cause issues
+	modImplementation("dev.isxander.yacl:yacl-gui:${property("yacl_version")}")
+	include("dev.isxander.yacl:yacl-gui:${property("yacl_version")}") // this might? cause issues
 	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
 }
 
