@@ -39,7 +39,8 @@
   "depends": {
     "fabricloader": ">=0.14.10",
     "fabric-language-kotlin": ">=1.8.6+kotlin.1.7.21",
-    "fabric-key-binding-api-v1": "*"
+    "fabric-key-binding-api-v1": "*",
+    "yet-another-config-lib": ">=2.0.0"
   },
   "recommends": {
     "modmenu": ">=5.0.0",
