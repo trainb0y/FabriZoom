@@ -16,6 +16,7 @@ If you don't like the default "feel" of the zoom, you can configure it to be how
 - [ModMenu](https://github.com/TerraformersMC/ModMenu) `>5.0.0` 
 - [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `>1.8.6`
 - [Fabric API](https://modrinth.com/mod/fabric-api) `>0.68.0` or the equivalent [QFAPI](https://modrinth.com/mod/qsl) version if using Quilt
+- [YACL](https://github.com/isXander/yetanotherconfiglib) `>2.0.0`
 
 Though not strictly required, ModMenu is the only way to access the configuration UI.
 
