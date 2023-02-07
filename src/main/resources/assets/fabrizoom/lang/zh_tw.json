@@ -1,0 +1,74 @@
+{
+  "category.fabrizoom.keybinds": "FabriZoom",
+  "key.fabrizoom.zoom": "縮放",
+  "key.fabrizoom.increase": "放大",
+  "key.fabrizoom.decrease": "縮小",
+  "key.fabrizoom.reset": "重設縮放",
+
+  "presets.fabrizoom.custom": "預設",
+  "presets.fabrizoom.cinematic": "電影",
+  "presets.fabrizoom.default": "預設",
+  "presets.fabrizoom.quicktoggle": "快速切換",
+  "presets.fabrizoom.optifine": "Optifine",
+
+  "transition.fabrizoom.linear": "線性",
+  "transition.fabrizoom.smooth": "平滑",
+  "transition.fabrizoom.none": "無",
+
+  "category.fabrizoom.presets": "縮放預設",
+
+  "config.fabrizoom.preset.select": "選擇預設",
+  "config.fabrizoom.preset.select.tooltip": "可用的縮放預設",
+  "config.fabrizoom.preset.apply": "套用預設",
+  "config.fabrizoom.preset.apply.tooltip": "套用所選的預設",
+
+  "category.fabrizoom.basic": "基本",
+
+  "config.fabrizoom.general": "一般",
+  "config.fabrizoom.preferences": "偏好",
+  "config.fabrizoom.presets": "預設",
+
+  "config.fabrizoom.zoomdivisor": "縮放倍數",
+  "config.fabrizoom.zoomdivisor.tooltip": "預設縮放大小",
+
+  "config.fabrizoom.minzoomdivisor": "最小縮放大小",
+  "config.fabrizoom.minzoomdivisor.tooltip": "允許最小縮放大小",
+  "config.fabrizoom.maxzoomdivisor": "最大縮放大小",
+  "config.fabrizoom.maxzoomdivisor.tooltip": "允許最大縮放大小",
+
+
+  "config.fabrizoom.zoomsound": "縮放音效",
+  "config.fabrizoom.zoomsound.tooltip": "是否在縮放時播放縮放音效",
+
+
+  "config.fabrizoom.overlay": "縮放疊加",
+  "config.fabrizoom.overlay.tooltip": "切換縮放陰影覆蓋",
+
+  "config.fabrizoom.scrolling": "滾輪縮放",
+  "config.fabrizoom.scrolling.tooltip": "縮放時滾輪是否要改變縮放大小",
+
+  "category.fabrizoom.advanced": "進階",
+
+  "config.fabrizoom.mouse.normal.title": "一般（預設）",
+  "config.fabrizoom.mouse.sensitivity": "滑鼠靈敏度",
+  "config.fabrizoom.mouse.sensitivity.tooltip": "縮放時降低滑鼠靈敏度。越高越敏感",
+
+  "config.fabrizoom.mouse.cinematic.title": "電影視角模式",
+  "config.fabrizoom.mouse.cinematic": "電影視角",
+  "config.fabrizoom.mouse.cinematic.tooltip": "縮放時是否讓滑鼠套用電影視角效果",
+  "config.fabrizoom.mouse.cinematicmultiplier": "電影視角縮放效果",
+  "config.fabrizoom.mouse.cinematicmultiplier.tooltip": "電影視角效果大小。越低就越強",
+
+  "config.fabrizoom.transition": "縮放過渡",
+  "config.fabrizoom.transition.linear": "線性過濾設定",
+  "config.fabrizoom.transition.smooth": "平滑過濾設定",
+  "config.fabrizoom.transition.tooltip": "縮放時到縮放結束的過渡",
+
+  "config.fabrizoom.linearstep.min": "最小線性大小",
+  "config.fabrizoom.linearstep.min.tooltip": "線性過渡的最小線性大小",
+  "config.fabrizoom.linearstep.max": "最大線性大小",
+  "config.fabrizoom.linearstep.max.tooltip": "線性過渡的最大線性大小",
+
+  "config.fabrizoom.smoothmultiplier": "平滑過度倍數",
+  "config.fabrizoom.smoothmultiplier.tooltip": "平滑過度的大小，越低越強。"
+}
