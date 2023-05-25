@@ -87,7 +87,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 						DoubleSliderController(
 							option,
 							4.0,
-							10.0,
+							40.0,
 							0.1
 						)
 					}
