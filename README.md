@@ -11,12 +11,12 @@ This mod adds a zoom key (default `c`) that allows the user to zoom in their vie
 If you don't like the default "feel" of the zoom, you can configure it to be however you want.
 
 ### Requirements
-- Minecraft `>1.19.4`
-- [Fabric Loader](https://fabricmc.net/) `>0.14.14` or the equivalent [Quilt](https://quiltmc.org/) version
-- [ModMenu](https://github.com/TerraformersMC/ModMenu) `>5.0.0` 
-- [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `>1.9.1`
+- Minecraft `>1.20`
+- [Fabric Loader](https://fabricmc.net/) `>0.14.21` or the equivalent [Quilt](https://quiltmc.org/) version
+- [ModMenu](https://github.com/TerraformersMC/ModMenu) `>7.0.0` 
+- [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `>1.9.4` or the equivalent [QKL](https://modrinth.com/mod/qkl) version if using Quilt
 - [Fabric API](https://modrinth.com/mod/fabric-api) `>0.75.3` or the equivalent [QFAPI](https://modrinth.com/mod/qsl) version if using Quilt
-- [YACL](https://github.com/isXander/yetanotherconfiglib) `>2.3.0`
+- [YACL](https://github.com/isXander/yetanotherconfiglib) `>2.5.1`
 
 Though not strictly required, ModMenu is the only way to access the configuration UI.
 
