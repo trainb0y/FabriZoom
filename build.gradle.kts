@@ -2,7 +2,7 @@ plugins {
 	id("fabric-loom")
 	`maven-publish`
 	java
-	kotlin("jvm") version "1.7.21"
+	kotlin("jvm") version "1.8.21"
 }
 
 group = property("maven_group")!!
@@ -17,6 +17,7 @@ repositories {
 	maven(uri("https://maven.terraformersmc.com/"))
 	maven(uri("https://maven.gegy.dev"))
 	maven(uri("https://maven.isxander.dev/releases"))
+	maven(uri("https://maven.isxander.dev/snapshots"))
 	mavenCentral()
 }
 
