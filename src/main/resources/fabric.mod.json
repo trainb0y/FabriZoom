@@ -43,7 +43,7 @@
     "yet-another-config-lib": ">=2.5.0"
   },
   "recommends": {
-    "modmenu": ">=6.2.*",
-    "minecraft": ">=1.20.*"
+    "modmenu": ">=6.2.0",
+    "minecraft": ">=1.20.0"
   }
 }

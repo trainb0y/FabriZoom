@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.Config;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.GameRenderer;
@@ -40,9 +41,9 @@ public class InGameHudMixin {
 	 */
 	@Inject(
 			at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.getArmorStack(I)Lnet/minecraft/item/ItemStack;"),
-			method = "render(Lnet/minecraft/client/util/math/MatrixStack;F)V"
+			method = "render(Lnet/minecraft/client/gui/DrawContext;F)V"
 	)
-	public void injectZoomOverlay(MatrixStack matrices, float tickDelta, CallbackInfo info) {
+	public void injectZoomOverlay(DrawContext matrix, float tickDelta, CallbackInfo info) {
 		if (!Config.getValues().getZoomOverlayEnabled()) return;
 		if (ZoomLogic.getZoomDivisor() == 1.0) return;
 

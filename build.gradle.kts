@@ -19,6 +19,7 @@ repositories {
 	maven(uri("https://maven.isxander.dev/releases"))
 	maven(uri("https://maven.isxander.dev/snapshots"))
 	mavenCentral()
+	mavenLocal()
 }
 
 dependencies {
@@ -41,7 +42,7 @@ dependencies {
 	modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
 	modImplementation("com.terraformersmc:modmenu:${property("mod_menu_version")}")
-	modImplementation("dev.isxander:yet-another-config-lib:${property("yacl_version")}")
+	modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${property("yacl_version")}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
 }
 
