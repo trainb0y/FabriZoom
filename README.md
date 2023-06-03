@@ -28,7 +28,7 @@ Suggest features and report bugs on the Issues page, or in the Discord.
 
 ### Contributing
 All contributions are welcome, including translations. The source code is licensed under the MIT license.
-If you have a feature request or run into an issue, please report it on the [GitHub](https://github.com/trainb0y/FabriZoom). For help join [the Discord](https://discord.gg/PPCvtMTXvP).
+If you have a feature request or run into an issue, please report it on the [GitHub](https://github.com/trainb0y/FabriZoom).
 
 Thanks to [Configurate](https://github.com/SpongePowered/Configurate), [SpruceUI](https://github.com/LambdAurora/SpruceUI), and [YACL](https://github.com/isXander/YetAnotherConfigLib). Excellent libraries. 
 Also [Devin's Badges](https://github.com/intergrav/devins-badges) are great.
@@ -44,5 +44,4 @@ This mod *does* work on Quilt, but you might as well use the original [OkZoomer]
 [![~quilt~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/quilt_64h.png)](https://modrinth.com/mod/fabrizoom/)
 [![~modrinth~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/modrinth_64h.png)](https://modrinth.com/mod/fabrizoom/)
 [![~curseforge~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/curseforge_64h.png)](https://www.curseforge.com/minecraft/mc-mods/fabrizoom)
-[![~discord~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/discord_64h.png)](https://discord.gg/PPCvtMTXvP)
 [![~github~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/github-repository_64h.png)](https://github.com/trainb0y/fabrizoom)
