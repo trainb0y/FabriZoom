@@ -1,21 +1,19 @@
 package io.github.trainb0y.fabrizoom.config
 
-import dev.isxander.yacl.api.Binding
-import dev.isxander.yacl.api.ButtonOption
-import dev.isxander.yacl.api.ConfigCategory
-import dev.isxander.yacl.api.Option
-import dev.isxander.yacl.api.OptionDescription
-import dev.isxander.yacl.api.OptionGroup
-import dev.isxander.yacl.api.YetAnotherConfigLib
-import dev.isxander.yacl.api.controller.EnumControllerBuilder
-import dev.isxander.yacl.gui.YACLScreen
-import dev.isxander.yacl.gui.controllers.ActionController
-import dev.isxander.yacl.gui.controllers.BooleanController
-import dev.isxander.yacl.gui.controllers.cycling.EnumController
-import dev.isxander.yacl.gui.controllers.TickBoxController
-import dev.isxander.yacl.gui.controllers.slider.DoubleSliderController
-import dev.isxander.yacl.gui.controllers.slider.FloatSliderController
-import dev.isxander.yacl.gui.controllers.slider.IntegerSliderController
+import dev.isxander.yacl3.api.Binding
+import dev.isxander.yacl3.api.ButtonOption
+import dev.isxander.yacl3.api.ConfigCategory
+import dev.isxander.yacl3.api.Option
+import dev.isxander.yacl3.api.OptionDescription
+import dev.isxander.yacl3.api.OptionGroup
+import dev.isxander.yacl3.api.YetAnotherConfigLib
+import dev.isxander.yacl3.api.controller.EnumControllerBuilder
+import dev.isxander.yacl3.gui.YACLScreen
+import dev.isxander.yacl3.gui.controllers.BooleanController
+import dev.isxander.yacl3.gui.controllers.TickBoxController
+import dev.isxander.yacl3.gui.controllers.slider.DoubleSliderController
+import dev.isxander.yacl3.gui.controllers.slider.FloatSliderController
+import dev.isxander.yacl3.gui.controllers.slider.IntegerSliderController
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.text.Text
 
