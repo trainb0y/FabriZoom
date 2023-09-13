@@ -1,8 +1,7 @@
 plugins {
 	id("fabric-loom")
-	`maven-publish`
 	java
-	kotlin("jvm") version "1.8.21"
+	kotlin("jvm") version "1.9.10"
 }
 
 group = property("maven_group")!!
@@ -17,7 +16,11 @@ repositories {
 	maven(uri("https://maven.terraformersmc.com/"))
 	maven(uri("https://maven.gegy.dev"))
 	maven(uri("https://maven.isxander.dev/releases"))
-	maven(uri("https://maven.isxander.dev/snapshots"))
+
+	// duct tape for yacl 3.1.1 wanting to use a snapshot version of twelvemonkeys imageio
+	// todo: remove
+	maven(uri("https://oss.sonatype.org/content/repositories/snapshots"))
+
 	mavenCentral()
 	mavenLocal()
 }

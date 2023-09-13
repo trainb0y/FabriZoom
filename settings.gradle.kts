@@ -8,6 +8,6 @@ pluginManagement {
     }
 
     plugins {
-        id("fabric-loom") version "1.2.7"
+        id("fabric-loom") version "1.3.9"
     }
 }
