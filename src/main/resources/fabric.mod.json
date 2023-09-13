@@ -17,7 +17,6 @@
   "contact": {
     "issues": "https://github.com/trainb0y/FabriZoom/issues",
     "sources": "https://github.com/trainb0y/FabriZoom",
-    "discord": "https://discord.gg/PPCvtMTXvP"
   },
   "license": "MIT",
   "icon": "assets/fabrizoom/icon.png",
@@ -30,7 +29,7 @@
       }
     ],
     "modmenu": [
-      "io.github.trainb0y.fabrizoom.config.modmenu.ModMenuIntegration"
+      "io.github.trainb0y.fabrizoom.config.ModMenuIntegration"
     ]
   },
   "mixins": [

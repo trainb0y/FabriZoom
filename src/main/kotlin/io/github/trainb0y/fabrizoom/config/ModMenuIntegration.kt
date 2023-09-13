@@ -1,4 +1,4 @@
-package io.github.trainb0y.fabrizoom.config.modmenu
+package io.github.trainb0y.fabrizoom.config
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi

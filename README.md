@@ -1,6 +1,7 @@
 # FabriZoom
-![modrinth badge](https://modrinth-utils.vercel.app/api/badge/downloads?logo=true&style=flat&id=pNFKDyna)
-![curseforge_badge](https://cf.way2muchnoise.eu/676845.svg)
+![modrinth badge](https://img.shields.io/modrinth/dt/pNFKDyna?label=Modrinth)
+![CurseForge Downloads](https://img.shields.io/curseforge/dt/676845?label=CurseForge)
+
 
 [Modrinth](https://modrinth.com/mod/fabrizoom/) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabrizoom)
 
@@ -11,12 +12,12 @@ This mod adds a zoom key (default `c`) that allows the user to zoom in their vie
 If you don't like the default "feel" of the zoom, you can configure it to be however you want.
 
 ### Requirements
-- Minecraft `>1.20`
-- [Fabric Loader](https://fabricmc.net/) `>0.14.21` or the equivalent [Quilt](https://quiltmc.org/) version
-- [ModMenu](https://github.com/TerraformersMC/ModMenu) `>7.0.0` 
-- [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `>1.9.4` or the equivalent [QKL](https://modrinth.com/mod/qkl) version if using Quilt
-- [Fabric API](https://modrinth.com/mod/fabric-api) `>0.75.3` or the equivalent [QFAPI](https://modrinth.com/mod/qsl) version if using Quilt
-- [YACL](https://github.com/isXander/yetanotherconfiglib) `>2.5.1`
+- Minecraft `1.20.1`
+- [Fabric Loader](https://fabricmc.net/) `0.14.*` or the equivalent [Quilt](https://quiltmc.org/) version
+- [ModMenu](https://github.com/TerraformersMC/ModMenu) `7.*` 
+- [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `1.10.*` or the equivalent [QKL](https://modrinth.com/mod/qkl) version if using Quilt
+- [Fabric API](https://modrinth.com/mod/fabric-api) `0.83.*` or the equivalent [QFAPI](https://modrinth.com/mod/qsl) version if using Quilt
+- [YACL](https://github.com/isXander/yetanotherconfiglib) `3.*`
 
 Though not strictly required, ModMenu is the only way to access the configuration UI.
 
