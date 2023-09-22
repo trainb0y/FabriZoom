@@ -2,9 +2,7 @@ package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.Config;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -24,11 +22,7 @@ public class MouseMixin {
 	 * The amount the scroll wheel has moved
 	 */
 	@Shadow
-	private double eventDeltaWheel;
-
-	@Shadow
-	@Final
-	private MinecraftClient client;
+	private double eventDeltaVerticalWheel;
 
 	/**
 	 * Whether to apply changes to the mouse
@@ -131,22 +125,22 @@ public class MouseMixin {
 	/**
 	 * Handle changing the zoom when the player scrolls while zooming
 	 *
-	 * @see MouseMixin#eventDeltaWheel
+	 * @see MouseMixin#eventDeltaVerticalWheel
 	 * @see ZoomLogic#changeZoomDivisor
 	 */
 	@Inject(
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/Mouse;eventDeltaWheel:D",
+					target = "Lnet/minecraft/client/Mouse;eventDeltaVerticalWheel:D",
 					ordinal = 7
 			),
 			method = "onMouseScroll(JDD)V",
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo info) {
-		if (this.eventDeltaWheel == 0.0 || !ZoomLogic.getZooming() || !Config.getValues().getZoomScroll()) return;
+		if (this.eventDeltaVerticalWheel == 0.0 || !ZoomLogic.getZooming() || !Config.getValues().getZoomScroll()) return;
 
-		ZoomLogic.changeZoomDivisor(this.eventDeltaWheel > 0.0);
+		ZoomLogic.changeZoomDivisor(this.eventDeltaVerticalWheel > 0.0);
 		info.cancel();
 	}
 }
