@@ -33,7 +33,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 			.name(Text.translatable("category.fabrizoom.basic"))
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.general"))
-				.option(Option.createBuilder(Double::class.java)
+				.option(Option.createBuilder<Double>()
 					.name(Text.translatable("config.fabrizoom.zoomdivisor"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.zoomdivisor.tooltip")))
 					.binding(
@@ -53,7 +53,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					}
 					.build()
 				)
-				.option(Option.createBuilder(Double::class.java)
+				.option(Option.createBuilder<Double>()
 					.name(Text.translatable("config.fabrizoom.minzoomdivisor"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.minzoomdivisor.tooltip")))
 					.binding(
@@ -73,7 +73,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					}
 					.build()
 				)
-				.option(Option.createBuilder(Double::class.java)
+				.option(Option.createBuilder<Double>()
 					.name(Text.translatable("config.fabrizoom.maxzoomdivisor"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.maxzoomdivisor.tooltip")))
 					.binding(
@@ -97,7 +97,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 			)
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.preferences"))
-				.option(Option.createBuilder(Boolean::class.java)
+				.option(Option.createBuilder<Boolean>()
 					.name(Text.translatable("config.fabrizoom.overlay"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.overlay.tooltip")))
 					.binding(
@@ -112,7 +112,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					}
 					.build()
 				)
-				.option(Option.createBuilder(Boolean::class.java)
+				.option(Option.createBuilder<Boolean>()
 					.name(Text.translatable("config.fabrizoom.scrolling"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.scrolling.tooltip")))
 					.binding(
@@ -127,7 +127,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					}
 					.build()
 				)
-				.option(Option.createBuilder(Boolean::class.java)
+				.option(Option.createBuilder<Boolean>()
 					.name(Text.translatable("config.fabrizoom.zoomsound"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.zoomsound.tooltip")))
 					.binding(
@@ -146,7 +146,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 			)
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.presets"))
-				.option(Option.createBuilder(Presets::class.java)
+				.option(Option.createBuilder<Presets>()
 					.name(Text.translatable("config.fabrizoom.preset.select"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.preset.select.tooltip")))
 					.instant(true)
@@ -179,7 +179,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 			.name(Text.translatable("category.fabrizoom.advanced"))
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.mouse.normal.title"))
-				.option(Option.createBuilder(Int::class.java)
+				.option(Option.createBuilder<Int>()
 					.name(Text.translatable("config.fabrizoom.mouse.sensitivity"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.mouse.sensitivity.tooltip")))
 					.binding(
@@ -204,7 +204,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.mouse.cinematic.title"))
 				.option(
-					Option.createBuilder(Boolean::class.java)
+					Option.createBuilder<Boolean>()
 						.name(Text.translatable("config.fabrizoom.mouse.cinematic"))
 						.description(OptionDescription.of(Text.translatable("config.fabrizoom.mouse.cinematic.tooltip")))
 						.binding(
@@ -219,7 +219,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 						}
 						.build()
 				)
-				.option(Option.createBuilder(Double::class.java)
+				.option(Option.createBuilder<Double>()
 					.name(Text.translatable("config.fabrizoom.mouse.cinematicmultiplier"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.mouse.cinematicmultiplier.tooltip")))
 					.binding(
@@ -243,7 +243,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 			)
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.transition"))
-				.option(Option.createBuilder(Config.Transition::class.java)
+				.option(Option.createBuilder<Config.Transition>()
 					.name(Text.translatable("config.fabrizoom.transition"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.transition.tooltip")))
 					.binding(
@@ -260,7 +260,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					}
 					.build()
 				)
-				.option(Option.createBuilder(Double::class.java)
+				.option(Option.createBuilder<Double>()
 					.name(Text.translatable("config.fabrizoom.linearstep.min"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.linearstep.min.tooltip")))
 					.binding(
@@ -282,7 +282,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					}
 					.build()
 				)
-				.option(Option.createBuilder(Double::class.java)
+				.option(Option.createBuilder<Double>()
 					.name(Text.translatable("config.fabrizoom.linearstep.max"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.linearstep.max.tooltip")))
 					.binding(
@@ -304,7 +304,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					}
 					.build()
 				)
-				.option(Option.createBuilder(Float::class.java)
+				.option(Option.createBuilder<Float>()
 					.name(Text.translatable("config.fabrizoom.smoothmultiplier"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.smoothmultiplier.tooltip")))
 					.binding(
