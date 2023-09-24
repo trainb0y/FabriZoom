@@ -1,7 +1,9 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.ZoomLogic;
-import io.github.trainb0y.fabrizoom.config.Config;
+import io.github.trainb0y.fabrizoom.config.ConfigHandler;
+import io.github.trainb0y.fabrizoom.config.ZoomOverlay;
+import io.github.trainb0y.fabrizoom.config.ZoomTransition;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.util.Identifier;
@@ -27,23 +29,19 @@ public class InGameHudMixin {
 	@Shadow
 	private void renderOverlay(DrawContext context, Identifier texture, float opacity) {}
 
-
-	/**
-	 * Renders the zoom vignette
-	 */
 	@Inject(
 			at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.getArmorStack(I)Lnet/minecraft/item/ItemStack;"),
 			method = "render(Lnet/minecraft/client/gui/DrawContext;F)V"
 	)
 	public void injectZoomOverlay(DrawContext context, float tickDelta, CallbackInfo info) {
-		var overlay = Config.getValues().getZoomOverlay();
+		var overlay = ConfigHandler.getValues().getZoomOverlay();
 
-		if (overlay == Config.ZoomOverlay.NONE || ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier() >= 0.99) return;
+		if (overlay == ZoomOverlay.NONE || ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier() >= 0.99) return;
 
 		switch (overlay) {
 			case VIGNETTE -> {
 				float alpha;
-				if (Config.getValues().getTransition() != Config.Transition.NONE) {
+				if (ConfigHandler.getValues().getTransition() != ZoomTransition.NONE) {
 					// smooth and linear transition
 					alpha = 1 - MathHelper.lerp(tickDelta, ZoomLogic.getLastZoomOverlayAlpha(), ZoomLogic.getZoomOverlayAlpha());
 				} else {
@@ -54,7 +52,7 @@ public class InGameHudMixin {
 				renderOverlay(context, ZOOM_OVERLAY, alpha);
 			}
 			case SPYGLASS -> {
-				if (ZoomLogic.getZooming()) {
+				if (ZoomLogic.isZooming()) {
 					float scale = (1f / (float) ZoomLogic.getZoomDivisor()) / ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier();
 					scale += 0.125f; // this is jank, but the vanilla spyglass lerps from 0.5 to 1.125
 					scale = MathHelper.clamp(scale, 0.5f, 1.125f);

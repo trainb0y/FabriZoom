@@ -1,7 +1,8 @@
 package io.github.trainb0y.fabrizoom
 
-import io.github.trainb0y.fabrizoom.config.Config
-import io.github.trainb0y.fabrizoom.config.Config.values
+import io.github.trainb0y.fabrizoom.config.ConfigHandler
+import io.github.trainb0y.fabrizoom.config.ConfigHandler.values
+import io.github.trainb0y.fabrizoom.config.ZoomTransition
 import net.minecraft.client.util.SmoothUtil
 import net.minecraft.util.math.MathHelper
 
@@ -27,7 +28,7 @@ object ZoomLogic {
 
 	/** Whether we are currently zooming */
 	@JvmStatic
-	var zooming = false
+	var isZooming = false
 
 	/** The current zoom divisor (amount to zoom in) */
 	@JvmStatic
@@ -39,7 +40,7 @@ object ZoomLogic {
 	var currentZoomFovMultiplier = 1.0f
 		private set
 
-	var lastZoomFovMultiplier = 1.0f
+	private var lastZoomFovMultiplier = 1.0f
 		private set
 
 	/**
@@ -95,7 +96,7 @@ object ZoomLogic {
 	 */
 	@JvmStatic
 	fun tick() {
-		if (!zooming) {
+		if (!isZooming) {
 			this.cursorXZoomSmoother.clear()
 			this.cursorYZoomSmoother.clear()
 		}
@@ -103,33 +104,33 @@ object ZoomLogic {
 		// calculate zoom fov multiplier
 		lastZoomFovMultiplier = currentZoomFovMultiplier
 
-		val zoomMultiplier = if (zooming) {
+		val zoomMultiplier = if (isZooming) {
 			1.0 / zoomDivisor
 		} else {
 			1.0
 		}
 
 		currentZoomFovMultiplier = when (values.transition) {
-			Config.Transition.NONE -> lastZoomFovMultiplier
-			Config.Transition.LINEAR -> MathHelper.stepTowards(
+			ZoomTransition.NONE -> lastZoomFovMultiplier
+			ZoomTransition.LINEAR -> MathHelper.stepTowards(
 				currentZoomFovMultiplier,
 				zoomMultiplier.toFloat(),
 				zoomMultiplier.coerceIn(values.minimumLinearStep, values.maximumLinearStep).toFloat()
 			)
 
-			Config.Transition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier
+			ZoomTransition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier
 		}
 
 		// Calculate zoom overlay alpha
 		lastZoomOverlayAlpha = zoomOverlayAlpha
 		zoomOverlayAlpha = when (values.transition) {
-			Config.Transition.SMOOTH -> zoomOverlayAlpha + (zoomMultiplier - zoomOverlayAlpha).toFloat() * values.smoothMultiplier
-			Config.Transition.LINEAR -> {
+			ZoomTransition.SMOOTH -> zoomOverlayAlpha + (zoomMultiplier - zoomOverlayAlpha).toFloat() * values.smoothMultiplier
+			ZoomTransition.LINEAR -> {
 				val linearStep = (1.0f / zoomDivisor).coerceIn(values.minimumLinearStep, values.maximumLinearStep)
 				MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat())
 			}
 
-			Config.Transition.NONE -> if (zooming) {
+			ZoomTransition.NONE -> if (isZooming) {
 				1f
 			} else {
 				0f
@@ -142,7 +143,7 @@ object ZoomLogic {
 	 * Used by the keybinds and mouse zoom scrolling
 	 *
 	 * @param increase whether to increase or decrease the zoom
-	 * @see Config.values
+	 * @see ConfigHandler.values
 	 * @see io.github.trainb0y.fabrizoom.config.ConfigurableValues.scrollStep
 	 */
 	@JvmStatic
@@ -162,7 +163,7 @@ object ZoomLogic {
 	@JvmStatic
 	fun getFov(fov: Double, delta: Float): Double =
 		when (values.transition) {
-			Config.Transition.NONE -> if (zooming) {
+			ZoomTransition.NONE -> if (isZooming) {
 				fov / zoomDivisor
 			} else {
 				fov

@@ -12,48 +12,25 @@ import java.nio.file.Path
  * Handles loading and saving of the mod configuration
  */
 @ConfigSerializable
-object Config {
+object ConfigHandler {
 
-	/** The path to the config file */
-	private val configPath: Path = FabricLoader.getInstance().configDir.resolve("fabrizoom.conf")
+	private val configFilePath: Path = FabricLoader.getInstance().configDir.resolve("fabrizoom.conf")
 
 	/** The config version, doesn't necessarily match mod version */
-	@Suppress("Unused")
-	private const val version = "1"
+	private const val VERSION = "2"
 
 	/** The current configuration values */
 	@JvmStatic
 	var values = Presets.DEFAULT.values!!.copy()  // this should get overwritten
 
-	/** A type of Zoom Transition */
-	enum class Transition(
-		/** Translation key for the name of this zoom transition */
-		val key: String
-	) {
-		LINEAR("transition.fabrizoom.linear"),
-		SMOOTH("transition.fabrizoom.smooth"),
-		NONE("transition.fabrizoom.none");
-	}
-
-	enum class ZoomOverlay(
-		val key: String
-	) {
-		NONE("overlay.fabrizoom.none"),
-		VIGNETTE("overlay.fabrizoom.vignette"),
-		SPYGLASS("overlay.fabrizoom.spyglass");
-	}
-
-	/**
-	 * Save the current configuration [values] to [configPath]
-	 */
 	fun saveConfig() {
 
 		val loader = HoconConfigurationLoader.builder()
-			.path(configPath)
+			.path(configFilePath)
 			.build()
 		try {
 			val root = loader.load()
-			root.node("version").set(version)
+			root.node("version").set(VERSION)
 			root.node("values").set(values)
 			loader.save(root)
 			FabriZoom.logger.info("Saved configuration")
@@ -63,18 +40,15 @@ object Config {
 
 	}
 
-	/**
-	 * Load configuration [values] from the file at [configPath]
-	 */
 	fun loadConfig() {
 		val loader = HoconConfigurationLoader.builder()
-			.path(configPath)
+			.path(configFilePath)
 			.build()
 		try {
 			val root = loader.load()
 			val configVersion = root.node("version").string!!
-			if (version != configVersion) {
-				FabriZoom.logger.warn("Found config version: $configVersion, current version: $version")
+			if (VERSION != configVersion) {
+				FabriZoom.logger.warn("Found config version: $configVersion, current version: $VERSION")
 				FabriZoom.logger.warn("Attempting to load anyway")
 			}
 
@@ -91,11 +65,6 @@ object Config {
 		applyDefaultConfig()
 	}
 
-	/**
-	 * Apply the default preset config [values]
-	 *
-	 * @see Presets.DEFAULT
-	 */
 	fun applyDefaultConfig() {
 		values = Presets.DEFAULT.values!!.copy()
 	}

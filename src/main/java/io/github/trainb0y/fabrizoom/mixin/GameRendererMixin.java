@@ -19,9 +19,7 @@ public class GameRendererMixin {
 			method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D",
 			cancellable = true
 	)
-	private double getZoomedFov(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
-		double result = ZoomLogic.getFov(info.getReturnValue(), tickDelta);
-		info.setReturnValue(result);
-		return result;
+	private void getZoomedFov(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
+		info.setReturnValue(ZoomLogic.getFov(info.getReturnValue(), tickDelta));
 	}
 }

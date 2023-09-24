@@ -11,7 +11,7 @@ enum class Presets(
 ) {
 	/**
 	 * Default configuration preset
-	 * @see Config.applyDefaultConfig
+	 * @see ConfigHandler.applyDefaultConfig
 	 */
 	DEFAULT(
 		"presets.fabrizoom.default",
@@ -28,8 +28,8 @@ enum class Presets(
 			0.4f,
 			1.0,
 			true,
-			Config.ZoomOverlay.NONE,
-			Config.Transition.LINEAR
+			ZoomOverlay.NONE,
+			ZoomTransition.LINEAR
 		)
 	),
 
@@ -51,8 +51,8 @@ enum class Presets(
 			0.4f,
 			1.0,
 			false,
-			Config.ZoomOverlay.VIGNETTE,
-			Config.Transition.SMOOTH
+			ZoomOverlay.VIGNETTE,
+			ZoomTransition.SMOOTH
 		)
 	),
 
@@ -74,8 +74,8 @@ enum class Presets(
 			0.4f,
 			1.0,
 			true,
-			Config.ZoomOverlay.NONE,
-			Config.Transition.NONE
+			ZoomOverlay.NONE,
+			ZoomTransition.NONE
 		)
 	),
 
@@ -97,8 +97,8 @@ enum class Presets(
 			0.4f,
 			1.0,
 			false,
-			Config.ZoomOverlay.NONE,
-			Config.Transition.NONE
+			ZoomOverlay.NONE,
+			ZoomTransition.NONE
 		)
 	),
 
@@ -112,9 +112,9 @@ enum class Presets(
 
 	fun next(): Presets { // used for toggle button in gui
 		return try {
-			Presets.values()[this.ordinal + 1]
+			entries[this.ordinal + 1]
 		} catch (e: IndexOutOfBoundsException) {
-			Presets.values().first()
+			entries.first()
 		}
 	}
 }

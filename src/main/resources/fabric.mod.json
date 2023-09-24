@@ -6,13 +6,7 @@
   "description": "Adds a highly configurable zoom button. Fork of OkZoomer v4",
   "authors": [
     "EnnuiL",
-    {
-      "name": "trainb0y",
-      "contact": {
-        "email": "trainb0ydev@gmail.com",
-        "discord": "trainb0y"
-      }
-    }
+    "trainb0y"
   ],
   "contact": {
     "issues": "https://github.com/trainb0y/FabriZoom/issues",
@@ -36,7 +30,7 @@
     "fabrizoom.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.21",
+    "fabricloader": "0.14.*",
     "fabric-language-kotlin": ">=1.10.10+kotlin.1.9.10",
     "fabric-key-binding-api-v1": "*",
     "yet_another_config_lib_v3": "3.*.*"

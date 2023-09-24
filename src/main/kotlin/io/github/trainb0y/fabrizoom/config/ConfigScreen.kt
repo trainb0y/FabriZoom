@@ -39,8 +39,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values!!.zoomDivisor,
-							{ Config.values.zoomDivisor },
-							{ value -> Config.values.zoomDivisor = value }
+							{ ConfigHandler.values.zoomDivisor },
+							{ value -> ConfigHandler.values.zoomDivisor = value }
 						)
 					)
 					.customController { option ->
@@ -59,8 +59,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.minimumZoomDivisor,
-							{ Config.values.minimumZoomDivisor },
-							{ value -> Config.values.minimumZoomDivisor = value }
+							{ ConfigHandler.values.minimumZoomDivisor },
+							{ value -> ConfigHandler.values.minimumZoomDivisor = value }
 						)
 					)
 					.customController { option ->
@@ -79,8 +79,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.maximumZoomDivisor,
-							{ Config.values.maximumZoomDivisor },
-							{ value -> Config.values.maximumZoomDivisor = value }
+							{ ConfigHandler.values.maximumZoomDivisor },
+							{ value -> ConfigHandler.values.maximumZoomDivisor = value }
 						)
 					)
 					.customController { option ->
@@ -97,20 +97,20 @@ fun openConfigScreen(parent: Screen?): Screen {
 			)
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.preferences"))
-				.option(Option.createBuilder<Config.ZoomOverlay>()
+				.option(Option.createBuilder<ZoomOverlay>()
 					.name(Text.translatable("config.fabrizoom.overlay"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.overlay.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.zoomOverlay,
-							{ Config.values.zoomOverlay },
-							{ value -> Config.values.zoomOverlay = value }
+							{ ConfigHandler.values.zoomOverlay },
+							{ value -> ConfigHandler.values.zoomOverlay = value }
 						)
 					)
 					.controller { option ->
 						EnumControllerBuilder.create(option)
-							.enumClass(Config.ZoomOverlay::class.java)
-							.valueFormatter { e: Config.ZoomOverlay -> Text.translatable(e.key) }
+							.enumClass(ZoomOverlay::class.java)
+							.valueFormatter { e: ZoomOverlay -> Text.translatable(e.key) }
 					}
 					.build()
 				)
@@ -120,8 +120,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.zoomScroll,
-							{ Config.values.zoomScroll },
-							{ value -> Config.values.zoomScroll = value }
+							{ ConfigHandler.values.zoomScroll },
+							{ value -> ConfigHandler.values.zoomScroll = value }
 						)
 					)
 					.customController { option ->
@@ -135,8 +135,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.zoomSound,
-							{ Config.values.zoomSound },
-							{ value -> Config.values.zoomSound = value }
+							{ ConfigHandler.values.zoomSound },
+							{ value -> ConfigHandler.values.zoomSound = value }
 						)
 					)
 					.customController { option ->
@@ -168,8 +168,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.name(Text.translatable("config.fabrizoom.preset.apply"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.preset.apply.tooltip")))
 					.action { screen: YACLScreen?, _: ButtonOption? ->
-						Config.values = preset.values?.copy() ?: Config.values
-						Config.saveConfig()
+						ConfigHandler.values = preset.values?.copy() ?: ConfigHandler.values
+						ConfigHandler.saveConfig()
 						screen?.close()
 					}
 					.build())
@@ -187,8 +187,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.mouseSensitivity,
-							{ Config.values.mouseSensitivity },
-							{ value -> Config.values.mouseSensitivity = value }
+							{ ConfigHandler.values.mouseSensitivity },
+							{ value -> ConfigHandler.values.mouseSensitivity = value }
 						)
 					)
 					.customController { option ->
@@ -212,8 +212,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 						.binding(
 							Binding.generic(
 								Presets.DEFAULT.values.cinematicCameraEnabled,
-								{ Config.values.cinematicCameraEnabled },
-								{ value -> Config.values.cinematicCameraEnabled = value }
+								{ ConfigHandler.values.cinematicCameraEnabled },
+								{ value -> ConfigHandler.values.cinematicCameraEnabled = value }
 							)
 						)
 						.customController { option ->
@@ -227,8 +227,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.cinematicCameraMultiplier,
-							{ Config.values.cinematicCameraMultiplier },
-							{ value -> Config.values.cinematicCameraMultiplier = value }
+							{ ConfigHandler.values.cinematicCameraMultiplier },
+							{ value -> ConfigHandler.values.cinematicCameraMultiplier = value }
 						)
 					)
 					.customController { option ->
@@ -245,20 +245,20 @@ fun openConfigScreen(parent: Screen?): Screen {
 			)
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.transition"))
-				.option(Option.createBuilder<Config.Transition>()
+				.option(Option.createBuilder<ZoomTransition>()
 					.name(Text.translatable("config.fabrizoom.transition"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.transition.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.transition,
-							{ Config.values.transition },
-							{ value -> Config.values.transition = value }
+							{ ConfigHandler.values.transition },
+							{ value -> ConfigHandler.values.transition = value }
 						)
 					)
 					.controller { option ->
 						EnumControllerBuilder.create(option)
-							.enumClass(Config.Transition::class.java)
-							.valueFormatter { e: Config.Transition -> Text.translatable(e.key) }
+							.enumClass(ZoomTransition::class.java)
+							.valueFormatter { e: ZoomTransition -> Text.translatable(e.key) }
 					}
 					.build()
 				)
@@ -268,9 +268,9 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.minimumLinearStep,
-							{ Config.values.minimumLinearStep },
+							{ ConfigHandler.values.minimumLinearStep },
 							{ value ->
-								Config.values.minimumLinearStep = value.coerceIn(0.0, Config.values.maximumLinearStep)
+								ConfigHandler.values.minimumLinearStep = value.coerceIn(0.0, ConfigHandler.values.maximumLinearStep)
 							}
 						)
 					)
@@ -290,9 +290,9 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.maximumLinearStep,
-							{ Config.values.maximumLinearStep },
+							{ ConfigHandler.values.maximumLinearStep },
 							{ value ->
-								Config.values.maximumLinearStep = value.coerceIn(Config.values.minimumLinearStep, 1.0)
+								ConfigHandler.values.maximumLinearStep = value.coerceIn(ConfigHandler.values.minimumLinearStep, 1.0)
 							}
 						)
 					)
@@ -312,8 +312,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.smoothMultiplier,
-							{ Config.values.smoothMultiplier },
-							{ value -> Config.values.smoothMultiplier = value }
+							{ ConfigHandler.values.smoothMultiplier },
+							{ value -> ConfigHandler.values.smoothMultiplier = value }
 						)
 					)
 					.customController { option ->
@@ -330,7 +330,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 			)
 			.build()
 		)
-		.save(Config::saveConfig)
+		.save(ConfigHandler::saveConfig)
 		.build()
 		.generateScreen(parent)
 }

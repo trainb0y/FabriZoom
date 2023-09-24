@@ -1,7 +1,7 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.ZoomLogic;
-import io.github.trainb0y.fabrizoom.config.Config;
+import io.github.trainb0y.fabrizoom.config.ConfigHandler;
 import net.minecraft.client.Mouse;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -71,7 +71,7 @@ public class MouseMixin {
 	)
 	public void applyZoomChanges(CallbackInfo ci, double d, double e, double k, double l, double f, double g, double h, int m) {
 		this.modifyMouse = false;
-		if (ZoomLogic.getZooming()) {
+		if (ZoomLogic.isZooming()) {
 			k = ZoomLogic.applyMouseXModifier(k, h, e);
 			l = ZoomLogic.applyMouseYModifier(l, h, e);
 			this.modifyMouse = true;
@@ -138,7 +138,7 @@ public class MouseMixin {
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo info) {
-		if (this.eventDeltaVerticalWheel == 0.0 || !ZoomLogic.getZooming() || !Config.getValues().getZoomScroll()) return;
+		if (this.eventDeltaVerticalWheel == 0.0 || !ZoomLogic.isZooming() || !ConfigHandler.getValues().getZoomScroll()) return;
 
 		ZoomLogic.changeZoomDivisor(this.eventDeltaVerticalWheel > 0.0);
 		info.cancel();
