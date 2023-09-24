@@ -35,6 +35,14 @@ object Config {
 		NONE("transition.fabrizoom.none");
 	}
 
+	enum class ZoomOverlay(
+		val key: String
+	) {
+		NONE("overlay.fabrizoom.none"),
+		VIGNETTE("overlay.fabrizoom.vignette"),
+		SPYGLASS("overlay.fabrizoom.spyglass");
+	}
+
 	/**
 	 * Save the current configuration [values] to [configPath]
 	 */

@@ -97,18 +97,20 @@ fun openConfigScreen(parent: Screen?): Screen {
 			)
 			.group(OptionGroup.createBuilder()
 				.name(Text.translatable("config.fabrizoom.preferences"))
-				.option(Option.createBuilder<Boolean>()
+				.option(Option.createBuilder<Config.ZoomOverlay>()
 					.name(Text.translatable("config.fabrizoom.overlay"))
 					.description(OptionDescription.of(Text.translatable("config.fabrizoom.overlay.tooltip")))
 					.binding(
 						Binding.generic(
-							Presets.DEFAULT.values.zoomOverlayEnabled,
-							{ Config.values.zoomOverlayEnabled },
-							{ value -> Config.values.zoomOverlayEnabled = value }
+							Presets.DEFAULT.values.zoomOverlay,
+							{ Config.values.zoomOverlay },
+							{ value -> Config.values.zoomOverlay = value }
 						)
 					)
-					.customController { option ->
-						TickBoxController(option)
+					.controller { option ->
+						EnumControllerBuilder.create(option)
+							.enumClass(Config.ZoomOverlay::class.java)
+							.valueFormatter { e: Config.ZoomOverlay -> Text.translatable(e.key) }
 					}
 					.build()
 				)

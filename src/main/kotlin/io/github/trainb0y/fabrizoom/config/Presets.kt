@@ -28,7 +28,7 @@ enum class Presets(
 			0.4f,
 			1.0,
 			true,
-			false,
+			Config.ZoomOverlay.NONE,
 			Config.Transition.LINEAR
 		)
 	),
@@ -51,7 +51,7 @@ enum class Presets(
 			0.4f,
 			1.0,
 			false,
-			true,
+			Config.ZoomOverlay.VIGNETTE,
 			Config.Transition.SMOOTH
 		)
 	),
@@ -74,7 +74,7 @@ enum class Presets(
 			0.4f,
 			1.0,
 			true,
-			false,
+			Config.ZoomOverlay.NONE,
 			Config.Transition.NONE
 		)
 	),
@@ -97,7 +97,7 @@ enum class Presets(
 			0.4f,
 			1.0,
 			false,
-			false,
+			Config.ZoomOverlay.NONE,
 			Config.Transition.NONE
 		)
 	),

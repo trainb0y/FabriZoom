@@ -15,6 +15,10 @@
   "transition.fabrizoom.smooth": "Smooth",
   "transition.fabrizoom.none": "None",
 
+  "overlay.fabrizoom.none": "None",
+  "overlay.fabrizoom.vignette": "Vignette",
+  "overlay.fabrizoom.spyglass": "Spyglass",
+
   "category.fabrizoom.presets": "Zoom Presets",
 
   "config.fabrizoom.preset.select": "Select Preset",
@@ -42,7 +46,7 @@
 
 
   "config.fabrizoom.overlay": "Zoom Overlay",
-  "config.fabrizoom.overlay.tooltip": "Toggles the zoom vignette overlay",
+  "config.fabrizoom.overlay.tooltip": "Whether to show a vignette or spyglass overlay while zooming",
 
   "config.fabrizoom.scrolling": "Scroll to Zoom",
   "config.fabrizoom.scrolling.tooltip": "Whether scrolling while zooming should change the zoom amount",
