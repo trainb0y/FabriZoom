@@ -110,7 +110,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.controller { option ->
 						EnumControllerBuilder.create(option)
 							.enumClass(ZoomOverlay::class.java)
-							.valueFormatter { e: ZoomOverlay -> Text.translatable(e.key) }
+							.formatValue { e: ZoomOverlay -> Text.translatable(e.key) }
 					}
 					.build()
 				)
@@ -160,7 +160,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.controller { option ->
 						EnumControllerBuilder.create(option)
 							.enumClass(Presets::class.java)
-							.valueFormatter { e: Presets -> Text.translatable(e.key) }
+							.formatValue { e: Presets -> Text.translatable(e.key) }
 					}
 					.build()
 				)
@@ -258,7 +258,7 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.controller { option ->
 						EnumControllerBuilder.create(option)
 							.enumClass(ZoomTransition::class.java)
-							.valueFormatter { e: ZoomTransition -> Text.translatable(e.key) }
+							.formatValue { e: ZoomTransition -> Text.translatable(e.key) }
 					}
 					.build()
 				)
