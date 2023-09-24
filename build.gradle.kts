@@ -20,6 +20,10 @@ repositories {
 	// duct tape for yacl 3.1.1 wanting to use a snapshot version of twelvemonkeys imageio
 	// todo: remove
 	maven(uri("https://oss.sonatype.org/content/repositories/snapshots"))
+	// duct tape for yacl 3.2 (1.20.2) snapshot
+	// todo: also remove
+	maven(uri("https://maven.quiltmc.org/repository/release"))
+	maven(uri("https://maven.isxander.dev/snapshots"))
 
 	mavenCentral()
 	mavenLocal()
