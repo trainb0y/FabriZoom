@@ -37,25 +37,30 @@ public class InGameHudMixin {
 	)
 	public void injectZoomOverlay(DrawContext context, float tickDelta, CallbackInfo info) {
 		var overlay = Config.getValues().getZoomOverlay();
-		if (overlay == Config.ZoomOverlay.NONE) return;
 
-		if (ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier() >= 0.99) return; // I hate floats
+		if (overlay == Config.ZoomOverlay.NONE || ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier() >= 0.99) return;
 
-		if (overlay == Config.ZoomOverlay.SPYGLASS && ZoomLogic.getZooming()) {
-			float scale = (1f / (float) ZoomLogic.getZoomDivisor()) / ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier();
-			scale += 0.125f; // this is jank, but the vanilla spyglass lerps from 0.5 to 1.125
-			scale = MathHelper.clamp(scale, 0.5f, 1.125f);
-			this.renderSpyglassOverlay(context, scale);
-			return;
+		switch (overlay) {
+			case VIGNETTE -> {
+				float alpha;
+				if (Config.getValues().getTransition() != Config.Transition.NONE) {
+					// smooth and linear transition
+					alpha = 1 - MathHelper.lerp(tickDelta, ZoomLogic.getLastZoomOverlayAlpha(), ZoomLogic.getZoomOverlayAlpha());
+				} else {
+					// no transition
+					alpha = ZoomLogic.getZoomOverlayAlpha();
+				}
+
+				renderOverlay(context, ZOOM_OVERLAY, alpha);
+			}
+			case SPYGLASS -> {
+				if (ZoomLogic.getZooming()) {
+					float scale = (1f / (float) ZoomLogic.getZoomDivisor()) / ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier();
+					scale += 0.125f; // this is jank, but the vanilla spyglass lerps from 0.5 to 1.125
+					scale = MathHelper.clamp(scale, 0.5f, 1.125f);
+					this.renderSpyglassOverlay(context, scale);
+				}
+			}
 		}
-
-		float alpha;
-		if (Config.getValues().getTransition() != Config.Transition.NONE) { // smooth and linear transition
-			alpha = 1 - MathHelper.lerp(tickDelta, ZoomLogic.getLastZoomOverlayAlpha(), ZoomLogic.getZoomOverlayAlpha());
-		} else { // no transition
-			alpha = ZoomLogic.getZoomOverlayAlpha();
-		}
-
-		renderOverlay(context, ZOOM_OVERLAY, alpha);
 	}
 }
