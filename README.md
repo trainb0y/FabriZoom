@@ -23,7 +23,6 @@ Though not strictly required, ModMenu is the only way to access the configuratio
 
 ### Future Plans
 - Scaling mouse sensitivity
-- Spyglass overlay option
 
 Suggest features and report bugs on the Issues page, or in the Discord.
 
