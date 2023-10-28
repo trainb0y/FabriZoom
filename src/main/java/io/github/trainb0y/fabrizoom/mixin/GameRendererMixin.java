@@ -1,8 +1,8 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.ZoomLogic;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.Camera;
+import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +16,7 @@ public class GameRendererMixin {
 
 	@Inject(
 			at = @At("RETURN"),
-			method = "getFov(Lnet/minecraft/client/render/Camera;FZ)D",
+			method = "getFov(Lnet/minecraft/client/Camera;FZ)D",
 			cancellable = true
 	)
 	private void getZoomedFov(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {

@@ -3,8 +3,8 @@ package io.github.trainb0y.fabrizoom
 import io.github.trainb0y.fabrizoom.config.ConfigHandler
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
-import net.minecraft.client.MinecraftClient
-import net.minecraft.sound.SoundEvents
+import net.minecraft.client.Minecraft
+import net.minecraft.sounds.SoundEvents
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -17,21 +17,21 @@ class FabriZoom : ClientModInitializer {
 		ClientTickEvents.END_CLIENT_TICK.register(::onTick)
 	}
 
-	private fun onTick(client: MinecraftClient) {
+	private fun onTick(client: Minecraft) {
 		if (ZoomLogic.isZooming) {
-			if (Keybinds.decreaseKey.isPressed) ZoomLogic.changeZoomDivisor(false)
-			if (Keybinds.increaseKey.isPressed) ZoomLogic.changeZoomDivisor(true)
-			if (Keybinds.resetKey.isPressed || !Keybinds.zoomKey.isPressed) ZoomLogic.zoomDivisor = ConfigHandler.values.zoomDivisor
+			if (Keybinds.decreaseKey.isDown) ZoomLogic.changeZoomDivisor(false)
+			if (Keybinds.increaseKey.isDown) ZoomLogic.changeZoomDivisor(true)
+			if (Keybinds.resetKey.isDown || !Keybinds.zoomKey.isDown) ZoomLogic.zoomDivisor = ConfigHandler.values.zoomDivisor
 		}
 
 		if (ConfigHandler.values.zoomSound) {
-			if (!ZoomLogic.isZooming && Keybinds.zoomKey.isPressed) client.player?.playSound(
-				SoundEvents.ITEM_SPYGLASS_USE, 1f, 1f)
-			if (ZoomLogic.isZooming && !Keybinds.zoomKey.isPressed)  client.player?.playSound(
-				SoundEvents.ITEM_SPYGLASS_STOP_USING, 1f, 1f)
+			if (!ZoomLogic.isZooming && Keybinds.zoomKey.isDown) client.player?.playSound(
+				SoundEvents.SPYGLASS_USE, 1f, 1f)
+			if (ZoomLogic.isZooming && !Keybinds.zoomKey.isDown)  client.player?.playSound(
+				SoundEvents.SPYGLASS_STOP_USING, 1f, 1f)
 		}
 
-		ZoomLogic.isZooming = Keybinds.zoomKey.isPressed
+		ZoomLogic.isZooming = Keybinds.zoomKey.isDown
 	}
 
 	companion object {

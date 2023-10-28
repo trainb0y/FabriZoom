@@ -14,8 +14,8 @@ import dev.isxander.yacl3.gui.controllers.TickBoxController
 import dev.isxander.yacl3.gui.controllers.slider.DoubleSliderController
 import dev.isxander.yacl3.gui.controllers.slider.FloatSliderController
 import dev.isxander.yacl3.gui.controllers.slider.IntegerSliderController
-import net.minecraft.client.gui.screen.Screen
-import net.minecraft.text.Text
+import net.minecraft.client.gui.screens.Screen
+import net.minecraft.network.chat.Component
 
 
 fun openConfigScreen(parent: Screen?): Screen {
@@ -28,14 +28,14 @@ fun openConfigScreen(parent: Screen?): Screen {
 	// but it was causing too many issues.
 
 	return YetAnotherConfigLib.createBuilder()
-		.title(Text.literal("config.fabrizoom.title"))
+		.title(Component.literal("config.fabrizoom.title"))
 		.category(ConfigCategory.createBuilder()
-			.name(Text.translatable("category.fabrizoom.basic"))
+			.name(Component.translatable("category.fabrizoom.basic"))
 			.group(OptionGroup.createBuilder()
-				.name(Text.translatable("config.fabrizoom.general"))
+				.name(Component.translatable("config.fabrizoom.general"))
 				.option(Option.createBuilder<Double>()
-					.name(Text.translatable("config.fabrizoom.zoomdivisor"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.zoomdivisor.tooltip")))
+					.name(Component.translatable("config.fabrizoom.zoomdivisor"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.zoomdivisor.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values!!.zoomDivisor,
@@ -54,8 +54,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.build()
 				)
 				.option(Option.createBuilder<Double>()
-					.name(Text.translatable("config.fabrizoom.minzoomdivisor"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.minzoomdivisor.tooltip")))
+					.name(Component.translatable("config.fabrizoom.minzoomdivisor"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.minzoomdivisor.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.minimumZoomDivisor,
@@ -74,8 +74,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.build()
 				)
 				.option(Option.createBuilder<Double>()
-					.name(Text.translatable("config.fabrizoom.maxzoomdivisor"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.maxzoomdivisor.tooltip")))
+					.name(Component.translatable("config.fabrizoom.maxzoomdivisor"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.maxzoomdivisor.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.maximumZoomDivisor,
@@ -96,10 +96,10 @@ fun openConfigScreen(parent: Screen?): Screen {
 				.build()
 			)
 			.group(OptionGroup.createBuilder()
-				.name(Text.translatable("config.fabrizoom.preferences"))
+				.name(Component.translatable("config.fabrizoom.preferences"))
 				.option(Option.createBuilder<ZoomOverlay>()
-					.name(Text.translatable("config.fabrizoom.overlay"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.overlay.tooltip")))
+					.name(Component.translatable("config.fabrizoom.overlay"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.overlay.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.zoomOverlay,
@@ -110,13 +110,13 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.controller { option ->
 						EnumControllerBuilder.create(option)
 							.enumClass(ZoomOverlay::class.java)
-							.formatValue { e: ZoomOverlay -> Text.translatable(e.translationKey) }
+							.formatValue { e: ZoomOverlay -> Component.translatable(e.translationKey) }
 					}
 					.build()
 				)
 				.option(Option.createBuilder<Boolean>()
-					.name(Text.translatable("config.fabrizoom.scrolling"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.scrolling.tooltip")))
+					.name(Component.translatable("config.fabrizoom.scrolling"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.scrolling.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.zoomScroll,
@@ -130,8 +130,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.build()
 				)
 				.option(Option.createBuilder<Boolean>()
-					.name(Text.translatable("config.fabrizoom.zoomsound"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.zoomsound.tooltip")))
+					.name(Component.translatable("config.fabrizoom.zoomsound"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.zoomsound.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.zoomSound,
@@ -147,10 +147,10 @@ fun openConfigScreen(parent: Screen?): Screen {
 				.build()
 			)
 			.group(OptionGroup.createBuilder()
-				.name(Text.translatable("config.fabrizoom.presets"))
+				.name(Component.translatable("config.fabrizoom.presets"))
 				.option(Option.createBuilder<Presets>()
-					.name(Text.translatable("config.fabrizoom.preset.select"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.preset.select.tooltip")))
+					.name(Component.translatable("config.fabrizoom.preset.select"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.preset.select.tooltip")))
 					.instant(true)
 					.binding(
 						Presets.CUSTOM,
@@ -160,17 +160,17 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.controller { option ->
 						EnumControllerBuilder.create(option)
 							.enumClass(Presets::class.java)
-							.formatValue { e: Presets -> Text.translatable(e.translationKey) }
+							.formatValue { e: Presets -> Component.translatable(e.translationKey) }
 					}
 					.build()
 				)
 				.option(ButtonOption.createBuilder()
-					.name(Text.translatable("config.fabrizoom.preset.apply"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.preset.apply.tooltip")))
+					.name(Component.translatable("config.fabrizoom.preset.apply"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.preset.apply.tooltip")))
 					.action { screen: YACLScreen?, _: ButtonOption? ->
 						ConfigHandler.values = preset.values?.copy() ?: ConfigHandler.values
 						ConfigHandler.saveConfig()
-						screen?.close()
+						screen?.onClose()
 					}
 					.build())
 				.build()
@@ -178,12 +178,12 @@ fun openConfigScreen(parent: Screen?): Screen {
 			.build()
 		)
 		.category(ConfigCategory.createBuilder()
-			.name(Text.translatable("category.fabrizoom.advanced"))
+			.name(Component.translatable("category.fabrizoom.advanced"))
 			.group(OptionGroup.createBuilder()
-				.name(Text.translatable("config.fabrizoom.mouse.normal.title"))
+				.name(Component.translatable("config.fabrizoom.mouse.normal.title"))
 				.option(Option.createBuilder<Int>()
-					.name(Text.translatable("config.fabrizoom.mouse.sensitivity"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.mouse.sensitivity.tooltip")))
+					.name(Component.translatable("config.fabrizoom.mouse.sensitivity"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.mouse.sensitivity.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.mouseSensitivity,
@@ -204,11 +204,11 @@ fun openConfigScreen(parent: Screen?): Screen {
 				.build()
 			)
 			.group(OptionGroup.createBuilder()
-				.name(Text.translatable("config.fabrizoom.mouse.cinematic.title"))
+				.name(Component.translatable("config.fabrizoom.mouse.cinematic.title"))
 				.option(
 					Option.createBuilder<Boolean>()
-						.name(Text.translatable("config.fabrizoom.mouse.cinematic"))
-						.description(OptionDescription.of(Text.translatable("config.fabrizoom.mouse.cinematic.tooltip")))
+						.name(Component.translatable("config.fabrizoom.mouse.cinematic"))
+						.description(OptionDescription.of(Component.translatable("config.fabrizoom.mouse.cinematic.tooltip")))
 						.binding(
 							Binding.generic(
 								Presets.DEFAULT.values.cinematicCameraEnabled,
@@ -222,8 +222,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 						.build()
 				)
 				.option(Option.createBuilder<Double>()
-					.name(Text.translatable("config.fabrizoom.mouse.cinematicmultiplier"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.mouse.cinematicmultiplier.tooltip")))
+					.name(Component.translatable("config.fabrizoom.mouse.cinematicmultiplier"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.mouse.cinematicmultiplier.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.cinematicCameraMultiplier,
@@ -244,10 +244,10 @@ fun openConfigScreen(parent: Screen?): Screen {
 				.build()
 			)
 			.group(OptionGroup.createBuilder()
-				.name(Text.translatable("config.fabrizoom.transition"))
+				.name(Component.translatable("config.fabrizoom.transition"))
 				.option(Option.createBuilder<ZoomTransition>()
-					.name(Text.translatable("config.fabrizoom.transition"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.transition.tooltip")))
+					.name(Component.translatable("config.fabrizoom.transition"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.transition.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.transition,
@@ -258,13 +258,13 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.controller { option ->
 						EnumControllerBuilder.create(option)
 							.enumClass(ZoomTransition::class.java)
-							.formatValue { e: ZoomTransition -> Text.translatable(e.translationKey) }
+							.formatValue { e: ZoomTransition -> Component.translatable(e.translationKey) }
 					}
 					.build()
 				)
 				.option(Option.createBuilder<Double>()
-					.name(Text.translatable("config.fabrizoom.linearstep.min"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.linearstep.min.tooltip")))
+					.name(Component.translatable("config.fabrizoom.linearstep.min"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.linearstep.min.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.minimumLinearStep,
@@ -285,8 +285,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.build()
 				)
 				.option(Option.createBuilder<Double>()
-					.name(Text.translatable("config.fabrizoom.linearstep.max"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.linearstep.max.tooltip")))
+					.name(Component.translatable("config.fabrizoom.linearstep.max"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.linearstep.max.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.maximumLinearStep,
@@ -307,8 +307,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 					.build()
 				)
 				.option(Option.createBuilder<Float>()
-					.name(Text.translatable("config.fabrizoom.smoothmultiplier"))
-					.description(OptionDescription.of(Text.translatable("config.fabrizoom.smoothmultiplier.tooltip")))
+					.name(Component.translatable("config.fabrizoom.smoothmultiplier"))
+					.description(OptionDescription.of(Component.translatable("config.fabrizoom.smoothmultiplier.tooltip")))
 					.binding(
 						Binding.generic(
 							Presets.DEFAULT.values.smoothMultiplier,

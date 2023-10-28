@@ -2,7 +2,7 @@ package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.ConfigHandler;
-import net.minecraft.client.Mouse;
+import net.minecraft.client.MouseHandler;
 import org.joml.Vector2d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,12 +16,11 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 /**
  * Handles modifying mouse behavior when zoomed in
  */
-@Mixin(Mouse.class)
+@Mixin(MouseHandler.class)
 public class MouseMixin {
 
-	/** The amount the scroll wheel has moved */
 	@Shadow
-	private double eventDeltaVerticalWheel;
+	private double accumulatedScrollY;
 
 	/**
 	 * Whether to apply changes to the mouse
@@ -47,10 +46,10 @@ public class MouseMixin {
 	 * @see MouseMixin#zoomCursorDelta
 	 */
 	@Inject(
-			method = "updateMouse()V",
+			method = "turnPlayer",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/option/GameOptions;getInvertYMouse()Lnet/minecraft/client/option/SimpleOption;"
+					target = "Lnet/minecraft/client/Options;invertYMouse()Lnet/minecraft/client/OptionInstance;"
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
@@ -68,10 +67,10 @@ public class MouseMixin {
 
 
 	@ModifyVariable(
-			method = "updateMouse",
+			method = "turnPlayer",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/option/GameOptions;getInvertYMouse()Lnet/minecraft/client/option/SimpleOption;"
+					target = "Lnet/minecraft/client/Options;invertYMouse()Lnet/minecraft/client/OptionInstance;"
 			),
 			ordinal = 2
 	)
@@ -80,10 +79,10 @@ public class MouseMixin {
 	}
 
 	@ModifyVariable(
-			method = "updateMouse",
+			method = "turnPlayer",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/option/GameOptions;getInvertYMouse()Lnet/minecraft/client/option/SimpleOption;"
+					target = "Lnet/minecraft/client/Options;invertYMouse()Lnet/minecraft/client/OptionInstance;"
 			),
 			ordinal = 3
 	)
@@ -95,22 +94,22 @@ public class MouseMixin {
 	/**
 	 * Handle changing the zoom when the player scrolls while zooming
 	 *
-	 * @see MouseMixin#eventDeltaVerticalWheel
+	 * @see MouseMixin#accumulatedScrollY
 	 * @see ZoomLogic#changeZoomDivisor
 	 */
 	@Inject(
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/Mouse;eventDeltaVerticalWheel:D",
+					target = "Lnet/minecraft/client/MouseHandler;accumulatedScrollY:D",
 					ordinal = 7
 			),
-			method = "onMouseScroll(JDD)V",
+			method = "onScroll(JDD)V",
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo ci) {
-		if (this.eventDeltaVerticalWheel == 0.0 || !ZoomLogic.isZooming() || !ConfigHandler.getValues().getZoomScroll()) return;
+		if (this.accumulatedScrollY == 0.0 || !ZoomLogic.isZooming() || !ConfigHandler.getValues().getZoomScroll()) return;
 
-		ZoomLogic.changeZoomDivisor(this.eventDeltaVerticalWheel > 0.0);
+		ZoomLogic.changeZoomDivisor(this.accumulatedScrollY > 0.0);
 		ci.cancel();
 	}
 }

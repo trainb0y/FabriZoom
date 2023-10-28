@@ -31,7 +31,7 @@ repositories {
 
 dependencies {
 	minecraft("com.mojang:minecraft:${property("minecraft_version")}")
-	mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
+	mappings(loom.officialMojangMappings())
 
 	// Configurate
 	implementation("org.spongepowered:configurate-hocon:${property("configurate_version")}")

@@ -1,11 +1,8 @@
 package io.github.trainb0y.fabrizoom
 
-import io.github.trainb0y.fabrizoom.config.ConfigHandler.values
+import com.mojang.blaze3d.platform.InputConstants
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.option.KeyBinding
-import net.minecraft.client.util.InputUtil
-import net.minecraft.sound.SoundEvents
+import net.minecraft.client.KeyMapping
 import org.lwjgl.glfw.GLFW
 
 
@@ -17,30 +14,30 @@ object Keybinds {
 	private const val CATEGORY = "category.fabrizoom.keybinds"
 
 	/** The primary key for zooming */
-	lateinit var zoomKey: KeyBinding
+	lateinit var zoomKey: KeyMapping
 
 	/** The key to increase the zoom divisor */
-	lateinit var increaseKey: KeyBinding
+	lateinit var increaseKey: KeyMapping
 
 	/** The key to decrease the zoom divisor */
-	lateinit var decreaseKey: KeyBinding
+	lateinit var decreaseKey: KeyMapping
 
 	/** The key to reset the zoom divisor */
-	lateinit var resetKey: KeyBinding
+	lateinit var resetKey: KeyMapping
 
 	fun registerKeybinds() {
 		// can't register and initialize at the same time, because they won't appear in the keybind menu
 		zoomKey = KeyBindingHelper.registerKeyBinding(
-			KeyBinding("key.fabrizoom.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_C, CATEGORY)
+			KeyMapping("key.fabrizoom.zoom", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_C, CATEGORY)
 		)
 		increaseKey = KeyBindingHelper.registerKeyBinding(
-			KeyBinding("key.fabrizoom.increase", InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.code, CATEGORY)
+			KeyMapping("key.fabrizoom.increase", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
 		)
 		decreaseKey = KeyBindingHelper.registerKeyBinding(
-			KeyBinding("key.fabrizoom.decrease", InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.code, CATEGORY)
+			KeyMapping("key.fabrizoom.decrease", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
 		)
 		resetKey = KeyBindingHelper.registerKeyBinding(
-			KeyBinding("key.fabrizoom.reset", InputUtil.Type.KEYSYM, InputUtil.UNKNOWN_KEY.code, CATEGORY)
+			KeyMapping("key.fabrizoom.reset", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
 		)
 	}
 }
