@@ -1,9 +1,7 @@
 # FabriZoom
 ![modrinth badge](https://img.shields.io/modrinth/dt/pNFKDyna?label=Modrinth)
-![CurseForge Downloads](https://img.shields.io/curseforge/dt/676845?label=CurseForge)
 
-
-[Modrinth](https://modrinth.com/mod/fabrizoom/) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabrizoom)
+[Modrinth](https://modrinth.com/mod/fabrizoom/) 
 
 ### What? 
 Fork of OkZoomer v4, updated to Minecraft 1.19, ported to Kotlin, moved to different (actually maintained) GUI and configuration libraries, and updated with some code from modern OkZoomer (LibZoomer).
@@ -42,5 +40,4 @@ This mod *does* work on Quilt, but you might as well use the original [OkZoomer]
 [![~fabric~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/fabric_64h.png)](https://modrinth.com/mod/fabrizoom/)
 [![~quilt~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/quilt_64h.png)](https://modrinth.com/mod/fabrizoom/)
 [![~modrinth~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/modrinth_64h.png)](https://modrinth.com/mod/fabrizoom/)
-[![~curseforge~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/curseforge_64h.png)](https://www.curseforge.com/minecraft/mc-mods/fabrizoom)
 [![~github~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/github-repository_64h.png)](https://github.com/trainb0y/fabrizoom)
