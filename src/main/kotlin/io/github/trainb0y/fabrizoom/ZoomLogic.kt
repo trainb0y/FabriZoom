@@ -46,54 +46,48 @@ object ZoomLogic {
 	/**
 	 * Calculates the cursor's X delta while zooming
 	 *
-	 * @param cursorDeltaX the original X delta
 	 * @param cursorSensitivity the cursor sensitivity multiplier
-	 * @param mouseUpdateTimeDelta the time since the last mouse update
 	 * @see applyMouseYModifier
 	 * @see io.github.trainb0y.fabrizoom.mixin.MouseMixin.applyZoomChanges
 	 */
 	@JvmStatic
 	fun applyMouseXModifier(
-		cursorDeltaX: Double,
+		vanillaCursorDeltaX: Double,
 		cursorSensitivity: Double,
 		mouseUpdateTimeDelta: Double,
 	): Double {
 		return if (values.cinematicCameraEnabled) {
 			val smoother: Double = mouseUpdateTimeDelta * values.cinematicCameraMultiplier * cursorSensitivity
-			this.cursorXZoomSmoother.smooth(cursorDeltaX, smoother)
+			this.cursorXZoomSmoother.smooth(vanillaCursorDeltaX, smoother)
 		} else {
 			this.cursorXZoomSmoother.clear()
-			cursorDeltaX * mouseUpdateTimeDelta * cursorSensitivity * values.mouseSensitivity
+			vanillaCursorDeltaX * mouseUpdateTimeDelta * cursorSensitivity * values.mouseSensitivity
 		}
 	}
 
 	/**
 	 * Calculates the cursor's Y delta while zooming
 	 *
-	 * @param cursorDeltaY the original Y delta
+	 * @param vanillaCursorDeltaY the original Y delta
 	 * @param cursorSensitivity the cursor sensitivity multiplier
-	 * @param mouseUpdateTimeDelta the time since the last mouse update
 	 * @see applyMouseXModifier
 	 * @see io.github.trainb0y.fabrizoom.mixin.MouseMixin.applyZoomChanges
 	 */
 	@JvmStatic
 	fun applyMouseYModifier(
-		cursorDeltaY: Double,
+		vanillaCursorDeltaY: Double,
 		cursorSensitivity: Double,
 		mouseUpdateTimeDelta: Double,
 	): Double {
 		return if (values.cinematicCameraEnabled) {
 			val smoother: Double = mouseUpdateTimeDelta * values.cinematicCameraMultiplier * cursorSensitivity
-			this.cursorYZoomSmoother.smooth(cursorDeltaY, smoother)
+			this.cursorYZoomSmoother.smooth(vanillaCursorDeltaY, smoother)
 		} else {
 			this.cursorYZoomSmoother.clear()
-			cursorDeltaY * mouseUpdateTimeDelta * cursorSensitivity * values.mouseSensitivity
+			vanillaCursorDeltaY * mouseUpdateTimeDelta * cursorSensitivity * values.mouseSensitivity
 		}
 	}
 
-	/**
-	 * Update the current zoom state, including the overlay alpha and the zoom FOV multipliers
-	 */
 	@JvmStatic
 	fun tick() {
 		if (!isZooming) {
@@ -117,11 +111,9 @@ object ZoomLogic {
 				zoomMultiplier.toFloat(),
 				zoomMultiplier.coerceIn(values.minimumLinearStep, values.maximumLinearStep).toFloat()
 			)
-
 			ZoomTransition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier
 		}
 
-		// Calculate zoom overlay alpha
 		lastZoomOverlayAlpha = zoomOverlayAlpha
 		zoomOverlayAlpha = when (values.transition) {
 			ZoomTransition.SMOOTH -> zoomOverlayAlpha + (zoomMultiplier - zoomOverlayAlpha).toFloat() * values.smoothMultiplier
@@ -129,7 +121,6 @@ object ZoomLogic {
 				val linearStep = (1.0f / zoomDivisor).coerceIn(values.minimumLinearStep, values.maximumLinearStep)
 				MathHelper.stepTowards(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat())
 			}
-
 			ZoomTransition.NONE -> if (isZooming) {
 				1f
 			} else {
@@ -155,27 +146,23 @@ object ZoomLogic {
 		zoomDivisor = changedZoomDivisor.coerceIn(values.minimumZoomDivisor, values.maximumZoomDivisor)
 	}
 
-	/**
-	 * @return the zoom-modified client FOV
-	 * @param fov the vanilla FOV
-	 * @param delta the frame delta
-	 */
+	/** @return the zoom-modified client FOV */
 	@JvmStatic
-	fun getFov(fov: Double, delta: Float): Double =
+	fun getZoomFov(vanillaFov: Double, frameDelta: Float): Double =
 		when (values.transition) {
 			ZoomTransition.NONE -> if (isZooming) {
-				fov / zoomDivisor
+				vanillaFov / zoomDivisor
 			} else {
-				fov
+				vanillaFov
 			}
 
 			else -> {
-				if (currentZoomFovMultiplier != 1.0f) fov * MathHelper.lerp(
-					delta,
+				if (currentZoomFovMultiplier != 1.0f) vanillaFov * MathHelper.lerp(
+					frameDelta,
 					lastZoomFovMultiplier,
 					currentZoomFovMultiplier
 				).toDouble()
-				else fov
+				else vanillaFov
 			}
 		}
 }

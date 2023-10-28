@@ -2,7 +2,6 @@ package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.ConfigHandler;
-import io.github.trainb0y.fabrizoom.config.ZoomOverlay;
 import io.github.trainb0y.fabrizoom.config.ZoomTransition;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -21,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
 	@Unique
-	private static final Identifier ZOOM_OVERLAY = new Identifier("fabrizoom:textures/misc/zoom_overlay.png");
+	private static final Identifier ZOOM_OVERLAY = new Identifier("fabrizoom:textures/zoom_overlay.png");
 
 	@Shadow
 	private void renderSpyglassOverlay(DrawContext context, float scale) {}
@@ -33,12 +32,11 @@ public class InGameHudMixin {
 			at = @At(value = "INVOKE", target = "net/minecraft/entity/player/PlayerInventory.getArmorStack(I)Lnet/minecraft/item/ItemStack;"),
 			method = "render(Lnet/minecraft/client/gui/DrawContext;F)V"
 	)
-	public void injectZoomOverlay(DrawContext context, float tickDelta, CallbackInfo info) {
-		var overlay = ConfigHandler.getValues().getZoomOverlay();
+	public void injectZoomOverlay(DrawContext context, float tickDelta, CallbackInfo ci) {
+		if (ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier() >= 0.99) return;
 
-		if (overlay == ZoomOverlay.NONE || ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier() >= 0.99) return;
-
-		switch (overlay) {
+		switch (ConfigHandler.getValues().getZoomOverlay()) {
+			case NONE -> {}
 			case VIGNETTE -> {
 				float alpha;
 				if (ConfigHandler.getValues().getTransition() != ZoomTransition.NONE) {

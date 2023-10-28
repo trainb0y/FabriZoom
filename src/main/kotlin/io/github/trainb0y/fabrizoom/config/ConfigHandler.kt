@@ -24,7 +24,6 @@ object ConfigHandler {
 	var values = Presets.DEFAULT.values!!.copy()  // this should get overwritten
 
 	fun saveConfig() {
-
 		val loader = HoconConfigurationLoader.builder()
 			.path(configFilePath)
 			.build()
@@ -65,7 +64,7 @@ object ConfigHandler {
 		applyDefaultConfig()
 	}
 
-	fun applyDefaultConfig() {
+	private fun applyDefaultConfig() {
 		values = Presets.DEFAULT.values!!.copy()
 	}
 }

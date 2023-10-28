@@ -3,6 +3,7 @@ package io.github.trainb0y.fabrizoom.mixin;
 import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.ConfigHandler;
 import net.minecraft.client.Mouse;
+import org.joml.Vector2d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,48 +19,32 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(Mouse.class)
 public class MouseMixin {
 
-	/**
-	 * The amount the scroll wheel has moved
-	 */
+	/** The amount the scroll wheel has moved */
 	@Shadow
 	private double eventDeltaVerticalWheel;
 
 	/**
 	 * Whether to apply changes to the mouse
 	 *
-	 * @see MouseMixin#finalCursorDeltaX
-	 * @see MouseMixin#finalCursorDeltaY
+	 * @see MouseMixin#zoomCursorDelta
 	 */
 	@Unique
 	private boolean modifyMouse;
 
 	/**
-	 * The actual mouse delta X
+	 * The actual mouse delta
 	 * Only applied if modifyMouse is true
-	 *
 	 * @see MouseMixin#modifyMouse
 	 */
 	@Unique
-	private double finalCursorDeltaX;
+	private Vector2d zoomCursorDelta;
 
 	/**
-	 * The actual mouse delta Y
-	 * Only applied if modifyMouse is true
-	 *
-	 * @see MouseMixin#modifyMouse
-	 */
-	@Unique
-	private double finalCursorDeltaY;
-
-	/**
-	 * Calculate finalCursorDeltaX and finalCursorDeltaY by applying mouse modifiers in ZoomLogic
+	 * Calculate zoomCursorDelta by applying mouse modifiers in ZoomLogic
 	 * If we should be zooming, sets modifyMouse to true
 	 *
 	 * @see MouseMixin#modifyMouse
-	 * @see MouseMixin#finalCursorDeltaX
-	 * @see MouseMixin#finalCursorDeltaY
-	 * @see ZoomLogic#applyMouseXModifier
-	 * @see ZoomLogic#applyMouseYModifier
+	 * @see MouseMixin#zoomCursorDelta
 	 */
 	@Inject(
 			method = "updateMouse()V",
@@ -70,25 +55,18 @@ public class MouseMixin {
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	public void applyZoomChanges(CallbackInfo ci, double d, double e, double k, double l, double f, double g, double h, int m) {
+		ZoomLogic.tick(); // todo: should this really go here?
+
 		this.modifyMouse = false;
 		if (ZoomLogic.isZooming()) {
 			k = ZoomLogic.applyMouseXModifier(k, h, e);
 			l = ZoomLogic.applyMouseYModifier(l, h, e);
 			this.modifyMouse = true;
 		}
-		ZoomLogic.tick(); // should this really go here?
-		this.finalCursorDeltaX = k;
-		this.finalCursorDeltaY = l;
+		this.zoomCursorDelta = new Vector2d(k,l);
 	}
 
-	/**
-	 * Apply the finalCursorDeltaX if modifyMouse
-	 *
-	 * @param k the vanilla X delta
-	 * @return the modified mouse X delta
-	 * @see MouseMixin#modifyMouse
-	 * @see MouseMixin#finalCursorDeltaX
-	 */
+
 	@ModifyVariable(
 			method = "updateMouse",
 			at = @At(
@@ -98,17 +76,9 @@ public class MouseMixin {
 			ordinal = 2
 	)
 	private double modifyFinalCursorDeltaX(double k) {
-		return this.modifyMouse ? finalCursorDeltaX : k;
+		return this.modifyMouse ? zoomCursorDelta.x : k;
 	}
 
-	/**
-	 * Apply the finalCursorDeltaY if modifyMouse
-	 *
-	 * @param l the vanilla Y delta
-	 * @return the modified mouse Y delta
-	 * @see MouseMixin#modifyMouse
-	 * @see MouseMixin#finalCursorDeltaY
-	 */
 	@ModifyVariable(
 			method = "updateMouse",
 			at = @At(
@@ -118,7 +88,7 @@ public class MouseMixin {
 			ordinal = 3
 	)
 	private double modifyFinalCursorDeltaY(double l) {
-		return this.modifyMouse ? finalCursorDeltaY : l;
+		return this.modifyMouse ? zoomCursorDelta.y: l;
 	}
 
 
@@ -137,10 +107,10 @@ public class MouseMixin {
 			method = "onMouseScroll(JDD)V",
 			cancellable = true
 	)
-	private void onMouseScroll(CallbackInfo info) {
+	private void onMouseScroll(CallbackInfo ci) {
 		if (this.eventDeltaVerticalWheel == 0.0 || !ZoomLogic.isZooming() || !ConfigHandler.getValues().getZoomScroll()) return;
 
 		ZoomLogic.changeZoomDivisor(this.eventDeltaVerticalWheel > 0.0);
-		info.cancel();
+		ci.cancel();
 	}
 }

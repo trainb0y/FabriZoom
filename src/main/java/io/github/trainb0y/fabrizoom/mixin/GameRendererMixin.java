@@ -20,6 +20,6 @@ public class GameRendererMixin {
 			cancellable = true
 	)
 	private void getZoomedFov(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
-		info.setReturnValue(ZoomLogic.getFov(info.getReturnValue(), tickDelta));
+		info.setReturnValue(ZoomLogic.getZoomFov(info.getReturnValue(), tickDelta));
 	}
 }
