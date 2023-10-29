@@ -24,20 +24,19 @@ configurations {
 	developmentForge.extendsFrom(configurations["common"])
 }
 
+repositories {
+	maven("https://thedarkcolour.github.io/KotlinForForge/")
+}
+
 dependencies {
 	forge("net.minecraftforge:forge:${property("minecraft_version")}-${property("forge_version")}")
 
 	common(project(":common", configuration = "namedElements")) { isTransitive = false }
 	shadowCommon(project(":common", configuration = "transformProductionForge")) { isTransitive = false }
 
-	modImplementation("dev.isxander.yacl:yet-another-config-lib-forge:${property("yacl_version")}")
+	implementation("thedarkcolour:kotlinforforge:${property("forge_kotlin_version")}")
 
-	forgeRuntimeLibrary("org.spongepowered:configurate-core:${property("configurate_version")}")
-	forgeRuntimeLibrary("org.spongepowered:configurate-hocon:${property("configurate_version")}")
-	forgeRuntimeLibrary("org.spongepowered:configurate-extra-kotlin:${property("configurate_version")}")
-	forgeRuntimeLibrary("com.google.guava:guava:31.1-jre")   // guava
-	forgeRuntimeLibrary("com.typesafe:config:1.4.2")         // hocon
-	forgeRuntimeLibrary("io.leangen.geantyref:geantyref:1.3.12") // reflection
+	modImplementation("dev.isxander.yacl:yet-another-config-lib-forge:${property("yacl_version")}")
 }
 
 tasks {

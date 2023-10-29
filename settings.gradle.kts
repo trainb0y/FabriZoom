@@ -15,10 +15,10 @@ pluginManagement {
         val shadow_version: String by settings
 
         kotlin("jvm") version kotlin_version
+        kotlin("plugin.serialization") version kotlin_version
         id("architectury-plugin") version architectury_gradle_plugin_version
         id("dev.architectury.loom") version architectury_loom_version
         id("com.github.johnrengelman.shadow") version shadow_version
-
     }
 }
 

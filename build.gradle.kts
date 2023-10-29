@@ -5,6 +5,7 @@ plugins {
 	id("dev.architectury.loom") apply false
 	id("com.github.johnrengelman.shadow") apply false
 	kotlin("jvm")
+	kotlin("plugin.serialization")
 	java
 }
 
@@ -25,9 +26,11 @@ subprojects {
 	}
 }
 
+
 allprojects {
 	apply(plugin="java")
 	apply(plugin="kotlin")
+	apply(plugin="org.jetbrains.kotlin.plugin.serialization")
 	apply(plugin="architectury-plugin")
 	apply(plugin="com.github.johnrengelman.shadow")
 
@@ -43,6 +46,10 @@ allprojects {
 		maven(uri("https://maven.terraformersmc.com/"))
 		maven(uri("https://maven.gegy.dev"))
 		maven(uri("https://maven.isxander.dev/releases"))
+
+		// duct tape for yacl 3.1.1 wanting to use a snapshot version of twelvemonkeys imageio
+		// todo: remove
+		maven(uri("https://oss.sonatype.org/content/repositories/snapshots"))
 
 		mavenCentral()
 	}

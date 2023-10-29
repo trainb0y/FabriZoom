@@ -7,13 +7,12 @@ loom {
 	accessWidenerPath.set(project(":common").loom.accessWidenerPath)
 }
 
-val common: Configuration by configurations.creating
-val shadowCommon: Configuration by configurations.creating // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
-val developmentFabric: Configuration = configurations.getByName("developmentFabric")
+val common by configurations.registering
+val shadowCommon by configurations.registering
 configurations {
-	compileClasspath.get().extendsFrom(configurations["common"])
-	runtimeClasspath.get().extendsFrom(configurations["common"])
-	developmentFabric.extendsFrom(configurations["common"])
+	configurations.compileClasspath.get().extendsFrom(common.get())
+	configurations.runtimeClasspath.get().extendsFrom(common.get())
+	configurations["developmentFabric"].extendsFrom(common.get())
 }
 
 
@@ -25,9 +24,8 @@ dependencies {
 
 	modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${property("yacl_version")}")
 
-	common(project(":common", configuration = "namedElements")) { isTransitive = true }
-	shadowCommon(project(":common", configuration = "transformProductionFabric")) { isTransitive = true }
-
+	common(project(":common", configuration = "namedElements")) { isTransitive = false }
+	shadowCommon(project(":common", configuration = "transformProductionFabric")) { isTransitive = false }
 }
 
 tasks {
@@ -41,14 +39,15 @@ tasks {
 
 	shadowJar {
 		exclude("architectury.common.json")
-		configurations = listOf(project.configurations["shadowCommon"])
+		configurations = listOf(shadowCommon.get())
 		archiveClassifier.set("dev-shadow")
 	}
 
 	remapJar {
-		injectAccessWidener.set(true)
-		inputFile.set(shadowJar.flatMap { it.archiveFile })
 		dependsOn(shadowJar)
+		from(rootProject.file("LICENSE"))
+		injectAccessWidener.set(true)
+		inputFile.set(shadowJar.get().archiveFile)
 		archiveClassifier.set("fabric")
 	}
 
