@@ -1,63 +1,53 @@
 package io.github.trainb0y.fabrizoom.config
 
 import io.github.trainb0y.fabrizoom.FabriZoom
-import org.spongepowered.configurate.ConfigurateException
-import org.spongepowered.configurate.hocon.HoconConfigurationLoader
-import org.spongepowered.configurate.kotlin.extensions.get
-import org.spongepowered.configurate.objectmapping.ConfigSerializable
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
+import kotlinx.serialization.json.encodeToStream
+import java.lang.Exception
+import java.nio.file.StandardOpenOption
+import kotlin.io.path.inputStream
+import kotlin.io.path.outputStream
+
 
 /**
  * Handles loading and saving of the mod configuration
  */
-@ConfigSerializable
 object ConfigHandler {
-
-	/** The config version, doesn't necessarily match mod version */
-	private const val VERSION = "2"
 
 	/** The current configuration values */
 	@JvmStatic
 	var values = Presets.DEFAULT.values!!.copy()  // this should get overwritten
 
-	fun saveConfig() {
-		val loader = HoconConfigurationLoader.builder()
-			.path(FabriZoom.platform.getConfigPath())
-			.build()
-		try {
-			val root = loader.load()
-			root.node("version").set(VERSION)
-			root.node("values").set(values)
-			loader.save(root)
-			FabriZoom.logger.info("Saved configuration")
-		} catch (e: ConfigurateException) {
-			FabriZoom.logger.warn("Failed to save configuration! $e")
-		}
 
+	@OptIn(ExperimentalSerializationApi::class)
+	fun saveConfig() {
+		try {
+			Json.encodeToStream(values, FabriZoom.platform.getConfigPath().outputStream(StandardOpenOption.TRUNCATE_EXISTING))
+			FabriZoom.logger.info("Saved configuration")
+		} catch (e: Exception) {
+			e.printStackTrace()
+			FabriZoom.logger.warn("Could not save config!")
+		}
 	}
 
+	@OptIn(ExperimentalSerializationApi::class)
 	fun loadConfig() {
-		val loader = HoconConfigurationLoader.builder()
-			.path(FabriZoom.platform.getConfigPath())
-			.build()
 		try {
-			val root = loader.load()
-			val configVersion = root.node("version").string!!
-			if (VERSION != configVersion) {
-				FabriZoom.logger.warn("Found config version: $configVersion, current version: $VERSION")
-				FabriZoom.logger.warn("Attempting to load anyway")
+			val conf = Json.decodeFromStream<ConfigurableValues>(FabriZoom.platform.getConfigPath().inputStream())
+			val currentVersion = Presets.DEFAULT.values!!.CONFIG_VERSION
+			if (conf.CONFIG_VERSION != currentVersion) {
+				FabriZoom.logger.warn("Config version mismatch! Existing configuration might break!")
+				conf.CONFIG_VERSION = currentVersion
 			}
-
-			values = root.node("values").get()!! // configurate doesn't error when file not found
-
+			values = conf
 			FabriZoom.logger.info("Loaded existing configuration")
-			return
-
-		} catch (e: ConfigurateException) {
-			FabriZoom.logger.warn("Failed to load existing configuration! Using defaults. $e")
-		} catch (e: NullPointerException) {
-			FabriZoom.logger.warn("Invalid configuration file! Using defaults.")
+		} catch (e: Exception) {
+			e.printStackTrace()
+			FabriZoom.logger.warn("Could not load config! Using default values.")
+			applyDefaultConfig()
 		}
-		applyDefaultConfig()
 	}
 
 	private fun applyDefaultConfig() {

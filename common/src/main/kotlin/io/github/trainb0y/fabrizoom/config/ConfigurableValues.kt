@@ -1,33 +1,33 @@
 package io.github.trainb0y.fabrizoom.config
 
-import org.spongepowered.configurate.objectmapping.ConfigSerializable
+import kotlinx.serialization.Serializable
 
 /**
  * Container for the user-configurable values
  */
-@ConfigSerializable
+@Serializable
 data class ConfigurableValues(
 	/**
 	 * The zoomed mouse sensitivity for the normal mouse mode
 	 * Reasonable 10-40
 	 */
-	var mouseSensitivity: Int,
+	var mouseSensitivity: Int = Presets.DEFAULT.values!!.mouseSensitivity,
 
 	/** Whether to use the cinematic mouse mode while zooming */
-	var cinematicCameraEnabled: Boolean,
+	var cinematicCameraEnabled: Boolean = Presets.DEFAULT.values!!.cinematicCameraEnabled,
 	/** Multiplier for the cinematic mouse mode */
-	var cinematicCameraMultiplier: Double,
+	var cinematicCameraMultiplier: Double = Presets.DEFAULT.values!!.cinematicCameraMultiplier,
 
 
 	/** The initial amount to zoom in */
-	var zoomDivisor: Double,
+	var zoomDivisor: Double = Presets.DEFAULT.values!!.zoomDivisor,
 	/** The minimum allowed zoom factor */
-	var minimumZoomDivisor: Double,
+	var minimumZoomDivisor: Double = Presets.DEFAULT.values!!.minimumZoomDivisor,
 	/** The maximum allowed zoom factor */
-	var maximumZoomDivisor: Double,
+	var maximumZoomDivisor: Double = Presets.DEFAULT.values!!.maximumZoomDivisor,
 
 	/** Whether to play the spyglass sounds on zoom */
-	var zoomSound: Boolean,
+	var zoomSound: Boolean = Presets.DEFAULT.values!!.zoomSound,
 
 
 	/**
@@ -35,39 +35,37 @@ data class ConfigurableValues(
 	 * @see ZoomTransition.LINEAR
 	 * @see maximumLinearStep
 	 */
-	var minimumLinearStep: Double,
+	var minimumLinearStep: Double = Presets.DEFAULT.values!!.minimumLinearStep,
 	/**
 	 * The minimum step for the linear zoom transition
 	 * @see ZoomTransition.LINEAR
 	 * @see minimumLinearStep
 	 */
-	var maximumLinearStep: Double,
+	var maximumLinearStep: Double = Presets.DEFAULT.values!!.maximumLinearStep,
 
 	/**
 	 * Multiplier for the smooth zoom transition
 	 * @see ZoomTransition.SMOOTH
 	 */
-	var smoothMultiplier: Float,
+	var smoothMultiplier: Float = Presets.DEFAULT.values!!.smoothMultiplier,
 
 	/**
 	 * The amount to change the zoom divisor by
 	 * @see io.github.trainb0y.fabrizoom.ZoomLogic.changeZoomDivisor
 	 */
-	var scrollStep: Double,
+	var scrollStep: Double = Presets.DEFAULT.values!!.scrollStep,
 
 	/**
 	 * Whether scrolling should change the zoom
 	 */
-	var zoomScroll: Boolean,
+	var zoomScroll: Boolean = Presets.DEFAULT.values!!.zoomScroll,
 
-	var zoomOverlay: ZoomOverlay,
+	var zoomOverlay: ZoomOverlay = Presets.DEFAULT.values!!.zoomOverlay,
 
 	/** The zoom transition to use */
-	var transition: ZoomTransition
+	var transition: ZoomTransition = Presets.DEFAULT.values!!.transition,
 ) {
-	// This is a dumb hacky fix for Configurate. It requires a zero argument constructor, but I really want to use a data class for this
-	// All of these values *should* get overwritten by Configurate.
-	// If they don't, I'll need to think of something else
-	@Suppress("Unused")
-	constructor() : this(1, true, 1.0,1.0,1.0,1.0,true, 1.0,1.0,1f,1.0,true, ZoomOverlay.VIGNETTE, ZoomTransition.NONE)
+	/** The config version, doesn't necessarily match mod version */
+	@Suppress("PropertyName")
+	var CONFIG_VERSION: Int = 3
 }

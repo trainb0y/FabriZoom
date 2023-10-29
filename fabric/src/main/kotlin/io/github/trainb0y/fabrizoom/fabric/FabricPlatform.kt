@@ -12,7 +12,7 @@ import kotlin.reflect.full.memberProperties
 
 class FabricPlatform: Platform {
 	override val platformName = "Fabric"
-	override fun getConfigPath(): Path = FabricLoader.getInstance().configDir.resolve("fabrizoom.conf")
+	override fun getConfigPath(): Path = FabricLoader.getInstance().configDir.resolve("fabrizoom.json")
 	override fun registerKeybinds() {
 		Keybinds::class.memberProperties
 			.filter { it.returnType == KeyMapping::class }

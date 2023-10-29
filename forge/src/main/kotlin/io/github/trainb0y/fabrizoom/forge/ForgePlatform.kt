@@ -12,7 +12,7 @@ class ForgePlatform: Platform {
 	private lateinit var onTick: (Minecraft) -> Unit
 	override val platformName: String = "Forge"
 
-	override fun getConfigPath(): Path = FMLPaths.CONFIGDIR.get().resolve("fabrizoom.conf")
+	override fun getConfigPath(): Path = FMLPaths.CONFIGDIR.get().resolve("fabrizoom.json")
 
 	override fun registerKeybinds() {
 
