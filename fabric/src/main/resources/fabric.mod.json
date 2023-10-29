@@ -5,8 +5,8 @@
   "name": "FabriZoom",
   "description": "Adds a highly configurable zoom button. Fork of OkZoomer v4",
   "authors": [
-    "EnnuiL",
-    "trainb0y"
+    "trainb0y",
+    "EnnuiL"
   ],
   "contact": {
     "issues": "https://github.com/trainb0y/FabriZoom/issues",
@@ -19,11 +19,11 @@
     "client": [
       {
         "adapter": "kotlin",
-        "value": "io.github.trainb0y.fabrizoom.FabriZoom"
+        "value": "io.github.trainb0y.fabrizoom.fabric.FabricEntrypoint"
       }
     ],
     "modmenu": [
-      "io.github.trainb0y.fabrizoom.config.ModMenuIntegration"
+      "io.github.trainb0y.fabrizoom.fabric.ModMenuIntegration"
     ]
   },
   "mixins": [

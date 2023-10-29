@@ -1,20 +1,16 @@
 package io.github.trainb0y.fabrizoom.config
 
 import io.github.trainb0y.fabrizoom.FabriZoom
-import net.fabricmc.loader.api.FabricLoader
 import org.spongepowered.configurate.ConfigurateException
 import org.spongepowered.configurate.hocon.HoconConfigurationLoader
 import org.spongepowered.configurate.kotlin.extensions.get
 import org.spongepowered.configurate.objectmapping.ConfigSerializable
-import java.nio.file.Path
 
 /**
  * Handles loading and saving of the mod configuration
  */
 @ConfigSerializable
 object ConfigHandler {
-
-	private val configFilePath: Path = FabricLoader.getInstance().configDir.resolve("fabrizoom.conf")
 
 	/** The config version, doesn't necessarily match mod version */
 	private const val VERSION = "2"
@@ -25,7 +21,7 @@ object ConfigHandler {
 
 	fun saveConfig() {
 		val loader = HoconConfigurationLoader.builder()
-			.path(configFilePath)
+			.path(FabriZoom.platform.getConfigPath())
 			.build()
 		try {
 			val root = loader.load()
@@ -41,7 +37,7 @@ object ConfigHandler {
 
 	fun loadConfig() {
 		val loader = HoconConfigurationLoader.builder()
-			.path(configFilePath)
+			.path(FabriZoom.platform.getConfigPath())
 			.build()
 		try {
 			val root = loader.load()
