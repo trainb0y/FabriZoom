@@ -22,10 +22,10 @@ dependencies {
 	modImplementation("com.terraformersmc:modmenu:${property("fabric_mod_menu_version")}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
 
-	modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${property("yacl_version")}")
-
 	common(project(":common", configuration = "namedElements")) { isTransitive = false }
 	shadowCommon(project(":common", configuration = "transformProductionFabric")) { isTransitive = false }
+
+	modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${property("yacl_version")}")
 }
 
 tasks {

@@ -23,4 +23,6 @@ object Keybinds {
 
 	/** The key to reset the zoom divisor */
 	val resetKey = KeyMapping("key.fabrizoom.reset", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
+
+	val all = arrayOf(zoomKey, increaseKey, decreaseKey, resetKey)
 }

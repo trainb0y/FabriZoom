@@ -30,11 +30,10 @@ repositories {
 
 dependencies {
 	forge("net.minecraftforge:forge:${property("minecraft_version")}-${property("forge_version")}")
+	implementation("thedarkcolour:kotlinforforge:${property("forge_kotlin_version")}")
 
 	common(project(":common", configuration = "namedElements")) { isTransitive = false }
 	shadowCommon(project(":common", configuration = "transformProductionForge")) { isTransitive = false }
-
-	implementation("thedarkcolour:kotlinforforge:${property("forge_kotlin_version")}")
 
 	modImplementation("dev.isxander.yacl:yet-another-config-lib-forge:${property("yacl_version")}")
 }
@@ -44,12 +43,11 @@ tasks {
 		inputs.property("version", project.version)
 
 		filesMatching("META-INF/mods.toml") {
-			expand("version" to project.version)
+			expand("mod_version" to project.version)
 		}
 	}
 
 	shadowJar {
-		exclude("fabric.mod.json")
 		exclude("architectury.common.json")
 
 		configurations = listOf(project.configurations["shadowCommon"])
