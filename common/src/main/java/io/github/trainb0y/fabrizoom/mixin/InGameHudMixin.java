@@ -23,10 +23,12 @@ public class InGameHudMixin {
 	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation("fabrizoom:textures/zoom_overlay.png");
 
 	@Shadow
-	private void renderSpyglassOverlay(GuiGraphics context, float scale) {}
+	private void renderSpyglassOverlay(GuiGraphics context, float scale) {
+	}
 
 	@Shadow
-	private void renderTextureOverlay(GuiGraphics context, ResourceLocation texture, float opacity) {}
+	private void renderTextureOverlay(GuiGraphics context, ResourceLocation texture, float opacity) {
+	}
 
 	@Inject(
 			at = @At(value = "INVOKE", target = "net/minecraft/world/entity/player/Inventory.getArmor(I)Lnet/minecraft/world/item/ItemStack;"),
@@ -36,7 +38,8 @@ public class InGameHudMixin {
 		if (ZoomLogic.INSTANCE.getCurrentZoomFovMultiplier() >= 0.99) return;
 
 		switch (ConfigHandler.getValues().getZoomOverlay()) {
-			case NONE -> {}
+			case NONE -> {
+			}
 			case VIGNETTE -> {
 				float alpha;
 				if (ConfigHandler.getValues().getTransition() != ZoomTransition.NONE) {

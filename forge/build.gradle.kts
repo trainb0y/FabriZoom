@@ -1,4 +1,3 @@
-
 architectury {
 	platformSetupLoomIde()
 	forge()

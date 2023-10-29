@@ -111,6 +111,7 @@ object ZoomLogic {
 				zoomMultiplier.toFloat(),
 				zoomMultiplier.coerceIn(values.minimumLinearStep, values.maximumLinearStep).toFloat()
 			)
+
 			ZoomTransition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier
 		}
 
@@ -121,6 +122,7 @@ object ZoomLogic {
 				val linearStep = (1.0f / zoomDivisor).coerceIn(values.minimumLinearStep, values.maximumLinearStep)
 				Mth.approach(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat())
 			}
+
 			ZoomTransition.NONE -> if (isZooming) {
 				1f
 			} else {

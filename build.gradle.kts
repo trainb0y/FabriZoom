@@ -14,7 +14,7 @@ architectury {
 }
 
 subprojects {
-	apply(plugin="dev.architectury.loom")
+	apply(plugin = "dev.architectury.loom")
 
 	val loom = project.extensions.getByName<LoomGradleExtensionAPI>("loom")
 
@@ -28,11 +28,11 @@ subprojects {
 
 
 allprojects {
-	apply(plugin="java")
-	apply(plugin="kotlin")
-	apply(plugin="org.jetbrains.kotlin.plugin.serialization")
-	apply(plugin="architectury-plugin")
-	apply(plugin="com.github.johnrengelman.shadow")
+	apply(plugin = "java")
+	apply(plugin = "kotlin")
+	apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
+	apply(plugin = "architectury-plugin")
+	apply(plugin = "com.github.johnrengelman.shadow")
 
 	base {
 		archivesName.set(property("archives_base_name") as String)

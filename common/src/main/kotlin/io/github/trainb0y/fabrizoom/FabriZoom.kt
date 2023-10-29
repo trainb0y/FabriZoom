@@ -24,14 +24,17 @@ object FabriZoom {
 		if (ZoomLogic.isZooming) {
 			if (Keybinds.decreaseKey.isDown) ZoomLogic.changeZoomDivisor(false)
 			if (Keybinds.increaseKey.isDown) ZoomLogic.changeZoomDivisor(true)
-			if (Keybinds.resetKey.isDown || !Keybinds.zoomKey.isDown) ZoomLogic.zoomDivisor = ConfigHandler.values.zoomDivisor
+			if (Keybinds.resetKey.isDown || !Keybinds.zoomKey.isDown) ZoomLogic.zoomDivisor =
+				ConfigHandler.values.zoomDivisor
 		}
 
 		if (ConfigHandler.values.zoomSound) {
 			if (!ZoomLogic.isZooming && Keybinds.zoomKey.isDown) client.player?.playSound(
-				SoundEvents.SPYGLASS_USE, 1f, 1f)
-			if (ZoomLogic.isZooming && !Keybinds.zoomKey.isDown)  client.player?.playSound(
-				SoundEvents.SPYGLASS_STOP_USING, 1f, 1f)
+				SoundEvents.SPYGLASS_USE, 1f, 1f
+			)
+			if (ZoomLogic.isZooming && !Keybinds.zoomKey.isDown) client.player?.playSound(
+				SoundEvents.SPYGLASS_STOP_USING, 1f, 1f
+			)
 		}
 
 		ZoomLogic.isZooming = Keybinds.zoomKey.isDown

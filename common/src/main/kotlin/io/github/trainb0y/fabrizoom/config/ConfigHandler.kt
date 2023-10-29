@@ -5,7 +5,6 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
-import java.lang.Exception
 import java.nio.file.StandardOpenOption
 import kotlin.io.path.inputStream
 import kotlin.io.path.outputStream
@@ -24,7 +23,10 @@ object ConfigHandler {
 	@OptIn(ExperimentalSerializationApi::class)
 	fun saveConfig() {
 		try {
-			Json.encodeToStream(values, FabriZoom.platform.getConfigPath().outputStream(StandardOpenOption.TRUNCATE_EXISTING))
+			Json.encodeToStream(
+				values,
+				FabriZoom.platform.getConfigPath().outputStream(StandardOpenOption.TRUNCATE_EXISTING)
+			)
 			FabriZoom.logger.info("Saved configuration")
 		} catch (e: Exception) {
 			e.printStackTrace()

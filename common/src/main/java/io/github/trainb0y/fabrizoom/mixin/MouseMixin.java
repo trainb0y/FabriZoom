@@ -25,25 +25,26 @@ public class MouseMixin {
 	/**
 	 * Whether to apply changes to the mouse
 	 *
-	 * @see MouseMixin#zoomCursorDelta
+	 * @see MouseMixin#fabrizoom$zoomCursorDelta
 	 */
 	@Unique
-	private boolean modifyMouse;
+	private boolean fabrizoom$modifyMouse;
 
 	/**
 	 * The actual mouse delta
 	 * Only applied if modifyMouse is true
-	 * @see MouseMixin#modifyMouse
+	 *
+	 * @see MouseMixin#fabrizoom$modifyMouse
 	 */
 	@Unique
-	private Vector2d zoomCursorDelta;
+	private Vector2d fabrizoom$zoomCursorDelta;
 
 	/**
 	 * Calculate zoomCursorDelta by applying mouse modifiers in ZoomLogic
 	 * If we should be zooming, sets modifyMouse to true
 	 *
-	 * @see MouseMixin#modifyMouse
-	 * @see MouseMixin#zoomCursorDelta
+	 * @see MouseMixin#fabrizoom$modifyMouse
+	 * @see MouseMixin#fabrizoom$zoomCursorDelta
 	 */
 	@Inject(
 			method = "turnPlayer",
@@ -56,13 +57,13 @@ public class MouseMixin {
 	public void applyZoomChanges(CallbackInfo ci, double d, double e, double k, double l, double f, double g, double h, int m) {
 		ZoomLogic.tick(); // todo: should this really go here?
 
-		this.modifyMouse = false;
+		this.fabrizoom$modifyMouse = false;
 		if (ZoomLogic.isZooming()) {
 			k = ZoomLogic.applyMouseXModifier(k, h, e);
 			l = ZoomLogic.applyMouseYModifier(l, h, e);
-			this.modifyMouse = true;
+			this.fabrizoom$modifyMouse = true;
 		}
-		this.zoomCursorDelta = new Vector2d(k,l);
+		this.fabrizoom$zoomCursorDelta = new Vector2d(k, l);
 	}
 
 
@@ -75,7 +76,7 @@ public class MouseMixin {
 			ordinal = 2
 	)
 	private double modifyFinalCursorDeltaX(double k) {
-		return this.modifyMouse ? zoomCursorDelta.x : k;
+		return this.fabrizoom$modifyMouse ? fabrizoom$zoomCursorDelta.x : k;
 	}
 
 	@ModifyVariable(
@@ -87,7 +88,7 @@ public class MouseMixin {
 			ordinal = 3
 	)
 	private double modifyFinalCursorDeltaY(double l) {
-		return this.modifyMouse ? zoomCursorDelta.y: l;
+		return this.fabrizoom$modifyMouse ? fabrizoom$zoomCursorDelta.y : l;
 	}
 
 
@@ -107,7 +108,8 @@ public class MouseMixin {
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo ci) {
-		if (this.accumulatedScrollY == 0.0 || !ZoomLogic.isZooming() || !ConfigHandler.getValues().getZoomScroll()) return;
+		if (this.accumulatedScrollY == 0.0 || !ZoomLogic.isZooming() || !ConfigHandler.getValues().getZoomScroll())
+			return;
 
 		ZoomLogic.changeZoomDivisor(this.accumulatedScrollY > 0.0);
 		ci.cancel();

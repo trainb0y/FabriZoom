@@ -270,7 +270,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 							Presets.DEFAULT.values.minimumLinearStep,
 							{ ConfigHandler.values.minimumLinearStep },
 							{ value ->
-								ConfigHandler.values.minimumLinearStep = value.coerceIn(0.0, ConfigHandler.values.maximumLinearStep)
+								ConfigHandler.values.minimumLinearStep =
+									value.coerceIn(0.0, ConfigHandler.values.maximumLinearStep)
 							}
 						)
 					)
@@ -292,7 +293,8 @@ fun openConfigScreen(parent: Screen?): Screen {
 							Presets.DEFAULT.values.maximumLinearStep,
 							{ ConfigHandler.values.maximumLinearStep },
 							{ value ->
-								ConfigHandler.values.maximumLinearStep = value.coerceIn(ConfigHandler.values.minimumLinearStep, 1.0)
+								ConfigHandler.values.maximumLinearStep =
+									value.coerceIn(ConfigHandler.values.minimumLinearStep, 1.0)
 							}
 						)
 					)

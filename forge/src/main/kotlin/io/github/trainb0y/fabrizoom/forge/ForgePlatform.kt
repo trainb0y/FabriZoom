@@ -11,7 +11,7 @@ import net.minecraftforge.fml.loading.FMLPaths
 import thedarkcolour.kotlinforforge.forge.MOD_CONTEXT
 import java.nio.file.Path
 
-class ForgePlatform: Platform {
+class ForgePlatform : Platform {
 	override val platformName: String = "Forge"
 
 	private lateinit var onTick: (Minecraft) -> Unit
@@ -30,9 +30,7 @@ class ForgePlatform: Platform {
 	}
 
 	override fun getConfigPath(): Path = FMLPaths.CONFIGDIR.get().resolve("fabrizoom.json")
-
 	override fun registerKeybinds() {} // can be ignored, on forge we use an event to do it
-
 	override fun registerTick(onTick: (Minecraft) -> Unit) {
 		this.onTick = onTick
 	}

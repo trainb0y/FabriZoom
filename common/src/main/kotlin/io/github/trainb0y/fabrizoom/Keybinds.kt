@@ -16,10 +16,12 @@ object Keybinds {
 	val zoomKey = KeyMapping("key.fabrizoom.zoom", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_C, CATEGORY)
 
 	/** The key to increase the zoom divisor */
-	val increaseKey = KeyMapping("key.fabrizoom.increase", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
+	val increaseKey =
+		KeyMapping("key.fabrizoom.increase", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
 
 	/** The key to decrease the zoom divisor */
-	val decreaseKey = KeyMapping("key.fabrizoom.decrease", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
+	val decreaseKey =
+		KeyMapping("key.fabrizoom.decrease", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
 
 	/** The key to reset the zoom divisor */
 	val resetKey = KeyMapping("key.fabrizoom.reset", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.value, CATEGORY)
