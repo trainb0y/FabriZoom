@@ -18,7 +18,7 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 
 
-fun openConfigScreen(parent: Screen?): Screen {
+fun createConfigScreen(parent: Screen?): Screen {
 	var preset = Presets.DEFAULT // currently selected preset
 
 	// Welcome to Builder Hell:tm:

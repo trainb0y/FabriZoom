@@ -25,7 +25,10 @@ object ConfigHandler {
 		try {
 			Json.encodeToStream(
 				values,
-				FabriZoom.platform.getConfigPath().outputStream(StandardOpenOption.TRUNCATE_EXISTING)
+				FabriZoom.platform.getConfigPath().outputStream(
+					StandardOpenOption.TRUNCATE_EXISTING,
+					StandardOpenOption.CREATE
+				)
 			)
 			FabriZoom.logger.info("Saved configuration")
 		} catch (e: Exception) {

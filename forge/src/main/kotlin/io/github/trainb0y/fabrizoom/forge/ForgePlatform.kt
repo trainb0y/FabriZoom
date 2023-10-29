@@ -1,8 +1,12 @@
 package io.github.trainb0y.fabrizoom.forge
 
+import com.mojang.brigadier.builder.LiteralArgumentBuilder.literal
+import io.github.trainb0y.fabrizoom.FabriZoom
 import io.github.trainb0y.fabrizoom.Keybinds
 import io.github.trainb0y.fabrizoom.Platform
 import net.minecraft.client.Minecraft
+import net.minecraft.commands.CommandSourceStack
+import net.minecraftforge.client.ClientCommandHandler
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.TickEvent
@@ -30,8 +34,14 @@ class ForgePlatform : Platform {
 	}
 
 	override fun getConfigPath(): Path = FMLPaths.CONFIGDIR.get().resolve("fabrizoom.json")
-	override fun registerKeybinds() {} // can be ignored, on forge we use an event to do it
+	override fun registerKeybinds() {} // can be ignored, on forge we use an event to do it instead
 	override fun registerTick(onTick: (Minecraft) -> Unit) {
 		this.onTick = onTick
+	}
+	override fun registerCommand() {
+		ClientCommandHandler.getDispatcher().register(literal<CommandSourceStack>("fabrizoom").executes {
+			FabriZoom.shouldOpenConfigScreen = true
+			1
+		})
 	}
 }

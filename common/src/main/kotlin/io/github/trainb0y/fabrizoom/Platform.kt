@@ -8,4 +8,5 @@ interface Platform {
 	fun getConfigPath(): Path
 	fun registerKeybinds()
 	fun registerTick(onTick: (Minecraft) -> Unit)
+	fun registerCommand()
 }
