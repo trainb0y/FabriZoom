@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Handles rendering the zoom vignette and/or spyglass overlay
  */
 @Mixin(Gui.class)
-public class InGameHudMixin {
+public class GuiMixin {
 	@Unique
 	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation("fabrizoom:textures/zoom_overlay.png");
 

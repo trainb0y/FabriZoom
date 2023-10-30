@@ -48,7 +48,7 @@ object ZoomLogic {
 	 *
 	 * @param cursorSensitivity the cursor sensitivity multiplier
 	 * @see applyMouseYModifier
-	 * @see io.github.trainb0y.fabrizoom.mixin.MouseMixin.applyZoomChanges
+	 * @see io.github.trainb0y.fabrizoom.mixin.MouseHandlerMixin.applyZoomChanges
 	 */
 	@JvmStatic
 	fun applyMouseXModifier(
@@ -71,7 +71,7 @@ object ZoomLogic {
 	 * @param vanillaCursorDeltaY the original Y delta
 	 * @param cursorSensitivity the cursor sensitivity multiplier
 	 * @see applyMouseXModifier
-	 * @see io.github.trainb0y.fabrizoom.mixin.MouseMixin.applyZoomChanges
+	 * @see io.github.trainb0y.fabrizoom.mixin.MouseHandlerMixin.applyZoomChanges
 	 */
 	@JvmStatic
 	fun applyMouseYModifier(
