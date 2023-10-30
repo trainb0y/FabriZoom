@@ -48,7 +48,7 @@ fun createConfigScreen(parent: Screen?): Screen {
 							option,
 							1.5,
 							8.0,
-							0.1
+							0.05
 						)
 					}
 					.build()
@@ -68,7 +68,7 @@ fun createConfigScreen(parent: Screen?): Screen {
 							option,
 							1.5,
 							4.0,
-							0.1
+							0.05
 						)
 					}
 					.build()
@@ -236,7 +236,7 @@ fun createConfigScreen(parent: Screen?): Screen {
 							option,
 							0.1,
 							10.0,
-							0.1
+							0.05
 						)
 					}
 					.build()
@@ -323,7 +323,7 @@ fun createConfigScreen(parent: Screen?): Screen {
 							option,
 							0.1f,
 							1f,
-							0.1f
+							0.01f
 						)
 					}
 					.build()
