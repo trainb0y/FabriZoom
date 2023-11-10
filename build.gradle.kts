@@ -26,6 +26,14 @@ subprojects {
 	}
 }
 
+kotlin {
+	jvmToolchain(17)
+}
+
+java {
+	toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
 
 allprojects {
 	apply(plugin = "java")
@@ -57,9 +65,6 @@ allprojects {
 	tasks {
 		jar {
 			from("LICENSE")
-		}
-		compileKotlin {
-			kotlinOptions.jvmTarget = "17"
 		}
 	}
 }
