@@ -21,7 +21,7 @@ public class MouseMixin {
 
 	/** The amount the scroll wheel has moved */
 	@Shadow
-	private double eventDeltaVerticalWheel;
+	private double eventDeltaWheel;
 
 	/**
 	 * Whether to apply changes to the mouse
@@ -95,22 +95,22 @@ public class MouseMixin {
 	/**
 	 * Handle changing the zoom when the player scrolls while zooming
 	 *
-	 * @see MouseMixin#eventDeltaVerticalWheel
+	 * @see MouseMixin#eventDeltaWheel
 	 * @see ZoomLogic#changeZoomDivisor
 	 */
 	@Inject(
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/client/Mouse;eventDeltaVerticalWheel:D",
+					target = "Lnet/minecraft/client/Mouse;eventDeltaWheel:D",
 					ordinal = 7
 			),
 			method = "onMouseScroll(JDD)V",
 			cancellable = true
 	)
 	private void onMouseScroll(CallbackInfo ci) {
-		if (this.eventDeltaVerticalWheel == 0.0 || !ZoomLogic.isZooming() || !ConfigHandler.getValues().getZoomScroll()) return;
+		if (this.eventDeltaWheel == 0.0 || !ZoomLogic.isZooming() || !ConfigHandler.getValues().getZoomScroll()) return;
 
-		ZoomLogic.changeZoomDivisor(this.eventDeltaVerticalWheel > 0.0);
+		ZoomLogic.changeZoomDivisor(this.eventDeltaWheel > 0.0);
 		ci.cancel();
 	}
 }
