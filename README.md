@@ -11,6 +11,9 @@ configuration libraries, and updated with some code from modern OkZoomer (LibZoo
 This mod adds a zoom key (default `c`) that allows the user to zoom in their view, and is highly configurable.
 If you don't like the default "feel" of the zoom, you can configure it to be however you want.
 # Forge?
+
+***(NEO)FORGE SUPPORT COMING SOON, HOWEVER, NOT YET RELEASED***
+
 Despite the name, this mod ***does*** support Forge since version `2.0.0`. 
 However, it is not as well tested and may have issues or bugs not present in the Fabric version, 
 so be sure to report any issues you come across!
