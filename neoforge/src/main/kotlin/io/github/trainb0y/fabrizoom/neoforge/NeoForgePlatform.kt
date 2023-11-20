@@ -12,7 +12,7 @@ import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent
 import net.neoforged.neoforge.common.NeoForge
 import net.neoforged.neoforge.event.TickEvent
-import thedarkcolour.kotlinforforge.forge.MOD_CONTEXT
+import thedarkcolour.kotlinforforge.neoforge.forge.MOD_CONTEXT
 import java.nio.file.Path
 
 class NeoForgePlatform : Platform {
@@ -39,8 +39,8 @@ class NeoForgePlatform : Platform {
 	}
 
 	override fun getConfigPath(): Path = FMLPaths.CONFIGDIR.get().resolve("fabrizoom.json")
-	override fun registerKeybinds() {} // can be ignored, on forge we use an event to do it instead
-	override fun registerCommand() {} // also ignored, uses forge event
+	override fun registerKeybinds() {} // can be ignored, on (neo)forge we use an event to do it instead
+	override fun registerCommand() {} // also ignored, uses neoforge event
 	override fun registerTick(onTick: (Minecraft) -> Unit) {
 		this.onTick = onTick
 	}
