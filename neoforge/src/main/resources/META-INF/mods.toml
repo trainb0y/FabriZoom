@@ -13,6 +13,8 @@ logoFile = "assets/fabrizoom/icon.png"
 
 [[mixins]]
 config = "fabrizoom.mixins.json"
+[[mixins]]
+config = "fabrizoom-neoforge.mixins.json"
 
 [[dependencies.fabrizoom]]
 modId = "neoforge"

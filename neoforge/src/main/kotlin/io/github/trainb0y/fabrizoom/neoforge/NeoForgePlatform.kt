@@ -5,6 +5,7 @@ import io.github.trainb0y.fabrizoom.FabriZoom
 import io.github.trainb0y.fabrizoom.Keybinds
 import io.github.trainb0y.fabrizoom.Platform
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.Gui
 import net.minecraft.commands.CommandSourceStack
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.loading.FMLPaths
@@ -21,6 +22,7 @@ class NeoForgePlatform : Platform {
 	private lateinit var onTick: (Minecraft) -> Unit
 
 	init {
+
 		NeoForge.EVENT_BUS.register(object {
 			@SubscribeEvent
 			fun onClientTick(event: TickEvent.ClientTickEvent) {

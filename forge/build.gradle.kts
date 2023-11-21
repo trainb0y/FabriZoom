@@ -6,7 +6,7 @@ architectury {
 loom {
 	accessWidenerPath.set(project(":common").loom.accessWidenerPath)
 	forge {
-		mixinConfig("fabrizoom.mixins.json")
+		mixinConfig("fabrizoom.mixins.json", "fabrizoom-forge.mixins.json")
 		convertAccessWideners.set(true)
 		extraAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
 	}

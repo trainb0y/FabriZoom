@@ -1,12 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "io.github.trainb0y.fabrizoom.mixin",
+  "package": "io.github.trainb0y.fabrizoom.neoforge.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "GameRendererMixin",
-    "GuiMixin",
-    "MouseHandlerMixin"
+    "ExtendedGuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1

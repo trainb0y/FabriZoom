@@ -1,8 +1,14 @@
 package io.github.trainb0y.fabrizoom
 
+import io.github.trainb0y.fabrizoom.FabriZoom.ZOOM_OVERLAY
+import io.github.trainb0y.fabrizoom.ZoomLogic.lastZoomOverlayAlpha
+import io.github.trainb0y.fabrizoom.ZoomLogic.zoomDivisor
+import io.github.trainb0y.fabrizoom.ZoomLogic.zoomOverlayAlpha
 import io.github.trainb0y.fabrizoom.config.ConfigHandler
 import io.github.trainb0y.fabrizoom.config.ConfigHandler.values
+import io.github.trainb0y.fabrizoom.config.ZoomOverlay
 import io.github.trainb0y.fabrizoom.config.ZoomTransition
+import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.util.Mth
 import net.minecraft.util.SmoothDouble
 
@@ -167,4 +173,37 @@ object ZoomLogic {
 				else vanillaFov
 			}
 		}
+
+	@JvmStatic
+	fun renderZoomOverlay(
+		context: GuiGraphics,
+		tickDelta: Float,
+		gui: CursedOverlay
+	) {
+		if (currentZoomFovMultiplier >= 0.99) return
+
+		when (values.zoomOverlay) {
+			ZoomOverlay.NONE -> {}
+			ZoomOverlay.VIGNETTE -> {
+				val alpha: Float
+				alpha = if (values.transition != ZoomTransition.NONE) {
+					// smooth and linear transition
+					1 - Mth.lerp(tickDelta, lastZoomOverlayAlpha, zoomOverlayAlpha)
+				} else {
+					// no transition
+					zoomOverlayAlpha
+				}
+				gui.invokeRenderTextureOverlay(context, ZOOM_OVERLAY, alpha)
+			}
+
+			ZoomOverlay.SPYGLASS -> {
+				if (isZooming) {
+					var scale = 1f / zoomDivisor.toFloat() / currentZoomFovMultiplier
+					scale += 0.125f // this is jank, but the vanilla spyglass lerps from 0.5 to 1.125
+					scale = Mth.clamp(scale, 0.5f, 1.125f)
+					gui.invokeRenderSpyglassOverlay(context, scale)
+				}
+			}
+		}
+	}
 }

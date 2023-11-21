@@ -3,11 +3,14 @@ package io.github.trainb0y.fabrizoom
 import io.github.trainb0y.fabrizoom.config.ConfigHandler
 import io.github.trainb0y.fabrizoom.config.createConfigScreen
 import net.minecraft.client.Minecraft
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object FabriZoom {
+	val ZOOM_OVERLAY = ResourceLocation("fabrizoom:textures/zoom_overlay.png")
+
 	lateinit var platform: Platform
 
 	var shouldOpenConfigScreen = false

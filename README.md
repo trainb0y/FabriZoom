@@ -14,7 +14,7 @@ If you don't like the default "feel" of the zoom, you can configure it to be how
 
 ***(NEO)FORGE SUPPORT COMING SOON, HOWEVER, NOT YET RELEASED***
 
-Despite the name, this mod ***does*** support Forge since version `2.0.0`. 
+Despite the name, this mod ***does*** support Forge and NeoForge since version `2.0.0`. 
 However, it is not as well tested and may have issues or bugs not present in the Fabric version, 
 so be sure to report any issues you come across!
 
@@ -28,9 +28,9 @@ so be sure to report any issues you come across!
   - [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `1.10.*` (or the
     equivalent [QKL](https://modrinth.com/mod/qkl) version)
   - [Fabric API](https://modrinth.com/mod/fabric-api) `0.90.*` (or the equivalent [QFAPI](https://modrinth.com/mod/qsl) version)
-- Forge Only
-  - [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/) - `48.*.*`
-  - [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) `4.5.*`
+- (Neo)Forge Only
+  - [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/) `48.*` or [NeoForge](https://neoforged.net/) `20.*`
+  - [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) `4.6.*`
 
   
 ## Future Plans
