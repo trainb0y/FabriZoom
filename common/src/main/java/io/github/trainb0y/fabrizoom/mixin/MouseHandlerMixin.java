@@ -1,10 +1,10 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
+import com.mojang.blaze3d.Blaze3D;
 import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
-import org.joml.Vector2d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 /**
  * Handles modifying mouse behavior when zoomed in
@@ -22,44 +21,32 @@ public class MouseHandlerMixin {
 
 	@Shadow
 	private double accumulatedScrollY;
+	@Shadow
+	private double lastMouseEventTime;
 
+	@Unique // could capture from locals but it's different on fabric and forge
+	private double fabrizoom$mouseUpdateDelta;
 	@Unique
-	private boolean fabrizoom$shouldModifyMouse;
-
-	/**
-	 * The zoom-modified mouse delta,
-	 * Only applied if modifyMouse is true
-	 *
-	 * @see MouseHandlerMixin#fabrizoom$shouldModifyMouse
-	 */
-	@Unique
-	private Vector2d fabrizoom$zoomCursorDelta;
+	private double fabrizoom$sensitivity;
 
 	/**
 	 * Calculate zoomCursorDelta by applying mouse modifiers in ZoomLogic
 	 * If we should be zooming, sets modifyMouse to true
 	 *
-	 * @see MouseHandlerMixin#fabrizoom$shouldModifyMouse
-	 * @see MouseHandlerMixin#fabrizoom$zoomCursorDelta
 	 */
 	@Inject(
 			method = "turnPlayer",
 			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/client/Options;invertYMouse()Lnet/minecraft/client/OptionInstance;"
-			),
-			locals = LocalCapture.CAPTURE_FAILHARD
+					value = "HEAD"
+			)
 	)
-	public void applyZoomChanges(CallbackInfo ci, double d, double e, double k, double l, double f, double g, double h, int m) {
-		ZoomLogic.tick(); // todo: should this really go here?
+	public void tick(CallbackInfo ci) {
+		ZoomLogic.tick();
 
-		this.fabrizoom$shouldModifyMouse = false;
-		if (ZoomLogic.isZooming()) {
-			k = ZoomLogic.applyMouseXModifier(k, h, e);
-			l = ZoomLogic.applyMouseYModifier(l, h, e);
-			this.fabrizoom$shouldModifyMouse = true;
-		}
-		this.fabrizoom$zoomCursorDelta = new Vector2d(k, l);
+		fabrizoom$mouseUpdateDelta = Blaze3D.getTime() - lastMouseEventTime;
+
+		// same way vanilla calculates it
+		fabrizoom$sensitivity = Math.pow(Minecraft.getInstance().options.sensitivity().get() * 0.6 + 0.2, 3) * 8.0;
 	}
 
 	// Since ModifyArgs breaks on Forge >1.17, we have to use two ModifyArg s instead
@@ -72,8 +59,8 @@ public class MouseHandlerMixin {
 			index = 0
 	)
 	private double modifyMouseDeltaX(double x) {
-		if (fabrizoom$shouldModifyMouse) {
-			return fabrizoom$zoomCursorDelta.x;
+		if (ZoomLogic.isZooming()) {
+			return ZoomLogic.applyMouseXModifier(x, fabrizoom$sensitivity, fabrizoom$mouseUpdateDelta);
 		} else {
 			return x;
 		}
@@ -89,8 +76,8 @@ public class MouseHandlerMixin {
 	private double modifyMouseDeltaY(double y) {
 		// could capture the local, but it's easier to just invert here
 		var invert = Minecraft.getInstance().options.invertYMouse().get() ? -1 : 1;
-		if (fabrizoom$shouldModifyMouse) {
-			return fabrizoom$zoomCursorDelta.y * invert;
+		if (ZoomLogic.isZooming()) {
+			return ZoomLogic.applyMouseYModifier(y, fabrizoom$sensitivity, fabrizoom$mouseUpdateDelta) * invert;
 		} else {
 			return y * invert;
 		}
