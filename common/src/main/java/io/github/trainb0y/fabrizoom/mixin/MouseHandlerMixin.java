@@ -2,6 +2,7 @@ package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.ConfigHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import org.joml.Vector2d;
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,11 +10,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 /**
  * Handles modifying mouse behavior when zoomed in
@@ -63,17 +62,37 @@ public class MouseHandlerMixin {
 		this.fabrizoom$zoomCursorDelta = new Vector2d(k, l);
 	}
 
-	@ModifyArgs(
+	// Since ModifyArgs breaks on Forge >1.17, we have to use two ModifyArg s instead
+	@ModifyArg(
 			method = "turnPlayer",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/player/LocalPlayer;turn(DD)V"
-			)
+			),
+			index = 0
 	)
-	private void modifyMouseDelta(Args args) {
+	private double modifyMouseDeltaX(double x) {
 		if (fabrizoom$shouldModifyMouse) {
-			args.set(0, fabrizoom$zoomCursorDelta.x);
-			args.set(1, fabrizoom$zoomCursorDelta.y);
+			return fabrizoom$zoomCursorDelta.x;
+		} else {
+			return x;
+		}
+	}
+	@ModifyArg(
+			method = "turnPlayer",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/player/LocalPlayer;turn(DD)V"
+			),
+			index = 1
+	)
+	private double modifyMouseDeltaY(double y) {
+		// could capture the local, but it's easier to just invert here
+		var invert = Minecraft.getInstance().options.invertYMouse().get() ? -1 : 1;
+		if (fabrizoom$shouldModifyMouse) {
+			return fabrizoom$zoomCursorDelta.y * invert;
+		} else {
+			return y * invert;
 		}
 	}
 
