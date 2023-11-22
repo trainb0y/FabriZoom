@@ -12,11 +12,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ForgeGui.class)
 public class ForgeGuiMixin {
-    // Forge overrides the render() method, so the normal (fabric) mixin won't work  net.minecraft.util.RandomSource
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;setSeed(J)V"), method = "render(Lnet/minecraft/client/gui/GuiGraphics;F)V")
-    void injectZoomOverlay(GuiGraphics context, float tickDelta, CallbackInfo ci) {
-        RenderSystem.enableBlend();
-        ZoomLogic.renderZoomOverlay(context, tickDelta, (CursedOverlay) this);
-        RenderSystem.disableBlend();
-    }
+	// Forge overrides the render() method, so the normal (fabric) mixin won't work  net.minecraft.util.RandomSource
+	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;setSeed(J)V"), method = "render(Lnet/minecraft/client/gui/GuiGraphics;F)V")
+	void injectZoomOverlay(GuiGraphics context, float tickDelta, CallbackInfo ci) {
+		RenderSystem.enableBlend();
+		ZoomLogic.renderZoomOverlay(context, tickDelta, (CursedOverlay) this);
+		RenderSystem.disableBlend();
+	}
 }

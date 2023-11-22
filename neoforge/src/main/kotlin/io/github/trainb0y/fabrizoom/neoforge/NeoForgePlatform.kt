@@ -5,7 +5,6 @@ import io.github.trainb0y.fabrizoom.FabriZoom
 import io.github.trainb0y.fabrizoom.Keybinds
 import io.github.trainb0y.fabrizoom.Platform
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.Gui
 import net.minecraft.commands.CommandSourceStack
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.loading.FMLPaths
@@ -28,11 +27,13 @@ class NeoForgePlatform : Platform {
 			fun onClientTick(event: TickEvent.ClientTickEvent) {
 				if (event.phase == TickEvent.Phase.END && ::onTick.isInitialized) onTick(Minecraft.getInstance())
 			}
+
 			@SubscribeEvent
-			fun onAddClientCommands(event: RegisterClientCommandsEvent) = event.dispatcher.register(literal<CommandSourceStack>("fabrizoom").executes {
-				FabriZoom.shouldOpenConfigScreen = true
-				1
-			})
+			fun onAddClientCommands(event: RegisterClientCommandsEvent) =
+				event.dispatcher.register(literal<CommandSourceStack>("fabrizoom").executes {
+					FabriZoom.shouldOpenConfigScreen = true
+					1
+				})
 		})
 		MOD_CONTEXT.getKEventBus().register(object {
 			@SubscribeEvent

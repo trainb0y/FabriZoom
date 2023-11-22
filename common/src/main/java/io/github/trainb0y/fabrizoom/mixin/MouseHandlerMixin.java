@@ -32,7 +32,6 @@ public class MouseHandlerMixin {
 	/**
 	 * Calculate zoomCursorDelta by applying mouse modifiers in ZoomLogic
 	 * If we should be zooming, sets modifyMouse to true
-	 *
 	 */
 	@Inject(
 			method = "turnPlayer",
@@ -65,6 +64,7 @@ public class MouseHandlerMixin {
 			return x;
 		}
 	}
+
 	@ModifyArg(
 			method = "turnPlayer",
 			at = @At(

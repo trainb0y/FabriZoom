@@ -5,34 +5,38 @@
 [Modrinth](https://modrinth.com/mod/fabrizoom/)
 
 ## What?
+
 Fork of OkZoomer v4, updated to modern Minecraft, ported to Kotlin, moved to different (actually maintained) GUI and
 configuration libraries, and updated with some code from modern OkZoomer (LibZoomer).
 
 This mod adds a zoom key (default `c`) that allows the user to zoom in their view, and is highly configurable.
 If you don't like the default "feel" of the zoom, you can configure it to be however you want.
+
 # Forge?
 
 ***(NEO)FORGE SUPPORT COMING SOON, HOWEVER, NOT YET RELEASED***
 
-Despite the name, this mod ***does*** support Forge and NeoForge since version `2.0.0`. 
-However, it is not as well tested and may have issues or bugs not present in the Fabric version, 
+Despite the name, this mod ***does*** support Forge and NeoForge since version `2.0.0`.
+However, it is not as well tested and may have issues or bugs not present in the Fabric version,
 so be sure to report any issues you come across!
 
 ## Requirements
-- All Platforms
-  - [Minecraft](https://minecraft.net) `1.20.2`
-  - [YACL](https://github.com/isXander/yetanotherconfiglib) `3.*`
-- Fabric Only
-  - [Fabric Loader](https://fabricmc.net/) `0.14.*` (or the equivalent [Quilt](https://quiltmc.org/) version)
-  - [ModMenu](https://github.com/TerraformersMC/ModMenu) `8.*`
-  - [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `1.10.*` (or the
-    equivalent [QKL](https://modrinth.com/mod/qkl) version)
-  - [Fabric API](https://modrinth.com/mod/fabric-api) `0.90.*` (or the equivalent [QFAPI](https://modrinth.com/mod/qsl) version)
-- (Neo)Forge Only
-  - [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/) `48.*` or [NeoForge](https://neoforged.net/) `20.*`
-  - [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) `4.6.*`
 
-  
+- All Platforms
+    - [Minecraft](https://minecraft.net) `1.20.2`
+    - [YACL](https://github.com/isXander/yetanotherconfiglib) `3.*`
+- Fabric Only
+    - [Fabric Loader](https://fabricmc.net/) `0.14.*` (or the equivalent [Quilt](https://quiltmc.org/) version)
+    - [ModMenu](https://github.com/TerraformersMC/ModMenu) `8.*`
+    - [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `1.10.*` (or the
+      equivalent [QKL](https://modrinth.com/mod/qkl) version)
+    - [Fabric API](https://modrinth.com/mod/fabric-api) `0.90.*` (or the
+      equivalent [QFAPI](https://modrinth.com/mod/qsl) version)
+- (Neo)Forge Only
+    - [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/) `48.*`
+      or [NeoForge](https://neoforged.net/) `20.*`
+    - [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) `4.6.*`
+
 ## Future Plans
 
 - Scaling mouse sensitivity
@@ -42,7 +46,8 @@ Suggest features and report bugs on [the Issues page](https://github.com/trainb0
 
 ## Contributing
 
-All contributions are welcome, including translations. [The source code](https://github.com/trainb0y/fabrizoom) is licensed under the MIT license.
+All contributions are welcome, including translations. [The source code](https://github.com/trainb0y/fabrizoom) is
+licensed under the MIT license.
 
 Thanks
 to [Configurate](https://github.com/SpongePowered/Configurate), [SpruceUI](https://github.com/LambdAurora/SpruceUI),

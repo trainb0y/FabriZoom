@@ -25,7 +25,7 @@ object ForgeEntrypoint {
 		}
 		ModLoadingContext.get().registerExtensionPoint(DisplayTest::class.java) {
 			// don't worry about version compatibility with servers
-			DisplayTest({"catstare"}){ _: String?, _: Boolean? -> true }
+			DisplayTest({ "catstare" }) { _: String?, _: Boolean? -> true }
 		}
 	}
 }
