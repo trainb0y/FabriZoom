@@ -9,9 +9,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 /**
  * Handles modifying mouse behavior when zoomed in
@@ -22,19 +24,14 @@ public class MouseHandlerMixin {
 	@Shadow
 	private double accumulatedScrollY;
 
-	/**
-	 * Whether to apply changes to the mouse
-	 *
-	 * @see MouseHandlerMixin#fabrizoom$zoomCursorDelta
-	 */
 	@Unique
-	private boolean fabrizoom$modifyMouse;
+	private boolean fabrizoom$shouldModifyMouse;
 
 	/**
-	 * The actual mouse delta
+	 * The zoom-modified mouse delta,
 	 * Only applied if modifyMouse is true
 	 *
-	 * @see MouseHandlerMixin#fabrizoom$modifyMouse
+	 * @see MouseHandlerMixin#fabrizoom$shouldModifyMouse
 	 */
 	@Unique
 	private Vector2d fabrizoom$zoomCursorDelta;
@@ -43,7 +40,7 @@ public class MouseHandlerMixin {
 	 * Calculate zoomCursorDelta by applying mouse modifiers in ZoomLogic
 	 * If we should be zooming, sets modifyMouse to true
 	 *
-	 * @see MouseHandlerMixin#fabrizoom$modifyMouse
+	 * @see MouseHandlerMixin#fabrizoom$shouldModifyMouse
 	 * @see MouseHandlerMixin#fabrizoom$zoomCursorDelta
 	 */
 	@Inject(
@@ -57,38 +54,27 @@ public class MouseHandlerMixin {
 	public void applyZoomChanges(CallbackInfo ci, double d, double e, double k, double l, double f, double g, double h, int m) {
 		ZoomLogic.tick(); // todo: should this really go here?
 
-		this.fabrizoom$modifyMouse = false;
+		this.fabrizoom$shouldModifyMouse = false;
 		if (ZoomLogic.isZooming()) {
 			k = ZoomLogic.applyMouseXModifier(k, h, e);
 			l = ZoomLogic.applyMouseYModifier(l, h, e);
-			this.fabrizoom$modifyMouse = true;
+			this.fabrizoom$shouldModifyMouse = true;
 		}
 		this.fabrizoom$zoomCursorDelta = new Vector2d(k, l);
 	}
 
-
-	@ModifyVariable(
+	@ModifyArgs(
 			method = "turnPlayer",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/Options;invertYMouse()Lnet/minecraft/client/OptionInstance;"
-			),
-			ordinal = 2
+					target = "Lnet/minecraft/client/player/LocalPlayer;turn(DD)V"
+			)
 	)
-	private double modifyFinalCursorDeltaX(double k) {
-		return this.fabrizoom$modifyMouse ? fabrizoom$zoomCursorDelta.x : k;
-	}
-
-	@ModifyVariable(
-			method = "turnPlayer",
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/client/Options;invertYMouse()Lnet/minecraft/client/OptionInstance;"
-			),
-			ordinal = 3
-	)
-	private double modifyFinalCursorDeltaY(double l) {
-		return this.fabrizoom$modifyMouse ? fabrizoom$zoomCursorDelta.y : l;
+	private void modifyMouseDelta(Args args) {
+		if (fabrizoom$shouldModifyMouse) {
+			args.set(0, fabrizoom$zoomCursorDelta.x);
+			args.set(1, fabrizoom$zoomCursorDelta.y);
+		}
 	}
 
 
