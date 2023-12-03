@@ -30,8 +30,8 @@
     "fabrizoom.mixins.json"
   ],
   "depends": {
-    "fabricloader": "0.14.*",
-    "fabric-language-kotlin": ">=1.10.10+kotlin.1.9.10",
+    "fabricloader": ">=0.14",
+    "fabric-language-kotlin": ">=1.10.16+kotlin.1.9.21",
     "fabric-key-binding-api-v1": "*",
     "yet_another_config_lib_v3": "3.*.*"
   },
