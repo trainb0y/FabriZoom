@@ -24,4 +24,4 @@ pluginManagement {
 
 rootProject.name = "fabrizoom"
 
-include("common", "fabric", "forge", "neoforge")
+include("common", "fabric", "neoforge")

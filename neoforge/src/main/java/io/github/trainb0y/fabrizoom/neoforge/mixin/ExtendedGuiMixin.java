@@ -12,9 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ExtendedGui.class)
 class ExtendedGuiMixin {
-	// See Forge's ForgeGuiMixin and CursedOverlay
-	// Same stupid workaround
-	// Even the same mixin target... lol
+	// Forge overrides the render() method, so the normal (fabric) mixin won't work
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;setSeed(J)V"), method = "render(Lnet/minecraft/client/gui/GuiGraphics;F)V")
 	void injectZoomOverlay(GuiGraphics context, float tickDelta, CallbackInfo ci) {
 		RenderSystem.enableBlend();
