@@ -22,7 +22,7 @@ public class MouseHandlerMixin {
 	@Shadow
 	private double accumulatedScrollY;
 	@Shadow
-	private double lastMouseEventTime;
+	private double mousePressedTime;
 
 	@Unique // could capture from locals but it's different on fabric and forge
 	private double fabrizoom$mouseUpdateDelta;
@@ -42,7 +42,7 @@ public class MouseHandlerMixin {
 	public void tick(CallbackInfo ci) {
 		ZoomLogic.tick();
 
-		fabrizoom$mouseUpdateDelta = Blaze3D.getTime() - lastMouseEventTime;
+		fabrizoom$mouseUpdateDelta = Blaze3D.getTime() - mousePressedTime;
 
 		// same way vanilla calculates it
 		fabrizoom$sensitivity = Math.pow(Minecraft.getInstance().options.sensitivity().get() * 0.6 + 0.2, 3) * 8.0;

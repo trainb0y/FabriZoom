@@ -27,11 +27,11 @@ subprojects {
 }
 
 kotlin {
-	jvmToolchain(17)
+	jvmToolchain(21)
 }
 
 java {
-	toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+	toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 
@@ -55,11 +55,14 @@ allprojects {
 		maven(uri("https://maven.gegy.dev"))
 		maven(uri("https://maven.isxander.dev/releases"))
 
+		maven(uri("https://maven.isxander.dev/snapshots")) // todo: yacl 3.4
+
 		// duct tape for yacl 3.1.1 wanting to use a snapshot version of twelvemonkeys imageio
 		// todo: remove
 		maven(uri("https://oss.sonatype.org/content/repositories/snapshots"))
 
 		mavenCentral()
+		mavenLocal() // currently using a 1.20.5 version of yacl for neoforge, which doesn't officially exist
 	}
 
 	tasks {

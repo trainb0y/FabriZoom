@@ -33,7 +33,7 @@ dependencies {
 	common(project(":common", configuration = "namedElements")) { isTransitive = false }
 	shadowCommon(project(":common", configuration = "transformProductionNeoForge")) { isTransitive = false }
 
-	modImplementation("dev.isxander.yacl:yet-another-config-lib-forge:${property("yacl_version")}")
+	modImplementation("dev.isxander:yet-another-config-lib:${property("yacl_version")}-neoforge")
 }
 
 tasks {

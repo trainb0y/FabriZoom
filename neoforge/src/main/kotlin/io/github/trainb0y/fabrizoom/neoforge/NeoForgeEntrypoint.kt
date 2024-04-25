@@ -8,7 +8,7 @@ import net.neoforged.fml.IExtensionPoint
 import net.neoforged.fml.ModLoadingContext
 import net.neoforged.fml.common.Mod
 import net.neoforged.fml.loading.FMLEnvironment
-import net.neoforged.neoforge.client.ConfigScreenHandler
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory
 
 
 @Mod("fabrizoom")
@@ -18,14 +18,10 @@ object NeoForgeEntrypoint {
 			FabriZoom.init(NeoForgePlatform())
 		}
 
-		ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory::class.java) {
-			ConfigScreenHandler.ConfigScreenFactory { _: Minecraft?, parent: Screen? ->
+		ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory::class.java) {
+			IConfigScreenFactory { _: Minecraft?, parent: Screen? ->
 				createConfigScreen(parent)
 			}
-		}
-		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest::class.java) {
-			// don't worry about version compatibility with servers
-			IExtensionPoint.DisplayTest({ "catstare" }) { _: String?, _: Boolean? -> true }
 		}
 	}
 }

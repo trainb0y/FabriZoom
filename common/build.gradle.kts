@@ -7,7 +7,9 @@ loom {
 }
 
 dependencies {
-	modCompileOnly("dev.isxander.yacl:yet-another-config-lib-common:${property("yacl_version")}")
+	// I know it says "-fabric" but that's apparently the proper version
+	// See YACL 3.4 changelog
+	modCompileOnly("dev.isxander:yet-another-config-lib:${property("yacl_version")}-fabric")
 
 	// We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
 	// Do NOT use other classes from fabric loader

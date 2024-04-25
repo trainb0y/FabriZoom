@@ -8,6 +8,7 @@ interface CursedOverlay {
 	// Semi-dirty hack for the Forge platform mixins, since Forge overrides Gui.render
 	// which is where we normally inject the overlays
 	// todo: there's probably a better way to do this
+	// todo: forge is dead and neoforge got rid of ExtendedGui, so maybe this is not needed?
 	fun invokeRenderSpyglassOverlay(context: GuiGraphics?, scale: Float)
 	fun invokeRenderTextureOverlay(context: GuiGraphics?, texture: ResourceLocation?, opacity: Float)
 }

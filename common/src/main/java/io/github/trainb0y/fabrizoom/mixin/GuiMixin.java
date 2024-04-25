@@ -21,7 +21,7 @@ public abstract class GuiMixin implements CursedOverlay {
 
 	@Inject(
 			at = @At(value = "INVOKE", target = "net/minecraft/world/entity/player/Inventory.getArmor(I)Lnet/minecraft/world/item/ItemStack;"),
-			method = "render(Lnet/minecraft/client/gui/GuiGraphics;F)V"
+			method = "renderCameraOverlays(Lnet/minecraft/client/gui/GuiGraphics;F)V"
 	)
 	public void injectZoomOverlay(GuiGraphics context, float tickDelta, CallbackInfo ci) {
 		// WARNING: THIS DOES NOT GET CALLED ON FORGE, LOOK AT PLATFORM-SPECIFIC MIXINS!!

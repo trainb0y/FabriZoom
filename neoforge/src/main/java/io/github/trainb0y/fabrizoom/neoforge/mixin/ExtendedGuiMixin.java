@@ -1,3 +1,4 @@
+/*
 package io.github.trainb0y.fabrizoom.neoforge.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,3 +21,4 @@ class ExtendedGuiMixin {
 		RenderSystem.disableBlend();
 	}
 }
+ */
