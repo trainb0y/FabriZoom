@@ -40,7 +40,7 @@ tasks {
 	processResources {
 		inputs.property("version", project.version)
 
-		filesMatching("META-INF/mods.toml") {
+		filesMatching("META-INF/neoforge.mods.toml") {
 			expand("mod_version" to project.version)
 		}
 	}

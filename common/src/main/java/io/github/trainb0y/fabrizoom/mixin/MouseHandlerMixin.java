@@ -38,10 +38,8 @@ public class MouseHandlerMixin {
 			)
 	)
 	public void tick(double delta, CallbackInfo ci) {
-		ZoomLogic.tick();
-
 		fabrizoom$mouseUpdateDelta = delta;
-		System.out.println("mouse update delta: " + fabrizoom$mouseUpdateDelta);
+		ZoomLogic.tick();
 
 		// same way vanilla calculates it
 		fabrizoom$sensitivity = Math.pow(Minecraft.getInstance().options.sensitivity().get() * 0.6 + 0.2, 3) * 8.0;
@@ -59,7 +57,6 @@ public class MouseHandlerMixin {
 	private double modifyPlayerTurnX(double x) {
 		if (ZoomLogic.isZooming()) {
 			double a = ZoomLogic.applyMouseXModifier(x, fabrizoom$sensitivity, fabrizoom$mouseUpdateDelta);
-			System.out.println("x in: " + x + " out: " + a);
 			return a;
 		} else {
 			return x;

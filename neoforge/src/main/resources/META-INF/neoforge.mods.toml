@@ -1,11 +1,11 @@
 modLoader = "kotlinforforge"
-loaderVersion = "[4,)"
+loaderVersion = "[5,)"
 issueTrackerURL = "https://github.com/trainb0y/fabrizoom/issues"
 license = "MIT"
 
 [[mods]]
 modId = "fabrizoom"
-version = "${mod_version}"
+version = "$mod_version"
 displayName = "FabriZoom"
 authors = "trainb0y, EnnuiL"
 description = "Lightweight, cross-platform, configurable zoom button. Fork of OkZoomer v4"
@@ -26,7 +26,7 @@ side = "CLIENT"
 [[dependencies.fabrizoom]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.5]"
+versionRange = "[1.20.6]"
 ordering = "NONE"
 side = "CLIENT"
 

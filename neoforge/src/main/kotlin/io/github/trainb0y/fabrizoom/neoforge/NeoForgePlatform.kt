@@ -8,10 +8,10 @@ import net.minecraft.client.Minecraft
 import net.minecraft.commands.CommandSourceStack
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.loading.FMLPaths
+import net.neoforged.neoforge.client.event.ClientTickEvent
 import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent
 import net.neoforged.neoforge.common.NeoForge
-import net.neoforged.neoforge.event.TickEvent
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_CONTEXT
 import java.nio.file.Path
 
@@ -24,8 +24,8 @@ class NeoForgePlatform : Platform {
 
 		NeoForge.EVENT_BUS.register(object {
 			@SubscribeEvent
-			fun onClientTick(event: TickEvent.ClientTickEvent) {
-				if (event.phase == TickEvent.Phase.END && ::onTick.isInitialized) onTick(Minecraft.getInstance())
+			fun onClientTick(event: ClientTickEvent.Post) {
+				if (::onTick.isInitialized) onTick(Minecraft.getInstance())
 			}
 
 			@SubscribeEvent
