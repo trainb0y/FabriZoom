@@ -21,8 +21,6 @@ public class MouseHandlerMixin {
 
 	@Shadow
 	private double accumulatedScrollY;
-	@Shadow
-	private double mousePressedTime;
 
 	@Unique // could capture from locals but it's different on fabric and forge
 	private double fabrizoom$mouseUpdateDelta;
@@ -39,10 +37,11 @@ public class MouseHandlerMixin {
 					value = "HEAD"
 			)
 	)
-	public void tick(CallbackInfo ci) {
+	public void tick(double delta, CallbackInfo ci) {
 		ZoomLogic.tick();
 
-		fabrizoom$mouseUpdateDelta = Blaze3D.getTime() - mousePressedTime;
+		fabrizoom$mouseUpdateDelta = delta;
+		System.out.println("mouse update delta: " + fabrizoom$mouseUpdateDelta);
 
 		// same way vanilla calculates it
 		fabrizoom$sensitivity = Math.pow(Minecraft.getInstance().options.sensitivity().get() * 0.6 + 0.2, 3) * 8.0;
@@ -57,9 +56,11 @@ public class MouseHandlerMixin {
 			),
 			index = 0
 	)
-	private double modifyMouseDeltaX(double x) {
+	private double modifyPlayerTurnX(double x) {
 		if (ZoomLogic.isZooming()) {
-			return ZoomLogic.applyMouseXModifier(x, fabrizoom$sensitivity, fabrizoom$mouseUpdateDelta);
+			double a = ZoomLogic.applyMouseXModifier(x, fabrizoom$sensitivity, fabrizoom$mouseUpdateDelta);
+			System.out.println("x in: " + x + " out: " + a);
+			return a;
 		} else {
 			return x;
 		}
@@ -73,7 +74,7 @@ public class MouseHandlerMixin {
 			),
 			index = 1
 	)
-	private double modifyMouseDeltaY(double y) {
+	private double modifyPlayerTurnY(double y) {
 		// could capture the local, but it's easier to just invert here
 		var invert = Minecraft.getInstance().options.invertYMouse().get() ? -1 : 1;
 		if (ZoomLogic.isZooming()) {
