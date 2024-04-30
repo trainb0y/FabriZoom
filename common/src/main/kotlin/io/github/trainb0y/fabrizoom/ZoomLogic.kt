@@ -183,7 +183,7 @@ object ZoomLogic {
 	fun renderZoomOverlay(
 		context: GuiGraphics,
 		tickDelta: Float,
-		gui: CursedOverlay
+		gui: Overlay
 	) {
 		if (currentZoomFovMultiplier >= 0.99) return
 
