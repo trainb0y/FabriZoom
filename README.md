@@ -14,28 +14,27 @@ This mod adds a zoom key (by default, `c`) that allows the user to zoom in their
 If you don't like the default "feel" of the zoom, you can configure it to be however you want.
 
 ## Forge? NeoForge?
-Despite the name, this mod ***does*** support both Forge and NeoForge since version `2.0.0`.
+Despite the name, this mod ***does*** support NeoForge since version `2.0.0` (and MinecraftForge for Minecraft `1.20.2` only).
 **However, it is not as well tested** and may have issues or bugs not present in the Fabric version,
 so be sure to report any issues you come across.
 
-Also, **FabriZoom is looking for a new name!**. Since the mod now supports Forge, it doesn't make sense to have Fabric in the name. 
+Also, **FabriZoom is looking for a new name!**. Since the mod now supports (Neo)Forge, it doesn't make sense to have Fabric in the name. 
 If you have any ideas, please let me know!
 
 ## Requirements
 - All Platforms
-    - [Minecraft](https://minecraft.net) `1.20.2`
+    - [Minecraft](https://minecraft.net) `1.20.6`
     - [YACL](https://github.com/isXander/yetanotherconfiglib) `3.*`
 - Fabric Only
     - [Fabric Loader](https://fabricmc.net/) `0.15.*` (or the equivalent [Quilt](https://quiltmc.org/) version)
-    - [ModMenu](https://github.com/TerraformersMC/ModMenu) `8.*`
+    - [ModMenu](https://github.com/TerraformersMC/ModMenu) `10.*`
     - [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `1.10.*` (or the
       equivalent [QKL](https://modrinth.com/mod/qkl) version)
     - [Fabric API](https://modrinth.com/mod/fabric-api) `0.90.*` (or the
       equivalent [QFAPI](https://modrinth.com/mod/qsl) version)
-- (Neo)Forge Only
-    - [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/) `48.*`
-      or [NeoForge](https://neoforged.net/) `20.2.*`
-    - [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) `4.6.*`
+- NeoForge Only
+  - [NeoForge](https://neoforged.net/) `20.6.*`
+  - [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) `5.*`
 
 ## Future Plans
 - New name
