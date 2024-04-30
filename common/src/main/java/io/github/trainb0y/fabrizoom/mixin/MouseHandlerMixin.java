@@ -1,6 +1,5 @@
 package io.github.trainb0y.fabrizoom.mixin;
 
-import com.mojang.blaze3d.Blaze3D;
 import io.github.trainb0y.fabrizoom.ZoomLogic;
 import io.github.trainb0y.fabrizoom.config.ConfigHandler;
 import net.minecraft.client.Minecraft;
