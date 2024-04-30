@@ -95,7 +95,7 @@ object ZoomLogic {
 	}
 
 	@JvmStatic
-	fun tick() {
+	fun update(delta: Double) {
 		if (!isZooming) {
 			this.cursorXZoomSmoother.reset()
 			this.cursorYZoomSmoother.reset()
@@ -110,23 +110,28 @@ object ZoomLogic {
 			1.0
 		}
 
+		// config values were tuned back when transitions were framerate-dependant (oops)
+		// this just to make values from old configs stay sane
+		// todo: should probably just migrate all values at some point or something
+		val adjDelta = delta.toFloat() * 60
+
 		currentZoomFovMultiplier = when (values.transition) {
 			ZoomTransition.NONE -> lastZoomFovMultiplier
 			ZoomTransition.LINEAR -> Mth.approach(
 				currentZoomFovMultiplier,
 				zoomMultiplier.toFloat(),
-				zoomMultiplier.coerceIn(values.minimumLinearStep, values.maximumLinearStep).toFloat()
+				zoomMultiplier.coerceIn(values.minimumLinearStep, values.maximumLinearStep).toFloat() * adjDelta
 			)
 
-			ZoomTransition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier
+			ZoomTransition.SMOOTH -> currentZoomFovMultiplier + (zoomMultiplier - currentZoomFovMultiplier).toFloat() * values.smoothMultiplier * adjDelta
 		}
 
 		lastZoomOverlayAlpha = zoomOverlayAlpha
 		zoomOverlayAlpha = when (values.transition) {
-			ZoomTransition.SMOOTH -> zoomOverlayAlpha + (zoomMultiplier - zoomOverlayAlpha).toFloat() * values.smoothMultiplier
+			ZoomTransition.SMOOTH -> zoomOverlayAlpha + (zoomMultiplier - zoomOverlayAlpha).toFloat() * values.smoothMultiplier * adjDelta
 			ZoomTransition.LINEAR -> {
 				val linearStep = (1.0f / zoomDivisor).coerceIn(values.minimumLinearStep, values.maximumLinearStep)
-				Mth.approach(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat())
+				Mth.approach(zoomOverlayAlpha, zoomMultiplier.toFloat(), linearStep.toFloat() * adjDelta)
 			}
 
 			ZoomTransition.NONE -> if (isZooming) {
