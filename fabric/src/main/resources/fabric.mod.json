@@ -3,7 +3,7 @@
   "id": "fabrizoom",
   "version": "$version",
   "name": "FabriZoom",
-  "description": "Lightweight, cross-platform, configurable zoom button. Fork of OkZoomer v4",
+  "description": "Lightweight, cross-platform, configurable zoom. Fork of OkZoomer v4",
   "authors": [
     "trainb0y",
     "EnnuiL"

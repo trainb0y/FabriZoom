@@ -62,11 +62,3 @@ and [YACL](https://github.com/isXander/YetAnotherConfigLib) for being excellent 
 Also [Devin's Badges](https://github.com/intergrav/devins-badges) are great.
 Some inspiration taken from the excellent [Zoomify](https://github.com/isXander/Zoomify) mod though I've never
 intentionally used its code.
-
-## Links
-
-[![~fabric~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/fabric_64h.png)](https://modrinth.com/mod/fabrizoom/)
-[![~forge~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/forge_64h.png)](https://modrinth.com/mod/fabrizoom/)
-[![~quilt~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/quilt_64h.png)](https://modrinth.com/mod/fabrizoom/)
-[![~modrinth~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/modrinth_64h.png)](https://modrinth.com/mod/fabrizoom/)
-[![~github~](https://raw.githubusercontent.com/intergrav/devins-badges/main/badges/github-repository_64h.png)](https://github.com/trainb0y/fabrizoom)

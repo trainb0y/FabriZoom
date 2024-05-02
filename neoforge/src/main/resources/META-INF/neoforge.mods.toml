@@ -8,7 +8,7 @@ modId = "fabrizoom"
 version = "$mod_version"
 displayName = "FabriZoom"
 authors = "trainb0y, EnnuiL"
-description = "Lightweight, cross-platform, configurable zoom button. Fork of OkZoomer v4"
+description = "Lightweight, cross-platform, configurable zoom. Fork of OkZoomer v4"
 logoFile = "assets/fabrizoom/icon.png"
 
 [[mixins]]
