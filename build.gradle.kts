@@ -62,7 +62,7 @@ allprojects {
 		maven(uri("https://oss.sonatype.org/content/repositories/snapshots"))
 
 		mavenCentral()
-		mavenLocal() // currently using a 1.20.5 version of yacl for neoforge, which doesn't officially exist
+		// mavenLocal() // currently using a 1.20.5 version of yacl for neoforge, which doesn't officially exist
 	}
 
 	tasks {

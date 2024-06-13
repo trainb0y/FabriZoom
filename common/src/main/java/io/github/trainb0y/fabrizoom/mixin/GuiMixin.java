@@ -2,6 +2,7 @@ package io.github.trainb0y.fabrizoom.mixin;
 
 import io.github.trainb0y.fabrizoom.Overlay;
 import io.github.trainb0y.fabrizoom.ZoomLogic;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -21,9 +22,9 @@ public abstract class GuiMixin implements Overlay {
 
 	@Inject(
 			at = @At(value = "INVOKE", target = "net/minecraft/world/entity/player/Inventory.getArmor(I)Lnet/minecraft/world/item/ItemStack;"),
-			method = "renderCameraOverlays(Lnet/minecraft/client/gui/GuiGraphics;F)V"
+			method = "renderCameraOverlays(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"
 	)
-	public void injectZoomOverlay(GuiGraphics context, float tickDelta, CallbackInfo ci) {
-		ZoomLogic.renderZoomOverlay(context, tickDelta, this);
+	public void injectZoomOverlay(GuiGraphics context, DeltaTracker tickDelta, CallbackInfo ci) {
+		ZoomLogic.renderZoomOverlay(context, tickDelta.getGameTimeDeltaTicks(), this);
 	}
 }

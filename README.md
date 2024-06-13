@@ -28,17 +28,17 @@ If you have any ideas, please let me know!
 ## Requirements
 
 - All Platforms
-    - [Minecraft](https://minecraft.net) `1.20.6`
+    - [Minecraft](https://minecraft.net) `1.21`
     - [YACL](https://github.com/isXander/yetanotherconfiglib) `3.*`
 - Fabric Only
     - [Fabric Loader](https://fabricmc.net/) `0.15.*` (or the equivalent [Quilt](https://quiltmc.org/) version)
-    - [ModMenu](https://github.com/TerraformersMC/ModMenu) `10.*`
-    - [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `1.10.*` (or the
+    - [ModMenu](https://github.com/TerraformersMC/ModMenu) `11.*`
+    - [Fabric Language Kotlin](https://github.com/FabricMC/fabric-language-kotlin) `1.11.*` (or the
       equivalent [QKL](https://modrinth.com/mod/qkl) version)
-    - [Fabric API](https://modrinth.com/mod/fabric-api) `0.90.*` (or the
+    - [Fabric API](https://modrinth.com/mod/fabric-api) `0.100.*` (or the
       equivalent [QFAPI](https://modrinth.com/mod/qsl) version)
 - NeoForge Only
-    - [NeoForge](https://neoforged.net/) `20.6.*`
+    - [NeoForge](https://neoforged.net/) `21.*`
     - [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) `5.*`
 
 ## Future Plans

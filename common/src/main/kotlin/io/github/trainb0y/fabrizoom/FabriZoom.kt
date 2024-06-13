@@ -9,7 +9,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object FabriZoom {
-	val ZOOM_OVERLAY = ResourceLocation("fabrizoom:textures/zoom_overlay.png")
+	val ZOOM_OVERLAY = ResourceLocation.parse("fabrizoom:textures/zoom_overlay.png")
 
 	lateinit var platform: Platform
 
